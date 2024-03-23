@@ -3,12 +3,12 @@ import React from 'react';
 import { Button } from "@/src/components/ui/button"
 import { SignInButton } from "./SignInButton";
 
-import { auth } from '@/src/auth/auth';
+import { baseAuth } from '@/src/auth/auth';
 import { Avatar, AvatarFallback, AvatarImage } from '@/src/components/ui/avatar';
 import { LoggedInDropDown } from './LoggedInDropDown';
 
 export const LoggedInButton = async () => {
-    const session = await auth()
+    const session = await baseAuth()
 
     if (!session?.user) {
         return <SignInButton />

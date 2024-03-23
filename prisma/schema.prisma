@@ -7,6 +7,8 @@ generator client {
   provider = "prisma-client-js"
 }
 
+// AUTH
+
 model Account {
   id                 String  @id @default(cuid())
   userId             String
@@ -34,20 +36,90 @@ model Session {
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
-model User {
-  id            String    @id @default(cuid())
-  name          String?
-  email         String?   @unique
-  emailVerified DateTime?
-  image         String?
-  accounts      Account[]
-  sessions      Session[]
-}
-
 model VerificationToken {
   identifier String
   token      String   @unique
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+//  USER
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+  plan          Plan      @default(FREE)
+
+  accounts      Account[]
+  sessions      Session[]
+  activities    Activity[]  
+  candidacies   Candidacy[]  
+
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime? @updatedAt
+}
+
+enum Plan {
+  FREE
+  PREMIMUM
+}
+
+model Activity {
+  id                String    @id @default(cuid())
+  slug              String    @unique
+  Title             String
+  categorie         String?
+  Information       String?
+  Date              DateTime?
+  userWanted        String?
+  Icon              String?
+  enable            Boolean @default(true)
+  
+  reviews           Review[]   
+  candidacies       Candidacy[]
+
+  userId            String
+  user              User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+}
+
+model Review {
+  id                String    @id @default(cuid())
+  Title             String
+  content           String?
+  ip                String
+  rating            Int
+  
+  activityId        String
+  activity          Activity  @relation(fields: [activityId], references: [id], onDelete: Cascade)
+
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+}
+
+
+model Candidacy {
+  id                String    @id @default(cuid())
+  status            CandidacyStatus
+
+  userId            String
+  user              User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  activityId        String
+  activity          Activity    @relation(fields: [activityId], references: [id], onDelete: Cascade)
+
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+}
+
+enum CandidacyStatus {
+  PENDING
+  ACCEPTED
+  REJECTED
 }
