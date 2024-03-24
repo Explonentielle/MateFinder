@@ -60,6 +60,7 @@ model User {
   accounts      Account[]
   sessions      Session[]
   activities    Activity[]  
+  reviews       Review[]  
   candidacies   Candidacy[]  
 
   createdAt         DateTime @default(now())
@@ -68,18 +69,18 @@ model User {
 
 enum Plan {
   FREE
-  PREMIMUM
+  PREMIUM
 }
 
 model Activity {
   id                String    @id @default(cuid())
   slug              String    @unique
   Title             String
-  categorie         String?
-  Information       String?
-  Date              DateTime?
-  userWanted        String?
-  Icon              String?
+  categorie         String
+  Information       String
+  Date              DateTime
+  userWanted        String
+  Icon              String
   enable            Boolean @default(true)
   
   reviews           Review[]   
@@ -95,12 +96,15 @@ model Activity {
 model Review {
   id                String    @id @default(cuid())
   Title             String
-  content           String?
-  ip                String
-  rating            Int
+  content           String
+  ip                String?
+  rating            String
   
   activityId        String
   activity          Activity  @relation(fields: [activityId], references: [id], onDelete: Cascade)
+
+  userId            String
+  user              User      @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   createdAt         DateTime  @default(now())
   updatedAt         DateTime  @updatedAt

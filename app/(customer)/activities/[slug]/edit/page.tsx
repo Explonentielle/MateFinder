@@ -7,14 +7,14 @@ import { notFound } from "next/navigation";
 import RouteError from "../../error";
 
 
-export default async function RouteParams(props: PageParams<{ activityid: string }>) {
+export default async function RouteParams(props: PageParams<{ slug: string }>) {
 
     try {
         const user = await requiredCurrentUser();
 
         const activity = await prisma.activity.findUnique({
             where: {
-                id: props.params.activityid,
+                slug: props.params.slug,
                 userId: user.id,
             }
         })

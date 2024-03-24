@@ -59,7 +59,7 @@ export const Landing = async () => {
                     </CardHeader>
                     <CardContent className="flex flex-wrap">
                         {activities.map(activity => (
-                            <Link key={activity.id} className="w-1/2 p-4" href={`/activities/${activity.id}`}>
+                            <Link key={activity.id} className="w-1/2 p-4" href={`/activities/${activity.slug}`}>
                                 <Card className="shadow-lg" key={activity.id}>
                                     <CardHeader className="font-bold text-2xl flex flex-row justify-between">
                                         {`${activity.Title.slice(0, 18)}...`}
@@ -117,5 +117,4 @@ export const Landing = async () => {
             </Layout>
         </div>
     )
-
 }

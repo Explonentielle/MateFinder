@@ -47,7 +47,7 @@ export const ActivityForm = (props: ActivityFormProps) => {
         return;
       }
       toast.success("Activity created");
-      router.push(`/activities/${data.id}`)
+      router.push(`/activities/${data.slug}`)
     }
   })
   const availablesPlaces = [

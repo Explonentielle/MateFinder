@@ -1,17 +1,15 @@
 import { requiredCurrentUser } from "@/src/auth/current-user";
 import { Layout, LayoutTitle } from "@/src/components/Layout";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/src/components/ui/card";
-import { Table, TableCell, TableRow } from "@/src/components/ui/table";
 import { prisma } from "@/src/prisma";
 import type { PageParams } from "@/src/types/next"
 import RouteError from "./error";
-
 import Link from "next/link";
 import LucideIcons, { IconName } from "@/src/components/LucideIcons";
 
 export default async function RouteParams(props: PageParams<{}>) {
-    try {
-        const user = await requiredCurrentUser();
+    
+        // const user = await requiredCurrentUser();
 
         const activities = await prisma.activity.findMany({
             // where: {
@@ -19,6 +17,7 @@ export default async function RouteParams(props: PageParams<{}>) {
             // },
         })
 
+        
         return (
             <Layout>
                 <Card className="p-4">
@@ -34,7 +33,7 @@ export default async function RouteParams(props: PageParams<{}>) {
                         {activities.length ? (
                             <div>
                                 {activities.map(activity => (
-                                    <Link href={`/activities/${activity.id}`}>
+                                    <Link href={`/activities/${activity.slug}`}>
                                         <Card key={activity.id} className="mb-4 flex items-center">
                                             <CardHeader className="flex flex-row items-center w-full">
                                                 <span className="font-mono mr-4">{activity.Title}</span>
@@ -58,7 +57,5 @@ export default async function RouteParams(props: PageParams<{}>) {
                 </Card>
             </Layout>
         );
-    } catch (error) {
-        return <RouteError />;
-    }
+   
 }

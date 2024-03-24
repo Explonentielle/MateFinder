@@ -3,11 +3,11 @@ import { z } from "zod";
 export const ActivitySchema = z.object({
   Title: z.string(),
   slug: z.string().regex(/^[a-zA-Z0-9_-]*$/).min(5).max(20),
-  categorie: z.string().optional().nullable(),
-  Information: z.string().optional().nullable(),
-  Date: z.date().optional().nullable(),
-  userWanted: z.string().optional().nullable(),
-  Icon: z.string().optional().nullable(),
+  categorie: z.string(),
+  Information: z.string(),
+  Date: z.date(),
+  userWanted: z.string(),
+  Icon: z.string(),
 
 });
 
