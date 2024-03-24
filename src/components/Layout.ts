@@ -6,5 +6,5 @@ export const Layout = twx.div((props) => [
 
 
 export const LayoutTitle = twx.div((props) => [
-    `text-4xl font bold `
+    `text-4xl font-bold `
 ])

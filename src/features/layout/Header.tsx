@@ -15,7 +15,7 @@ export const Header = async () => {
                             height="64"
                             src="/icon.png"
                             alt="MateFinder logo" />
-                        <h2 className="px-2">Mate Finder</h2>
+                        <h2 className="px-2 text-2xl font-extrabold iconBorder">Mate Finder</h2>
                     </Link>
                 </div>
                 <div className="flex items-center gap-2">

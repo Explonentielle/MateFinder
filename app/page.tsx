@@ -1,23 +1,16 @@
-import { Layout, LayoutTitle } from "@/src/components/Layout";
-import { Button } from "@/src/components/ui/button";
+import { Layout } from "@/src/components/Layout";
 import { Header } from "@/src/features/layout/Header";
-import Link from "next/link";
+import { Landing } from "./Landing";
+
+
+
 
 export default function Home() {
   return (
     <div className="h-full w-full">
       <Header />
       <Layout>
-        <LayoutTitle>
-          Welcome
-        </LayoutTitle>
-        <Button
-        variant={"ghost"}
-          className="py-6 w-1/3 border-dashes border-2">
-          <Link href={"/activities"} >
-            Check All Activities
-          </Link>
-        </Button>
+        <Landing />
       </Layout>
     </div>
   );

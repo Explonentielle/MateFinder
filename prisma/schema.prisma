@@ -53,7 +53,10 @@ model User {
   emailVerified DateTime?
   image         String?
   plan          Plan      @default(FREE)
-
+  age           Int?
+  username      String?   @unique
+  password      String?   
+  
   accounts      Account[]
   sessions      Session[]
   activities    Activity[]  
