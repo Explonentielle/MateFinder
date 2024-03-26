@@ -9,10 +9,10 @@ import { useRouter } from "next/navigation"
 import { createReviewAction } from "./Review.action"
 import { ReviewSchema, ReviewType } from "./Review.schema"
 import { Button } from "@/src/components/ui/button"
-import LucideIcons, { IconName } from "@/src/components/LucideIcons"
 import { Input } from "@/src/components/ui/input"
 import { Star } from "lucide-react"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/src/components/ui/select"
+
+import React from "react"
 
 export type ReviewFormProps = {
   activityId?: string
@@ -40,7 +40,14 @@ const ReviewForm = (props: ReviewFormProps) => {
       router.push(`/activities/${props.activityId}/reviews`);
     }
   });
-  
+
+  const [rating, setRating] = React.useState<string | null>(null);
+
+  const handleStarClick = (value: string) => {
+    setRating(value);
+    form.setValue('rating', value);
+  };
+
 
   return (
     <Card>
@@ -51,18 +58,10 @@ const ReviewForm = (props: ReviewFormProps) => {
       <CardContent>
         <Form className="flex flex-col gap-4" form={form} onSubmit={async (values) => await mutation.mutateAsync(values)}>
 
-        <FormField
-            control={form.control}
-            name="activityId"
-            render={({ field }) => (
-              <FormItem>
-                <FormControl>
-                  <Input
-                     {...field}
-                     defaultValue={props.activityId ?? ""}/>
-                </FormControl>
-              </FormItem>
-            )}
+          <input
+            type="hidden"
+            {...form.register("activityId")}
+            defaultValue={props.activityId ?? ""}
           />
 
           <FormField
@@ -111,31 +110,19 @@ const ReviewForm = (props: ReviewFormProps) => {
               <FormItem>
                 <FormLabel className="font-bold">Rating</FormLabel>
                 <FormControl>
-                  <Select value={field.value ?? "1"} onValueChange={field.onChange}>
-                    <SelectTrigger>
-                      <SelectValue></SelectValue>
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value={"1"}>
-                        <div>1</div>
-                      </SelectItem>
-                      <SelectItem value={"2"}>
-                        <div>2</div>
-                      </SelectItem>
-                      <SelectItem value={"3"}>
-                        <div>3</div>
-                      </SelectItem>
-                      <SelectItem value={"4"}>
-                        <div>4</div>
-                      </SelectItem>
-                      <SelectItem value={"5"}>
-                        <div>5</div>
-                      </SelectItem>
-                    </SelectContent>
-                  </Select>
+                  <div className="flex items-center">
+                    {["1", "2", "3", "4", "5"].map((num) => (
+                      <Star
+                        key={num}
+                        size={24}
+                        onClick={() => handleStarClick(num) }
+                        className={rating && rating >= num ? "text-yellow-500 cursor-pointer" : "cursor-pointer"}
+                      />
+                    ))}
+                  </div>
                 </FormControl>
                 <FormDescription>
-                  Choose to rate between 1-5.
+                  Click on the stars to rate (1-5).
                 </FormDescription>
                 <FormMessage />
               </FormItem>

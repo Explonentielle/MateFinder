@@ -3,6 +3,8 @@ import type { PageParams } from "@/src/types/next"
 import ReviewForm from "../edit/ReviewForm"
 import { prisma } from "@/src/prisma";
 import { notFound } from "next/navigation";
+import Link from "next/link";
+import { ChevronsLeft } from "lucide-react";
 
 export default async function RouteParams(props: PageParams<{ slug: string }>) {
 
@@ -22,6 +24,9 @@ export default async function RouteParams(props: PageParams<{ slug: string }>) {
 
     return (
         <Layout>
+            <Link href={`/activities/${props.params.slug}/reviews`}>
+                <ChevronsLeft size={32} className="" />
+            </Link>
             <LayoutTitle>{props.params.slug}</LayoutTitle>
             <ReviewForm activityId={activity.id} />
         </Layout>

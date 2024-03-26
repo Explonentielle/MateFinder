@@ -37,7 +37,7 @@ export const Landing = async () => {
     const top5Activities = sortedActivities.slice(0, 5);
 
     function calculateAverageRating(reviews: Review[]) {
-        const totalRating = reviews.reduce((sum, review) => sum + review.rating, 0);
+        const totalRating = reviews.reduce((sum, review) => sum + Number(review.rating), 0);
         return totalRating / reviews.length;
     }
 
@@ -49,18 +49,18 @@ export const Landing = async () => {
                 </LayoutTitle>
                 <h1 className="text-2xl font-ligth pl-6">Discover your perfect mate with Mate Finder</h1>
                 <Link href={"/activities"}>
-                    <Button variant="ghost" className="w-full py-6 border-dashes border-2">
+                    <Button variant="ghost" className="shadow-lg w-full py-6 border-primary border-dashed border-2">
                         Check All Activities
                     </Button>
                 </Link>
-                <Card>
+                <Card className="shadow-lg">
                     <CardHeader className="font-bold text-2xl">
-                        More recents Activities
+                        Upcoming Activities Recently
                     </CardHeader>
                     <CardContent className="flex flex-wrap">
                         {activities.map(activity => (
                             <Link key={activity.id} className="w-1/2 p-4" href={`/activities/${activity.slug}`}>
-                                <Card className="shadow-lg" key={activity.id}>
+                                <Card className="shadow-lg h-full" key={activity.id}>
                                     <CardHeader className="font-bold text-2xl flex flex-row justify-between">
                                         {`${activity.Title.slice(0, 18)}...`}
                                         <div className="flex">
@@ -84,14 +84,14 @@ export const Landing = async () => {
                     </CardContent>
                 </Card>
 
-                <Card className="mt-12">
+                <Card className="mt-12 shadow-lg ">
                     <CardHeader className="font-bold text-2xl">
-                        More popular Activities
+                        Most Appreciated Activities
                     </CardHeader>
                     <CardContent className="flex flex-wrap">
                         {top5Activities.map(activity => (
-                            <Link key={activity.id} className="w-1/2 p-4" href={`/activities/${activity.id}`}>
-                                <Card className="shadow-lg" key={activity.id}>
+                            <Link key={activity.id} className="w-1/2 p-4" href={`/activities/${activity.slug}`}>
+                                <Card className="shadow-lg h-full" key={activity.id}>
                                     <CardHeader className="font-bold text-2xl flex flex-row justify-between">
                                         {`${activity.Title.slice(0, 18)}...`}
                                         <div className="flex">

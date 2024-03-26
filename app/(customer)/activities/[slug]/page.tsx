@@ -4,7 +4,7 @@ import { Button } from "@/src/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader } from "@/src/components/ui/card"
 import { prisma } from "@/src/prisma"
 import type { PageParams } from "@/src/types/next"
-import { MousePointerClick, Send, Star, UsersRound } from "lucide-react"
+import { ChevronsLeft, MousePointerClick, Send, Star, UsersRound } from "lucide-react"
 import { notFound } from "next/navigation"
 import RouteError from "../error"
 import { EditButton } from "./EditButton"
@@ -22,6 +22,7 @@ export default async function RouteParams(props: PageParams<{ slug: string }>) {
         },
         include: {
             user: true,
+            reviews: true,
         },
     })
 
@@ -33,9 +34,20 @@ export default async function RouteParams(props: PageParams<{ slug: string }>) {
 
     const isCreate = user?.id === activity.userId;
 
+    let totalRating = 0;
+    if (activity.reviews && activity.reviews.length > 0) {
+        activity.reviews.forEach((review) => {
+            totalRating += Number(review.rating);
+        });
+    }
+    const averageRating = activity.reviews.length > 0 ? totalRating / activity.reviews.length : 0;
+
 
     return (
         <Layout>
+            <Link href={"/activities"}>
+                <ChevronsLeft size={32} className="" />
+            </Link>
             <Card>
                 <CardHeader className="flex flex-row justify-between">
                     <div className="flex items-center">
@@ -94,7 +106,7 @@ export default async function RouteParams(props: PageParams<{ slug: string }>) {
                     </Button>
                     <Card className="p-2 m-2 w-1/3 h-full">
                         <CardDescription className="flex justify-center items-center">
-                            {Array.from({ length: 4 }).map((_, index) => (
+                            {Array.from({ length: Math.floor(averageRating) }).map((_, index) => (
                                 <Star color="gold" key={index} size={16} />
                             ))}
                             <span>/ 5</span>
