@@ -5,13 +5,13 @@ import { Upload } from "lucide-react";
 import Link from "next/link";
 
 interface EditButtonProps {
-    id: string;
+    slug: string;
   }
 
-export const EditButton = ( { id }: EditButtonProps ) => {
+export const EditButton = ( { slug }: EditButtonProps ) => {
 
     return (
-        <Link href={`/activities/${id}/edit`}>
+        <Link href={`/activities/${slug}/edit`}>
             <Button variant={"outline"}>
                 <p className="mr-2">Update </p>
                 <Upload size={16} />

@@ -18,6 +18,9 @@ import { cn } from "@/src/lib/utils"
 import { Calendar } from "@/src/components/ui/calendar"
 import { format } from "date-fns"
 import LucideIcons, { IconName } from "@/src/components/LucideIcons"
+import { RadioGroup } from "@radix-ui/react-dropdown-menu"
+import { RadioGroupItem } from "@/src/components/ui/radio-group"
+import { Switch } from "@/src/components/ui/switch"
 
 
 export type ActivityFormProps = {
@@ -78,9 +81,9 @@ export const ActivityForm = (props: ActivityFormProps) => {
             <TabsList >
               <TabsTrigger className="w-full" value="one">Step One</TabsTrigger>
               <TabsTrigger className="w-full" value="two">Step Two</TabsTrigger>
+              <TabsTrigger className="w-full" value="three">Step Three</TabsTrigger>
             </TabsList>
             <TabsContent value="one">
-
               <div className="py-4">
                 <FormField
                   control={form.control}
@@ -120,7 +123,7 @@ export const ActivityForm = (props: ActivityFormProps) => {
                           }} />
                       </FormControl>
                       <FormDescription>
-                        The Slug in the url of your activity page
+                        The Slug in the url of your activity page max 20 chars no spécial chars no space 
                       </FormDescription>
                       <FormMessage />
                     </FormItem>
@@ -260,31 +263,42 @@ export const ActivityForm = (props: ActivityFormProps) => {
                     )}
                   />
                 </div>
+
                 <div className="py-4">
                   <FormField
                     control={form.control}
-                    name="userWanted"
+                    name="Hour"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="font-bold">Available spots</FormLabel>
+                        <FormLabel className="font-bold">Hours</FormLabel>
                         <FormControl>
-                          <Select value={field.value ?? ""} onValueChange={field.onChange}>
-                            <SelectTrigger>
-                              <SelectValue></SelectValue>
-                            </SelectTrigger>
-                            <SelectContent>
-                              {availablesPlaces.map((place) => {
-                                return (
-                                  <SelectItem value={place} key={place}>
-                                    <div>{place}</div>
-                                  </SelectItem>
-                                );
-                              })}
-                            </SelectContent>
-                          </Select>
+                          <Input
+                            placeholder="Hours"
+                            {...field} />
                         </FormControl>
                         <FormDescription>
-                          Enter the number of available spots for your activity
+                          What time will the activity take place?
+                        </FormDescription>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+
+                <div className="py-4">
+                  <FormField
+                    control={form.control}
+                    name="Location"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="font-bold">Location</FormLabel>
+                        <FormControl>
+                          <Input
+                            placeholder="Location"
+                            {...field} />
+                        </FormControl>
+                        <FormDescription>
+                          Location of the activity take place?
                         </FormDescription>
                         <FormMessage />
                       </FormItem>
@@ -292,7 +306,88 @@ export const ActivityForm = (props: ActivityFormProps) => {
                   />
                 </div>
               </div>
+            </TabsContent>
+
+            <TabsContent value="three">
+
+              <div className="py-4">
+                <FormField
+                  control={form.control}
+                  name="userWanted"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="font-bold">Available spots</FormLabel>
+                      <FormControl>
+                        <Select value={field.value ?? ""} onValueChange={field.onChange}>
+                          <SelectTrigger>
+                            <SelectValue></SelectValue>
+                          </SelectTrigger>
+                          <SelectContent>
+                            {availablesPlaces.map((place) => {
+                              return (
+                                <SelectItem value={place} key={place}>
+                                  <div>{place}</div>
+                                </SelectItem>
+                              );
+                            })}
+                          </SelectContent>
+                        </Select>
+                      </FormControl>
+                      <FormDescription>
+                        Enter the number of available spots for your activity
+                      </FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+
+              <div className="py-4">
+                <FormField
+                  control={form.control}
+                  name="Free"
+                  render={({ field }) => (
+                    <FormItem className="flex flex-row items-center justify-between rounded-lg border p-3 shadow-sm">
+                      <div className="space-y-0.5">
+                        <FormLabel>FREE</FormLabel>
+                        <FormDescription>
+                          This activity is free or not.
+                        </FormDescription>
+                      </div>
+                      <FormControl>
+                        <Switch
+                          checked={field.value}
+                          onCheckedChange={field.onChange}
+                        />
+                      </FormControl>
+                    </FormItem>
+                  )}
+                />
+              </div>
+
+              <div className="py-4">
+                <FormField
+                  control={form.control}
+                  name="Link"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="font-bold">Link  *optional</FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder="Link"
+                          {...field} />
+                      </FormControl>
+                      <FormDescription>
+                        Links to the establishment offering the activity.
+                      </FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+
               <Button className="w-full" variant={'default'} type="submit">Edit Activity</Button>
+
             </TabsContent>
           </Tabs>
         </Form>

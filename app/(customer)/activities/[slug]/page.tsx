@@ -4,7 +4,7 @@ import { Button } from "@/src/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader } from "@/src/components/ui/card"
 import { prisma } from "@/src/prisma"
 import type { PageParams } from "@/src/types/next"
-import { ChevronsLeft, MousePointerClick, Send, Star, UsersRound } from "lucide-react"
+import { Check, ChevronsLeft, HandCoins, MousePointerClick, Send, Star, ThumbsDown, ThumbsUp, UsersRound } from "lucide-react"
 import { notFound } from "next/navigation"
 import RouteError from "../error"
 import { EditButton } from "./EditButton"
@@ -55,7 +55,7 @@ export default async function RouteParams(props: PageParams<{ slug: string }>) {
                         <LucideIcons name={activity.Icon as IconName} size={36} />
                     </div>
                     {isCreate! ?
-                        <EditButton id={activity.id} /> :
+                        <EditButton slug={activity.slug} /> :
                         <Button variant={"outline"}>
                             <span className="mr-2">Participate</span>
                             <Send size={16} />
@@ -70,6 +70,10 @@ export default async function RouteParams(props: PageParams<{ slug: string }>) {
                     <Card className="p-2 m-2 w-1/2 justify-center flex  ">
                         <CardDescription className="flex justify-center items-center">
                             <span className="py-2 font-extrabold text-2xl">{activity.Date ? new Date(activity.Date).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' }) : ''}</span>
+                            <span className="ml-8 font-extrabold text-xl">{(typeof activity.Hour === 'string' && activity.Hour.match(/^\d+$/)) ?
+                                `${parseInt(activity.Hour, 10)}h` :
+                                activity.Hour}
+                            </span>
                         </CardDescription>
                     </Card>
                 </CardContent>
@@ -85,16 +89,37 @@ export default async function RouteParams(props: PageParams<{ slug: string }>) {
                             <UsersRound />
                         </CardDescription>
                     </Card>
-                    <Card className="p-2 m-2 w-1/3  justify-center flex ">
+                    <Link className="m-2 w-1/3  justify-center flex " href={`/users/${activity.user.username}`}>
+                        <Card className="w-full justify-center flex ">
+                            <CardDescription className="flex justify-center items-center" >
+                                <span className="mr-4">{activity.user.name?.split(' ')[0]}</span>
+                                <Avatar className='size-6'>
+                                    <AvatarFallback>{activity.user.name?.[0]}</AvatarFallback>
+                                    {activity.user.image ? (
+                                        <AvatarImage src={activity.user.image} alt={`${activity.user.name}'s profile picture`} />
+                                    ) : null}
+                                </Avatar>
+                            </CardDescription>
+                        </Card>
+                    </Link>
+                </CardContent>
+                <CardContent className="flex wrap justify-center">
+                    <Card className="p-2 m-2 w-1/3 ">
                         <CardDescription className="flex justify-center items-center" >
-                            <span className="mr-4">{activity.user.name?.split(' ')[0]}</span>
-                            <Avatar className='size-6'>
-                                <AvatarFallback>{activity.user.name?.[0]}</AvatarFallback>
-                                {activity.user.image ? (
-                                    <AvatarImage src={activity.user.image} alt={`${activity.user.name}'s profile picture`} />
-                                ) : null}
-                            </Avatar>
+                            <span className="p-2 font-extrabold text-2xl">{activity.Location}</span>
                         </CardDescription>
+                    </Card>
+                    <Card className="p-2 m-2 w-1/3  justify-center flex  ">
+                        {activity.Free ? (
+                            <CardDescription className="flex justify-center items-center" >
+                                <span className="mr-4"> Free : </span>
+                                <Check />
+                            </CardDescription>
+                        ) :
+                            <CardDescription className="flex justify-center items-center" >
+                                <span className="mr-4"> Free : </span>
+                                <HandCoins />
+                            </CardDescription>}
                     </Card>
                 </CardContent>
                 <CardFooter className="flex wrap justify-center">
@@ -104,16 +129,16 @@ export default async function RouteParams(props: PageParams<{ slug: string }>) {
                             <MousePointerClick size={16} />
                         </Link>
                     </Button>
-                    <Card className="p-2 m-2 w-1/3 h-full">
-                        <CardDescription className="flex justify-center items-center">
+                    <Card className="p-5 m-2 w-1/3 h-full">
+                        <div className="flex justify-center items-center h-full">
                             {Array.from({ length: Math.floor(averageRating) }).map((_, index) => (
                                 <Star color="gold" key={index} size={16} />
                             ))}
                             <span>/ 5</span>
-                        </CardDescription>
+                        </div>
                     </Card>
                 </CardFooter>
-            </Card>
-        </Layout>
+            </Card >
+        </Layout >
     )
 }

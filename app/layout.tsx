@@ -3,6 +3,8 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/src/lib/utils";
 import { Providers } from "./Providers";
+import { Suspense } from "react";
+import { NavigationEvents } from "@/src/components/navigation-events";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,7 +20,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="h-full">
-      <body className={cn(inter.className, 'h-full')}><Providers>{children}</Providers></body>
+      <body className={cn(inter.className, 'h-full')}><Providers>
+        {children}
+        <Suspense fallback={null}>
+          <NavigationEvents />
+        </Suspense></Providers>
+      </body>
     </html>
   );
 }

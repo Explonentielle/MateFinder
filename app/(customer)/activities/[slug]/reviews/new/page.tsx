@@ -28,7 +28,7 @@ export default async function RouteParams(props: PageParams<{ slug: string }>) {
                 <ChevronsLeft size={32} className="" />
             </Link>
             <LayoutTitle>{props.params.slug}</LayoutTitle>
-            <ReviewForm activityId={activity.id} />
+            <ReviewForm slug={activity.slug} activityId={activity.id} />
         </Layout>
     )
 

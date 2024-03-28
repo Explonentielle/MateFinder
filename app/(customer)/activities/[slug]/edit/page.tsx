@@ -5,6 +5,8 @@ import { requiredCurrentUser } from "@/src/auth/current-user"
 import { prisma } from "@/src/prisma";
 import { notFound } from "next/navigation";
 import RouteError from "../../error";
+import Link from "next/link";
+import { ChevronsLeft } from "lucide-react";
 
 
 export default async function RouteParams(props: PageParams<{ slug: string }>) {
@@ -24,6 +26,9 @@ export default async function RouteParams(props: PageParams<{ slug: string }>) {
         }
         return (
             <Layout>
+                <Link href={`/activities/${props.params.slug}/reviews`}>
+                    <ChevronsLeft size={32} className="" />
+                </Link>
                 <LayoutTitle>
                     Create Activities
                 </LayoutTitle>

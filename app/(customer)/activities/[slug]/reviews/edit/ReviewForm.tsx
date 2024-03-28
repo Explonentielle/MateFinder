@@ -12,9 +12,10 @@ import { Button } from "@/src/components/ui/button"
 import { Input } from "@/src/components/ui/input"
 import { Star } from "lucide-react"
 
-import React from "react"
+import React, { useEffect } from "react"
 
 export type ReviewFormProps = {
+  slug?: string
   activityId?: string
 }
 
@@ -25,11 +26,10 @@ const ReviewForm = (props: ReviewFormProps) => {
   })
 
   const router = useRouter();
+  const [rating, setRating] = React.useState<string | null>(null);
 
   const mutation = useMutation({
-
     mutationFn: async (values: ReviewType) => {
-      console.log("toto")
       const { data, serverError } = await createReviewAction(values);
 
       if (serverError || !data) {
@@ -37,11 +37,9 @@ const ReviewForm = (props: ReviewFormProps) => {
         return;
       }
       toast.success("Review created");
-      router.push(`/activities/${props.activityId}/reviews`);
+      router.push(`/activities/${props.slug}/reviews`);
     }
   });
-
-  const [rating, setRating] = React.useState<string | null>(null);
 
   const handleStarClick = (value: string) => {
     setRating(value);
