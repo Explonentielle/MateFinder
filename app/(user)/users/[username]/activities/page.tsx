@@ -21,13 +21,14 @@ export default async function RouteParams(props: PageParams<{ username: string }
             }
         },
         include: {
-            user: true
+            user: true,
+            candidacies: true
         }
     });
 
     return (
         <Layout>
-            <Link href={"/"}>
+            <Link href={`/users/${username}`}>
                 <ChevronsLeft size={32} className="" />
             </Link>
             <Card className="p-4 shadow-lg">
@@ -44,7 +45,14 @@ export default async function RouteParams(props: PageParams<{ username: string }
                         <div className="p-4">
                             {activities.map(activity => (
                                 <Link href={`/activities/${activity.slug}`} key={activity.id}>
-                                    <Card className="mb-4 flex items-center shadow-lg">
+                                    <Card className="relative mb-4 flex items-center shadow-lg">
+                                        {(user?.username === username) &&
+                                            (activity.candidacies.filter(candidacy => candidacy.status === "PENDING").length > 0 ? (
+                                                <div className="transform -translate-x-1/2 -translate-y-1/2 absolute top-0 left-0 rounded-full bg-red-500 w-6 h-6 flex justify-center items-center text-white">
+                                                    {activity.candidacies.filter(candidacy => candidacy.status === "PENDING").length}
+                                                </div>
+                                            ) : null)
+                                        }
                                         <CardHeader className="flex flex-row items-center w-1/3">
                                             <span className="font-mono mr-4">{activity.Title}</span>
                                             {activity.user.name ? (

@@ -6,11 +6,12 @@ import { prisma } from "@/src/prisma"
 import type { PageParams } from "@/src/types/next"
 import { Check, ChevronsLeft, HandCoins, MousePointerClick, Send, Star, ThumbsDown, ThumbsUp, UsersRound } from "lucide-react"
 import { notFound } from "next/navigation"
-import RouteError from "../error"
 import { EditButton } from "./EditButton"
 import LucideIcons, { IconName } from "@/src/components/LucideIcons"
 import { Avatar, AvatarFallback, AvatarImage } from "@/src/components/ui/avatar"
 import Link from "next/link"
+import CandidacyForm from "../../candidacies/new/CandidacyForm"
+import { Popover, PopoverContent, PopoverTrigger } from "@/src/components/ui/popover"
 
 
 
@@ -23,6 +24,7 @@ export default async function RouteParams(props: PageParams<{ slug: string }>) {
         include: {
             user: true,
             reviews: true,
+            candidacies: true,
         },
     })
 
@@ -55,27 +57,56 @@ export default async function RouteParams(props: PageParams<{ slug: string }>) {
                         <LucideIcons name={activity.Icon as IconName} size={36} />
                     </div>
                     {isCreate! ?
-                        <EditButton slug={activity.slug} /> :
-                        <Button variant={"outline"}>
-                            <span className="mr-2">Participate</span>
-                            <Send size={16} />
-                        </Button>}
+                        <div>
+                            <Link className="relative" href={`/candidacies/${activity.slug}`}>
+                                {(activity.candidacies.filter(candidacy => candidacy.status === "PENDING").length > 0 ? (
+                                        <div className="transform -translate-x-1/2 -translate-y-1/2 absolute top-0 left-0 rounded-full bg-red-500 w-6 h-6 flex justify-center items-center text-white">
+                                            {activity.candidacies.filter(candidacy => candidacy.status === "PENDING").length}
+                                        </div>
+                                    ) 
+                                : null)}
+                                <Button variant={"secondary"} className="mr-4">
+                                    Manage candidacies
+                                </Button>
+                            </Link>
+                            <EditButton slug={activity.slug} />
+                        </div> :
+                         <Popover>
+                         <PopoverTrigger asChild>
+                             <Button variant="outline">Participate <Send className="ml-4" size={24} /></Button>
+                         </PopoverTrigger>
+                         <PopoverContent className="w-50">
+                             <div className="grid gap-4">
+                                 <div className="space-y-2">
+                                     <p className="text-sm text-muted-foreground">
+                                         Are your sure to send your candidacy
+                                     </p>
+                                 </div>
+                                 <div className="items-center">
+                                 <CandidacyForm activityId={activity.id} userId={user?.id} status="PENDING" icon="Send" candidacyId="" />
+                                 </div>
+                             </div>
+                         </PopoverContent>
+                     </Popover>
+                    }
                 </CardHeader>
-                <CardContent className="flex wrap justify-center">
-                    <Card className="p-2 m-2 w-1/2  ">
-                        <CardDescription className="flex justify-center items-center">
-                            <span className="py-2 px-6 font-bold">{activity.Information}</span>
-                        </CardDescription>
-                    </Card>
-                    <Card className="p-2 m-2 w-1/2 justify-center flex  ">
-                        <CardDescription className="flex justify-center items-center">
-                            <span className="py-2 font-extrabold text-2xl">{activity.Date ? new Date(activity.Date).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' }) : ''}</span>
-                            <span className="ml-8 font-extrabold text-xl">{(typeof activity.Hour === 'string' && activity.Hour.match(/^\d+$/)) ?
-                                `${parseInt(activity.Hour, 10)}h` :
-                                activity.Hour}
-                            </span>
-                        </CardDescription>
-                    </Card>
+                <CardContent className="flex flex-col justify-center">
+                    <div className="flex wrap justify-center">
+                        <Card className="p-2 m-2 w-1/2  ">
+                            <CardDescription className="flex justify-center items-center">
+                                <span className="py-2 px-6 font-bold">{activity.Information}</span>
+                            </CardDescription>
+                        </Card>
+                        <Card className="p-2 m-2 w-1/2 justify-center flex  ">
+                            <CardDescription className="flex justify-center items-center">
+                                <span className="py-2 font-extrabold text-2xl">{activity.Date ? new Date(activity.Date).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' }) : ''}</span>
+                                <span className="ml-8 font-extrabold text-xl">{(typeof activity.Hour === 'string' && activity.Hour.match(/^\d+$/)) ?
+                                    `${parseInt(activity.Hour, 10)}h` :
+                                    activity.Hour}
+                                </span>
+                            </CardDescription>
+                        </Card>
+                    </div>
                 </CardContent>
                 <CardContent className="flex wrap justify-center">
                     <Card className="p-2 m-2 w-1/3 ">

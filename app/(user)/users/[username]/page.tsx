@@ -6,7 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/src
 import { Avatar, AvatarFallback, AvatarImage } from "@/src/components/ui/avatar"
 import { prisma } from "@/src/prisma"
 import LucideIcons, { IconName } from "@/src/components/LucideIcons"
-import { MouseIcon, MousePointerClick, Star } from "lucide-react"
+import { ChevronsLeft, MouseIcon, MousePointerClick, Star } from "lucide-react"
 import { Button } from "@/src/components/ui/button"
 import RouteError from "../../notFound"
 import { ActivityType } from "@/app/(customer)/activities/[slug]/edit/Activity.schema"
@@ -29,8 +29,9 @@ export default async function RouteParams(props: PageParams<{ username: string }
                 reviews: true,
                 activities: {
                     include: {
-                        reviews: true
-                    }
+                        reviews: true,
+                        candidacies: true
+                    },
                 }
             }
         })
@@ -118,27 +119,36 @@ export default async function RouteParams(props: PageParams<{ username: string }
                             </CardHeader>
                             <CardContent>
                                 {userdata?.activities.slice(0, 2).map((activity) => (
-                                    <Card className="shadow-lg p-2 my-2" key={activity.id}>
-                                        <div className="flex justify-between m2-4 w-full">
-                                            <CardDescription className="font-extrabold">{activity.Title}</CardDescription>
-                                            <LucideIcons name={activity.Icon as IconName} />
-                                        </div>
-                                        <div className="flex justify-between">
-                                            <CardDescription className="my-2" >{activity.Date ? new Date(activity.Date).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' }) : ''}</CardDescription>
-                                            <CardDescription className="my-2" >{activity.Location}</CardDescription>
-                                            <CardDescription className="my-2" >{(typeof activity.Hour === 'string' && activity.Hour.match(/^\d+$/)) ?
-                                                `${parseInt(activity.Hour, 10)}h` :
-                                                activity.Hour}
-                                            </CardDescription>
-                                        </div>
-                                        <div className="flex justify-between">
-                                            <CardDescription>Average rating: </CardDescription>
-                                            <CardDescription className="flex justify-center items-center">
-                                                {Array.from({ length: Math.floor(Number(rating(activity))) }).map((_, index) => (
-                                                    <Star color="gold" key={index} size={16} />
-                                                ))}
-                                            </CardDescription>
-                                        </div>
+                                    <Card className="relative shadow-lg p-2 my-2" key={activity.id}>
+                                        <Link href={`/activities/${activity.slug}`} key={activity.id}>
+                                            {(current?.id === userdata?.id) &&
+                                                (activity.candidacies.filter(candidacy => candidacy.status === "PENDING").length > 0 ? (
+                                                    <div className="transform -translate-x-1/2 -translate-y-1/2 absolute top-0 left-0 rounded-full bg-red-500 w-6 h-6 flex justify-center items-center text-white">
+                                                        {activity.candidacies.filter(candidacy => candidacy.status === "PENDING").length}
+                                                    </div>
+                                                ) : null)
+                                            }
+                                            <div className="flex justify-between m2-4 w-full">
+                                                <CardDescription className="font-extrabold">{activity.Title}</CardDescription>
+                                                <LucideIcons name={activity.Icon as IconName} />
+                                            </div>
+                                            <div className="flex justify-between">
+                                                <CardDescription className="my-2" >{activity.Date ? new Date(activity.Date).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' }) : ''}</CardDescription>
+                                                <CardDescription className="my-2" >{activity.Location}</CardDescription>
+                                                <CardDescription className="my-2" >{(typeof activity.Hour === 'string' && activity.Hour.match(/^\d+$/)) ?
+                                                    `${parseInt(activity.Hour, 10)}h` :
+                                                    activity.Hour}
+                                                </CardDescription>
+                                            </div>
+                                            <div className="flex justify-between">
+                                                <CardDescription>Average rating: </CardDescription>
+                                                <CardDescription className="flex justify-center items-center">
+                                                    {Array.from({ length: Math.floor(Number(rating(activity))) }).map((_, index) => (
+                                                        <Star color="gold" key={index} size={16} />
+                                                    ))}
+                                                </CardDescription>
+                                            </div>
+                                        </Link>
                                     </Card>
                                 ))}
                             </CardContent>

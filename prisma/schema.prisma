@@ -117,7 +117,7 @@ model Review {
 
 model Candidacy {
   id                String    @id @default(cuid())
-  status            CandidacyStatus
+  status            String
 
   userId            String
   user              User        @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -127,10 +127,4 @@ model Candidacy {
 
   createdAt         DateTime  @default(now())
   updatedAt         DateTime  @updatedAt
-}
-
-enum CandidacyStatus {
-  PENDING
-  ACCEPTED
-  REJECTED
 }
