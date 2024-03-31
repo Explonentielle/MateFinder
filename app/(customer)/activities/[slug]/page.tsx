@@ -60,7 +60,7 @@ export default async function RouteParams(props: PageParams<{ slug: string }>) {
                         <div>
                             <Link className="relative" href={`/candidacies/${activity.slug}`}>
                                 {(activity.candidacies.filter(candidacy => candidacy.status === "PENDING").length > 0 ? (
-                                        <div className="transform -translate-x-1/2 -translate-y-1/2 absolute top-0 left-0 rounded-full bg-red-500 w-6 h-6 flex justify-center items-center text-white">
+                                        <div className="-translate-x-1/2 -translate-y-1/2 absolute top-0 left-0 rounded-full bg-red-500 size-6 flex justify-center items-center text-white">
                                             {activity.candidacies.filter(candidacy => candidacy.status === "PENDING").length}
                                         </div>
                                     ) 
@@ -91,7 +91,7 @@ export default async function RouteParams(props: PageParams<{ slug: string }>) {
                     }
                 </CardHeader>
                 <CardContent className="flex flex-col justify-center">
-                    <div className="flex wrap justify-center">
+                    <div className="flex justify-center">
                         <Card className="p-2 m-2 w-1/2  ">
                             <CardDescription className="flex justify-center items-center">
                                 <span className="py-2 px-6 font-bold">{activity.Information}</span>
@@ -108,7 +108,7 @@ export default async function RouteParams(props: PageParams<{ slug: string }>) {
                         </Card>
                     </div>
                 </CardContent>
-                <CardContent className="flex wrap justify-center">
+                <CardContent className="flex justify-center">
                     <Card className="p-2 m-2 w-1/3 ">
                         <CardDescription className="flex justify-center items-center" >
                             <span className="p-2 font-extrabold text-2xl">{activity.categorie}</span>
@@ -134,7 +134,7 @@ export default async function RouteParams(props: PageParams<{ slug: string }>) {
                         </Card>
                     </Link>
                 </CardContent>
-                <CardContent className="flex wrap justify-center">
+                <CardContent className="flex justify-center">
                     <Card className="p-2 m-2 w-1/3 ">
                         <CardDescription className="flex justify-center items-center" >
                             <span className="p-2 font-extrabold text-2xl">{activity.Location}</span>
@@ -153,7 +153,7 @@ export default async function RouteParams(props: PageParams<{ slug: string }>) {
                             </CardDescription>}
                     </Card>
                 </CardContent>
-                <CardFooter className="flex wrap justify-center">
+                <CardFooter className="flex justify-center">
                     <Button className=" py-2 m-2 w-1/3 h-full" variant={"default"}>
                         <Link className="w-full flex items-center justify-center" href={`/activities/${props.params.slug}/reviews`}>
                             <span className="p-2 font-extrabold text-2xl">Reviews </span>

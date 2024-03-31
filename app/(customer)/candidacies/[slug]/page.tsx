@@ -89,7 +89,7 @@ export default async function RouteParams(props: PageParams<{ slug: string }>) {
                                                 </Popover>
                                                 <Popover>
                                                     <PopoverTrigger asChild>
-                                                        <Button className="bg-red-300 mr-4" variant="outline"><Cross className="transform rotate-45" size={24} /></Button>
+                                                        <Button className="bg-red-300 mr-4" variant="outline"><Cross className=" rotate-45" size={24} /></Button>
                                                     </PopoverTrigger>
                                                     <PopoverContent className="w-80">
                                                         <div className="grid gap-4">

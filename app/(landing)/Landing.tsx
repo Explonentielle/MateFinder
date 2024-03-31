@@ -54,12 +54,12 @@ export const Landing = async () => {
 
 
         return (
-            <div className="h-full w-full">
+            <div className="size-full">
                 <Layout>
                     <LayoutTitle className="flex items-center">
-                        <p className="font-ligth mr-4 text-4xl">Welcome to</p><p className="titleBorder font-extrabold text-5xl">Mate Finder</p>
+                        <p className="mr-4 text-4xl">Welcome to</p><p className="titleBorder font-extrabold text-5xl">Mate Finder</p>
                     </LayoutTitle>
-                    <h1 className="text-2xl font-ligth pl-6">Discover your perfect mate with Mate Finder</h1>
+                    <h1 className="text-2xl  pl-6">Discover your perfect mate with Mate Finder</h1>
                     <Link href={"/activities"}>
                         <Button variant="ghost" className="shadow-lg w-full py-6 border-primary border-dashed border-2">
                             Check All Activities

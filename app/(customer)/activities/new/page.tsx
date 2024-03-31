@@ -11,7 +11,7 @@ export default async function RouteParams(props: PageParams<{}>) {
 
         return (
             <Layout>
-                <LayoutTitle className="flex font-bold">Ready to Join the<p className="titleBorder ml-2">Community?</p></LayoutTitle>
+                <LayoutTitle className="flex font-bold">Ready to Join the<p className="ml-2 titleBorder">Community?</p></LayoutTitle>
                 <h1 className="font-bold text-xl"> Propose Your Activity with Mate Finder!</h1>
                 <ActivityForm />
             </Layout>

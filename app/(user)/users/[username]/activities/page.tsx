@@ -35,7 +35,7 @@ export default async function RouteParams(props: PageParams<{ username: string }
                 <CardHeader>
                     <div className="flex justify-between">
                         <LayoutTitle>Check all Activities of {username}</LayoutTitle>
-                        {(user?.username === username) ? <Link href={"/activities/new"} className="shadow-lg flex items-center justify-center hover:bg-primary transition-color rounded-md border-2 border-dashed border-primary bg-accent p-2 w-1/5">
+                        {(user?.username === username) ? <Link href={"/activities/new"} className="shadow-lg flex items-center justify-center hover:bg-primary transition rounded-md border-2 border-dashed border-primary bg-accent p-2 w-1/5">
                             Create Activity
                         </Link> : null}
                     </div>
@@ -48,7 +48,7 @@ export default async function RouteParams(props: PageParams<{ username: string }
                                     <Card className="relative mb-4 flex items-center shadow-lg">
                                         {(user?.username === username) &&
                                             (activity.candidacies.filter(candidacy => candidacy.status === "PENDING").length > 0 ? (
-                                                <div className="transform -translate-x-1/2 -translate-y-1/2 absolute top-0 left-0 rounded-full bg-red-500 w-6 h-6 flex justify-center items-center text-white">
+                                                <div className=" -translate-x-1/2 -translate-y-1/2 absolute top-0 left-0 rounded-full bg-red-500 size-full flex justify-center items-center text-white">
                                                     {activity.candidacies.filter(candidacy => candidacy.status === "PENDING").length}
                                                 </div>
                                             ) : null)

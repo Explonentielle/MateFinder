@@ -22,7 +22,7 @@ export default async function RouteParams(props: PageParams<{ username: string }
             <Link href={`/`}>
                 <ChevronsLeft size={32} className="" />
             </Link>
-            <p>profil de l'utilisateur : {props.params.username} </p>
+            <p>profil de l utilisateur : {props.params.username} </p>
             <UserForm userId={user.id} username={props.params.username} defaultValues={defaultValues} />
         </Layout>
     )

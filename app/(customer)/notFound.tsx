@@ -12,7 +12,7 @@ export default function RouteError() {
                     <CardTitle>
                         Activity not found
                     </CardTitle>
-                    <CardDescription>The Activity may deleted or you don't have the permission to view it.</CardDescription>
+                    <CardDescription>The Activity may deleted or you don t have the permission to view it.</CardDescription>
                 </CardHeader>
                 <CardFooter>
                 </CardFooter>

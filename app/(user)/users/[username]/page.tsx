@@ -78,7 +78,7 @@ export default async function RouteParams(props: PageParams<{ username: string }
                         <CardHeader className="flex flex-row items-center justify-between">
                             <CardTitle> {(current?.id === userdata?.id) ? "My Informations" : `Informations of ${userdata?.username}`}</CardTitle>
                             <div className="flex items-center">
-                                <CardDescription className="font-bold mr-4"> {userdata?.age ? calculateAge(userdata?.age) : "Unknown"} year's old</CardDescription>
+                                <CardDescription className="font-bold mr-4"> {userdata?.age ? calculateAge(userdata?.age) : "Unknown"} year s old</CardDescription>
                                 <Avatar className="size-10 mr-4">
                                     <AvatarFallback>{userdata?.name?.[0]}</AvatarFallback>
                                     {userdata?.image && <AvatarImage src={userdata?.image} alt={`${userdata?.name}'s profile picture`} />}
@@ -123,12 +123,12 @@ export default async function RouteParams(props: PageParams<{ username: string }
                                         <Link href={`/activities/${activity.slug}`} key={activity.id}>
                                             {(current?.id === userdata?.id) &&
                                                 (activity.candidacies.filter(candidacy => candidacy.status === "PENDING").length > 0 ? (
-                                                    <div className="transform -translate-x-1/2 -translate-y-1/2 absolute top-0 left-0 rounded-full bg-red-500 w-6 h-6 flex justify-center items-center text-white">
+                                                    <div className=" -translate-x-1/2 -translate-y-1/2 absolute top-0 left-0 rounded-full bg-red-500 size-6 flex justify-center items-center text-white">
                                                         {activity.candidacies.filter(candidacy => candidacy.status === "PENDING").length}
                                                     </div>
                                                 ) : null)
                                             }
-                                            <div className="flex justify-between m2-4 w-full">
+                                            <div className="flex justify-between m-4 w-full">
                                                 <CardDescription className="font-extrabold">{activity.Title}</CardDescription>
                                                 <LucideIcons name={activity.Icon as IconName} />
                                             </div>
@@ -162,7 +162,7 @@ export default async function RouteParams(props: PageParams<{ username: string }
                                 <CardContent>
                                     {userdata?.reviews.map((review) => (
                                         <Card className="shadow-lg p-2 my-2" key={review.id}>
-                                            <div className="flex justify-between m2-4 w-full">
+                                            <div className="flex justify-between m-4 w-full">
                                                 <CardDescription className="font-extrabold">{review.Title}</CardDescription>
                                                 <CardDescription className="flex justify-center items-center">
                                                     {Array.from({ length: Math.floor(Number(review.rating)) }).map((_, index) => (

@@ -29,7 +29,7 @@ export default async function RouteParams(props: PageParams<{}>) {
                 <CardHeader>
                     <div className="flex justify-between">
                         <LayoutTitle>Check all Activities</LayoutTitle>
-                        <Link href={"/activities/new"} className="shadow-lg flex items-center justify-center hover:bg-primary transition-color rounded-md border-2 border-dashed border-primary bg-accent p-2 w-1/5">
+                        <Link href={"/activities/new"} className="shadow-lg flex items-center justify-center hover:bg-primary transition rounded-md border-2 border-dashed border-primary bg-accent p-2 w-1/5">
                             Create Activity
                         </Link>
                     </div>
@@ -40,7 +40,7 @@ export default async function RouteParams(props: PageParams<{}>) {
                             {activities.length ? (
                                 <div>
                                     {activities.map(activity => (
-                                        <Link href={`/activities/${activity.slug}`}>
+                                        <Link key={activity.id} href={`/activities/${activity.slug}`}>
                                             <Card key={activity.id} className="mb-4 flex items-center shadow-lg">
                                                 <CardHeader className="flex flex-row items-center w-1/3">
                                                     <span className="font-mono mr-4">{activity.Title}</span>
@@ -71,7 +71,7 @@ export default async function RouteParams(props: PageParams<{}>) {
                                     ))}
                                 </div>
                             ) : (
-                                <Link href={"/activities/new"} className="flex items-center justify-center hover:bg-accent transition-color rounded-md border-2 border-dashed border-primary py-8-lg p-12 w-full">
+                                <Link href={"/activities/new"} className="flex items-center justify-center hover:bg-accent transition rounded-md border-2 border-dashed border-primary py-8 p-12 w-full">
                                     Create Activity
                                 </Link>
                             )}

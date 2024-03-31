@@ -16,7 +16,7 @@ export default function RouteError() {
                 </CardHeader>
                 <CardContent className="flex items-center flex-col items-center">
                     <SignInButton />
-                    <CardDescription className="p-8 w-2/3">The User may deleted or you don't have the permission to view it.</CardDescription>
+                    <CardDescription className="p-8 w-2/3">The User may deleted or you don t have the permission to view it.</CardDescription>
                 </CardContent>
             </Card>
         </Layout>
