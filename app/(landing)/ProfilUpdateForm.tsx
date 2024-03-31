@@ -54,7 +54,7 @@ const ProfileUpdateForm = (userId: UserFormProps) => {
                                 <CardDescription>
                                     You can now check and update you profil
                                 </CardDescription>
-                                <Link className="my-8 flex items-center " href={`/users/new`}>
+                                <Link className="my-8 flex items-center " href={`/users/${username}/new`}>
                                     <Button>
                                         View Profile
                                     </Button>

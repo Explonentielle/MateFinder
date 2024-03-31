@@ -7,9 +7,9 @@ import { toast } from "sonner"
 import { useRouter } from "next/navigation"
 import { Popover, PopoverContent, PopoverTrigger } from "@/src/components/ui/popover"
 import { UserSchema, UserType } from "./User.schema"
-import { format } from "date-fns"
+import { format, isValid, parseISO } from "date-fns"
 import { z } from "zod"
-import React from "react"
+import React, { useEffect } from "react"
 import { updateUserAction } from "./User.action"
 import { Input } from "@/src/components/ui/input"
 import { Button } from "@/src/components/ui/button"
@@ -31,14 +31,14 @@ const UserForm = (props: UserFormProps) => {
     defaultValues: props.defaultValues
   })
   const isCreate = !Boolean(props.defaultValues)
+  const [year, setYear] = React.useState<Date | undefined>(props.defaultValues?.age);
+  const [inputYear, setInputYear] = React.useState<number | undefined>(year?.getFullYear());
+
 
   const router = useRouter();
   const mutation = useMutation({
 
     mutationFn: async (values: UserType) => {
-
-      console.log("toto")
-
       const { data, serverError } = await updateUserAction(values);
 
       if (serverError || !data) {
@@ -55,7 +55,7 @@ const UserForm = (props: UserFormProps) => {
   return (
     <Card>
       <CardHeader>
-      <CardTitle>{isCreate
+        <CardTitle>{isCreate
           ? <p className="font-extrabold text-2xl">Create Profil</p>
           : <p className="font-extrabold text-2xl">{`Update Profil : ${props.defaultValues?.username}`}</p>}
         </CardTitle>
@@ -92,12 +92,13 @@ const UserForm = (props: UserFormProps) => {
                   <FormLabel>Date of birth</FormLabel>
                   <Popover>
                     <PopoverTrigger asChild>
-                      <FormControl>
+                      <div className="flex items-center">
                         <Button
+                          type="button"
                           variant={"outline"}
                           className={cn(
                             "w-[240px] pl-3 text-left font-normal",
-                            !field.value && "text-muted-foreground"
+                            !isValid(field.value) && "text-muted-foreground"
                           )}
                         >
                           {field.value ? (
@@ -107,18 +108,30 @@ const UserForm = (props: UserFormProps) => {
                           )}
                           <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
                         </Button>
-                      </FormControl>
+                      </div>
                     </PopoverTrigger>
                     <PopoverContent className="w-auto p-0" align="start">
-                      <Calendar
-                        mode="single"
-                        selected={field.value}
-                        onSelect={field.onChange}
-                        disabled={(date) =>
-                          date > new Date() || date < new Date("1900-01-01")
-                        }
-                        initialFocus
+                      <Input
+                        type="text"
+                        placeholder="Enter year"
+                        onChange={(e) => {
+                          setInputYear(Number(e.target.value));
+                        }}
+                        className="w-full"
                       />
+                      <div className="rounded-md border">
+                        <Calendar
+                          mode="single"
+                          selected={field.value}
+                          onSelect={field.onChange}
+                          disabled={(date) =>
+                            date > new Date() || date < new Date("1900-01-01")
+                          }
+                          toYear={inputYear ? inputYear : year?.getFullYear()}
+                          toDate={year}
+                          toMonth={year}
+                        />
+                      </div>
                     </PopoverContent>
                   </Popover>
                   <FormDescription>
@@ -159,7 +172,7 @@ const UserForm = (props: UserFormProps) => {
                       {...field} />
                   </FormControl>
                   <FormDescription>
-                    Past the link of Avatar of your profil 
+                    Past the link of Avatar of your profil
                   </FormDescription>
                   <FormMessage />
                 </FormItem>

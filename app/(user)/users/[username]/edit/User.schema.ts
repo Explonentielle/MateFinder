@@ -1,10 +1,10 @@
 import { z } from "zod";
 
 export const UserSchema = z.object({
-  name: z.string(), // Permet une chaîne de caractères ou null/undefined
+  name: z.string(),
   image: z.string().optional(),
-  age: z.date(), // Permet un nombre entier ou null/undefined
-  username: z.string(), // Permet une chaîne de caractères ou null/undefined
+  age: z.date(),
+  username: z.string(), 
 });
 
 export type UserType = z.infer<typeof UserSchema>;

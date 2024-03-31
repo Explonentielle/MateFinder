@@ -12,7 +12,7 @@ export default async function RouteParams(props: PageParams<{ username: string }
 
     const defaultValues = {
         name: user?.name || "",
-        age: user?.age || new Date,
+        age: new Date (user?.age || new Date) || new Date,
         username: user?.username || "",
         image: user?.image || "",
     }

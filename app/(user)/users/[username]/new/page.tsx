@@ -1,5 +1,5 @@
 import type { PageParams } from "@/src/types/next"
-import UserForm from "../[username]/edit/UserForm"
+import UserForm from "../edit/UserForm"
 import { requiredCurrentUser } from "@/src/auth/current-user"
 import { Layout } from "@/src/components/Layout"
 import Link from "next/link"
