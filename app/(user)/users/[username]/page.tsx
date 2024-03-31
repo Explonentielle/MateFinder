@@ -23,7 +23,12 @@ export default async function RouteParams(props: PageParams<{ username: string }
             },
             include: {
                 reviews: true,
-                activities: true
+                activities: {
+                    include: {
+                        reviews: true,
+                        candidacies: true
+                    },
+                }
             }
         })
         
@@ -113,13 +118,13 @@ export default async function RouteParams(props: PageParams<{ username: string }
                                 {userdata?.activities.slice(0, 2).map((activity) => (
                                     <Card className="relative shadow-lg p-2 my-2" key={activity.id}>
                                         <Link href={`/activities/${activity.slug}`} key={activity.id}>
-                                            {/* {(current?.id === userdata?.id) &&
+                                            {(current?.id === userdata?.id) &&
                                                 (activity.candidacies.filter(candidacy => candidacy.status === "PENDING").length > 0 ? (
                                                     <div className=" -translate-x-1/2 -translate-y-1/2 absolute top-0 left-0 rounded-full bg-red-500 size-6 flex justify-center items-center text-white">
                                                         {activity.candidacies.filter(candidacy => candidacy.status === "PENDING").length}
                                                     </div>
                                                 ) : null)
-                                            } */}
+                                            }
                                             <div className="flex justify-between my-4 w-full">
                                                 <CardDescription className="font-extrabold">{activity.Title}</CardDescription>
                                                 <LucideIcons name={activity.Icon as IconName} />
@@ -135,7 +140,7 @@ export default async function RouteParams(props: PageParams<{ username: string }
                                             <div className="flex justify-between">
                                                 <CardDescription>Average rating: </CardDescription>
                                                 <CardDescription className="flex justify-center items-center">
-                                                    {Array.from({ length: Math.floor(Number("4")) }).map((_, index) => (
+                                                    {Array.from({ length: Math.floor(Number(rating(activity))) }).map((_, index) => (
                                                         <Star color="gold" key={index} size={16} />
                                                     ))}
                                                 </CardDescription>

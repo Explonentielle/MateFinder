@@ -49,7 +49,11 @@ export const ActivityForm = (props: ActivityFormProps) => {
         toast.error(serverError);
         return;
       }
-      toast.success("Activity created");
+      if (!isCreate) {
+        toast.success("Activity update")
+      } else {
+        toast.success("Activity created")
+      }
       router.push(`/activities/${data.slug}`)
     }
   })
@@ -123,7 +127,7 @@ export const ActivityForm = (props: ActivityFormProps) => {
                           }} />
                       </FormControl>
                       <FormDescription>
-                        The Slug in the url of your activity page max 20 chars no spécial chars no space 
+                        The Slug in the url of your activity page max 20 chars no spécial chars no space
                       </FormDescription>
                       <FormMessage />
                     </FormItem>
