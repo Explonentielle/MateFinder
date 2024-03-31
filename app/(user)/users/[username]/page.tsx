@@ -6,21 +6,17 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/src
 import { Avatar, AvatarFallback, AvatarImage } from "@/src/components/ui/avatar"
 import { prisma } from "@/src/prisma"
 import LucideIcons, { IconName } from "@/src/components/LucideIcons"
-import { ChevronsLeft, MouseIcon, MousePointerClick, Star } from "lucide-react"
+import { MousePointerClick, Star } from "lucide-react"
 import { Button } from "@/src/components/ui/button"
 import RouteError from "../../notFound"
-import { ActivityType } from "@/app/(customer)/activities/[slug]/edit/Activity.schema"
 import { ScrollArea } from "@/src/components/ui/scroll-area"
 
 
 
 export default async function RouteParams(props: PageParams<{ username: string }>) {
-
-
-    const current = await currentUser()
-
     try {
-
+        
+        const current = await currentUser()
         const userdata = await prisma.user.findUnique({
             where: {
                 username: props.params.username
