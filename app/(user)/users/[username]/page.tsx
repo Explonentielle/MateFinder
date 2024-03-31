@@ -61,7 +61,7 @@ export default async function RouteParams(props: PageParams<{ username: string }
         return (
             <Layout>
                 <div className="flex justify-between items-center">
-                    <LayoutTitle>{userdata?.username}</LayoutTitle>
+                    <LayoutTitle>{props.params.username}</LayoutTitle>
                     {(current?.id === userdata?.id) ? <Button>
                         <Link href={`/users/${userdata?.username}/edit`}>Update my profile</Link>
                     </Button> : <Button>

@@ -123,7 +123,7 @@ export default async function RouteParams(props: PageParams<{ slug: string }>) {
                     <Link className="m-2 w-1/3  justify-center flex " href={`/users/${activity.user.username}`}>
                         <Card className="w-full justify-center flex ">
                             <CardDescription className="flex justify-center items-center" >
-                                <span className="mr-4">{activity.user.name?.split(' ')[0]}</span>
+                                <span className="mr-4">{activity.user.username}</span>
                                 <Avatar className='size-6'>
                                     <AvatarFallback>{activity.user.name?.[0]}</AvatarFallback>
                                     {activity.user.image ? (
