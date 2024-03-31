@@ -10,15 +10,22 @@ import { MousePointerClick, Star } from "lucide-react"
 import { Button } from "@/src/components/ui/button"
 import RouteError from "../../notFound"
 import { ScrollArea } from "@/src/components/ui/scroll-area"
+import { error } from "console"
 
 
 
 export default async function RouteParams(props: PageParams<{ username: string }>) {
 
-    try {        
+    try {    
+
+        if (!props || !props.params || !props.params.username) {
+            return  error("user missing")
+        }
+        const username = props.params.username
+        
         const userdata = await prisma.user.findUnique({
             where: {
-                username: props.params.username
+                username: username
             },
             include: {
                 reviews: true,
@@ -62,7 +69,7 @@ export default async function RouteParams(props: PageParams<{ username: string }
         return (
             <Layout>
                 <div className="flex justify-between items-center">
-                    <LayoutTitle>{props.params.username}</LayoutTitle>
+                    <LayoutTitle>{username}</LayoutTitle>
                     {(current?.id === userdata?.id) ? <Button>
                         <Link href={`/users/${userdata?.username}/edit`}>Update my profile</Link>
                     </Button> : <Button>
