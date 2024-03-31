@@ -15,8 +15,7 @@ import { ScrollArea } from "@/src/components/ui/scroll-area"
 
 export default async function RouteParams(props: PageParams<{ username: string }>) {
 
-    try {
-        
+    try {        
         const userdata = await prisma.user.findUnique({
             where: {
                 username: props.params.username
@@ -31,8 +30,10 @@ export default async function RouteParams(props: PageParams<{ username: string }
                 }
             }
         })
+        console.log(userdata)
         
         const current = await currentUser()
+        console.log(current)
 
         const calculateAge = (date: Date) => {
             const birthDate = new Date(date)
