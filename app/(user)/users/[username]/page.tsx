@@ -35,9 +35,22 @@ export default async function RouteParams(props: PageParams<{ username: string }
             }
         })
         
-        if (!userdata) {
-            return error("user not found", error.arguments)
-        }
+        console.error(userdata)
+        console.error(await prisma.user.findUnique({
+            where: {
+                username: username
+            },
+            include: {
+                reviews: true,
+                activities: {
+                    include: {
+                        reviews: true,
+                        candidacies: true
+                    },
+                }
+            }
+        }))
+
         
         const current = await currentUser()
 
