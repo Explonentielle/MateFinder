@@ -4,7 +4,7 @@ export const getServerUrl = () => {
         return window.location.origin;
     }
     if (process.env.VERCEL_ENV === "production") {
-        return "https://mate-finder.vercel.app"
+        return "https://matefinder.vercel.app"
     }
 
     if (process.env.VERCEL_URL) {
