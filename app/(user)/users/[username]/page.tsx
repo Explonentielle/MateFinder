@@ -27,15 +27,15 @@ export default async function RouteParams(props: PageParams<{ username: string }
             where: {
                 username: username
             },
-            include: {
-                reviews: true,
-                activities: {
-                    include: {
-                        reviews: true,
-                        candidacies: true
-                    },
-                }
-            }
+            // include: {
+            //     reviews: true,
+            //     activities: {
+            //         include: {
+            //             reviews: true,
+            //             candidacies: true
+            //         },
+            //     }
+            // }
         })
         console.log(userdata)
         
@@ -123,7 +123,7 @@ export default async function RouteParams(props: PageParams<{ username: string }
                                 </Link>
                             </CardHeader>
                             <CardContent>
-                                {userdata?.activities.slice(0, 2).map((activity) => (
+                                {/* {userdata?.activities.slice(0, 2).map((activity) => (
                                     <Card className="relative shadow-lg p-2 my-2" key={activity.id}>
                                         <Link href={`/activities/${activity.slug}`} key={activity.id}>
                                             {(current?.id === userdata?.id) &&
@@ -155,7 +155,7 @@ export default async function RouteParams(props: PageParams<{ username: string }
                                             </div>
                                         </Link>
                                     </Card>
-                                ))}
+                                ))} */}
                             </CardContent>
                         </Card>
 
@@ -165,7 +165,7 @@ export default async function RouteParams(props: PageParams<{ username: string }
                             </CardHeader>
                             <ScrollArea className="w-full h-[25vh]">
                                 <CardContent>
-                                    {userdata?.reviews.map((review) => (
+                                    {/* {userdata?.reviews.map((review) => (
                                         <Card className="shadow-lg p-2 my-2" key={review.id}>
                                             <div className="flex justify-between my-4 w-full">
                                                 <CardDescription className="font-extrabold">{review.Title}</CardDescription>
@@ -179,7 +179,7 @@ export default async function RouteParams(props: PageParams<{ username: string }
                                             <CardDescription className="my-2" >{review.createdAt ? new Date(review.createdAt).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' }) : ''}</CardDescription>
                                             <CardDescription className="">{review.content}</CardDescription>
                                         </Card>
-                                    ))}
+                                    ))} */}
                                 </CardContent>
                             </ScrollArea>
                         </Card>
