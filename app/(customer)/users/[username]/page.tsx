@@ -35,21 +35,21 @@ export default async function RouteParams(props: PageParams<{ username: string }
             }
         })
         
-        console.error(userdata)
-        console.error(await prisma.user.findUnique({
-            where: {
-                username: username
-            },
-            include: {
-                reviews: true,
-                activities: {
-                    include: {
-                        reviews: true,
-                        candidacies: true
-                    },
-                }
-            }
-        }))
+        // console.error(userdata)
+        // console.error(await prisma.user.findUnique({
+        //     where: {
+        //         username: username
+        //     },
+        //     include: {
+        //         reviews: true,
+        //         activities: {
+        //             include: {
+        //                 reviews: true,
+        //                 candidacies: true
+        //             },
+        //         }
+        //     }
+        // }))
 
         
         const current = await currentUser()

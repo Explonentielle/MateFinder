@@ -8,8 +8,9 @@ import { Button } from "@/src/components/ui/button";
 import Link from "next/link";
 import { prisma } from "@/src/prisma";
 import { ActionError } from "@/src/safe.action";
-import { verifyUserUniqueness } from "../(user)/users/[username]/edit/User.action";
+
 import { ArrowBigRight } from "lucide-react";
+import { verifyUserUniqueness } from "../(customer)/users/[username]/edit/User.action";
 
 export type UserFormProps = {
     userId?: string

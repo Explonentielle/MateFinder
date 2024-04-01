@@ -48,7 +48,7 @@ export default async function RouteParams(props: PageParams<{ username: string }
                                     <Card className="relative mb-4 flex items-center shadow-lg">
                                         {(user?.username === username) &&
                                             (activity.candidacies.filter(candidacy => candidacy.status === "PENDING").length > 0 ? (
-                                                <div className=" -translate-x-1/2 -translate-y-1/2 absolute top-0 left-0 rounded-full bg-red-500 size-full flex justify-center items-center text-white">
+                                                <div className=" -translate-x-1/2 -translate-y-1/2 absolute top-0 left-0 rounded-full bg-red-500 size-6 flex justify-center items-center text-white">
                                                     {activity.candidacies.filter(candidacy => candidacy.status === "PENDING").length}
                                                 </div>
                                             ) : null)
