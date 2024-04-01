@@ -11,7 +11,6 @@ export function NavigationEvents() {
     useEffect(() => {
         const currentUrl = `${pathname}?${searchParams}`;
 
-        // Vérifier si l'URL actuelle est différente de l'URL précédente
         if (currentUrl !== previousUrl) {
             const isReturnFromForm = (previousUrl.includes(`/new?`) || previousUrl.includes(`/edit?`))
          
