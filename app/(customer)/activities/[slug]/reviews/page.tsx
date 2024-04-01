@@ -16,7 +16,6 @@ import { Description } from "@radix-ui/react-dialog"
 
 export default async function RouteParams(props: PageParams<{ slug: string }>) {
 
-    try {
 
         const activity = await prisma.activity.findUnique({
             where: {
@@ -138,7 +137,5 @@ export default async function RouteParams(props: PageParams<{ slug: string }>) {
                 </Link>
             </Layout>
         )
-    } catch (error) {
-        return <RouteError />;
-    }
+
 }
