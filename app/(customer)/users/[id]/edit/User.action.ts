@@ -5,7 +5,8 @@ import { UserSchema } from "./User.schema";
 import { prisma } from "@/src/prisma";
 import { z } from "zod";
 
-export const verifyUserUniqueness = async (username: string, userId: string) => {
+
+export const verifyUserUniqueness = async (username: string, userId: string, create?: boolean) => {
 
     const userExists = await prisma.user.findFirst({
         where: {
@@ -15,11 +16,16 @@ export const verifyUserUniqueness = async (username: string, userId: string) => 
             },
         }
     });
-
+    if (userExists && create) {
+       return("User already exists with this username");
+    }
     if (userExists) {
         throw new ActionError("User already exists with this username");
     }
+    return null;
 }
+
+
 
 export const updateUserAction = userAction(UserSchema, async (input, context) => {
 

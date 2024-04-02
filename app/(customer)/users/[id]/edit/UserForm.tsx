@@ -46,8 +46,14 @@ const UserForm = (props: UserFormProps) => {
         return;
       }
 
-      toast.success("Profil Updated");
-      router.push(`/`);
+      if (isCreate) {
+        window.location.reload()
+        toast.success("Profil Created");
+      }
+      else {
+        toast.success("Profil Updated");
+        router.push(`/`);
+      }
     }
   });
 

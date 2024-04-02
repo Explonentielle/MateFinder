@@ -9,12 +9,10 @@ import { ChevronsLeft } from "lucide-react"
 export default async function RouteParams(props: PageParams<{ username: string }>) {
 
     const user = await requiredCurrentUser()
+    console.log(props.params.username)
 
     return (
         <Layout>
-            <Link href={`/`}>
-                <ChevronsLeft size={32} className="" />
-            </Link>
             <p>profil de l utilisateur : {props.params.username} </p>
             <UserForm userId={user.id} username={props.params.username} />
         </Layout>
