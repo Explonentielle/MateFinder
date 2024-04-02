@@ -9,15 +9,15 @@ import { ScrollArea } from "@/src/components/ui/scroll-area";
 import { Avatar, AvatarFallback, AvatarImage } from "@/src/components/ui/avatar";
 import { currentUser } from "@/src/auth/current-user";
 
-export default async function RouteParams(props: PageParams<{ username: string }>) {
-    const { username } = props.params;
+export default async function RouteParams(props: PageParams<{ id: string }>) {
+    const { id } = props.params;
 
     const user = await currentUser()
 
     const activities = await prisma.activity.findMany({
         where: {
             user: {
-                username: username
+                id: id
             }
         },
         include: {
@@ -28,14 +28,14 @@ export default async function RouteParams(props: PageParams<{ username: string }
 
     return (
         <Layout>
-            <Link href={`/users/${username}`}>
+            <Link href={`/users/${user?.username}`}>
                 <ChevronsLeft size={32} className="" />
             </Link>
             <Card className="p-4 shadow-lg">
                 <CardHeader>
                     <div className="flex justify-between">
-                        <LayoutTitle>Check all Activities of {username}</LayoutTitle>
-                        {(user?.username === username) ? <Link href={"/activities/new"} className="shadow-lg flex items-center justify-center hover:bg-primary transition rounded-md border-2 border-dashed border-primary bg-accent p-2 w-1/5">
+                        <LayoutTitle>Check all Activities of {user?.username}</LayoutTitle>
+                        {(user?.id === id) ? <Link href={"/activities/new"} className="shadow-lg flex items-center justify-center hover:bg-primary transition rounded-md border-2 border-dashed border-primary bg-accent p-2 w-1/5">
                             Create Activity
                         </Link> : null}
                     </div>
@@ -46,7 +46,7 @@ export default async function RouteParams(props: PageParams<{ username: string }
                             {activities.map(activity => (
                                 <Link href={`/activities/${activity.slug}`} key={activity.id}>
                                     <Card className="relative mb-4 flex items-center shadow-lg">
-                                        {(user?.username === username) &&
+                                        {(user?.id === id) &&
                                             (activity.candidacies.filter(candidacy => candidacy.status === "PENDING").length > 0 ? (
                                                 <div className=" -translate-x-1/2 -translate-y-1/2 absolute top-0 left-0 rounded-full bg-red-500 size-6 flex justify-center items-center text-white">
                                                     {activity.candidacies.filter(candidacy => candidacy.status === "PENDING").length}

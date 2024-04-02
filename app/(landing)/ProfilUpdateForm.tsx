@@ -6,11 +6,9 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/src
 import { Input } from "@/src/components/ui/input";
 import { Button } from "@/src/components/ui/button";
 import Link from "next/link";
-import { prisma } from "@/src/prisma";
-import { ActionError } from "@/src/safe.action";
-
 import { ArrowBigRight } from "lucide-react";
-import { verifyUserUniqueness } from "../(customer)/users/[username]/edit/User.action";
+import { verifyUserUniqueness } from "../(customer)/users/[id]/edit/User.action";
+
 
 export type UserFormProps = {
     userId?: string

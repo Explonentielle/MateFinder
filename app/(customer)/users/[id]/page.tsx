@@ -15,15 +15,15 @@ import { notFound } from "next/navigation"
 
 
 
-export default async function RouteParams(props: PageParams<{ username: string }>) {
+export default async function RouteParams(props: PageParams<{ id: string }>) {
 
     try {    
-        const username = props.params.username
+        const userId = props.params.id
         const current = await currentUser()
         
         const user = await prisma.user.findUnique({
             where: {
-                id: current?.id
+                id: userId
             },
             include: {
                 reviews: true,
@@ -35,12 +35,13 @@ export default async function RouteParams(props: PageParams<{ username: string }
                 }
             }
         })
+
+        if (!user) {
+            notFound()
+        }
         
         console.error(user)
-        console.error(current)
-
         
-
 
         const calculateAge = (date: Date) => {
             const birthDate = new Date(date)
@@ -69,7 +70,7 @@ export default async function RouteParams(props: PageParams<{ username: string }
         return (
             <Layout>
                 <div className="flex justify-between items-center">
-                    <LayoutTitle>{username}</LayoutTitle>
+                    <LayoutTitle>{user.username}</LayoutTitle>
                     {(current?.id === user?.id) ? <Button>
                         <Link href={`/users/${user?.username}/edit`}>Update my profile</Link>
                     </Button> : <Button>

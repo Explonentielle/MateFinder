@@ -5,16 +5,15 @@ import { PropsWithChildren } from "react"
 import { SignOutAction } from "./auth.action"
 import { LogOut, User } from "lucide-react"
 import Link from "next/link"
-import { currentUser } from "@/src/auth/current-user"
 
 
 
 interface LoggedInDropDownProps extends PropsWithChildren {
-    username: string;
+    id: string;
 }
 
 export const LoggedInDropDown = (props: LoggedInDropDownProps) => {
-    const { username, children } = props;
+    const { id, children } = props;
     return (
 
         <DropdownMenu>
@@ -22,7 +21,7 @@ export const LoggedInDropDown = (props: LoggedInDropDownProps) => {
                 {children}
             </DropdownMenuTrigger>
             <DropdownMenuContent>
-                <Link href={`/users/${username}`}>
+                <Link href={`/users/${id}`}>
                     <DropdownMenuItem >
                         <User size='16' className="mr-2" />
                         Profil

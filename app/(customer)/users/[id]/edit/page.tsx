@@ -6,7 +6,7 @@ import Link from "next/link"
 import { ChevronsLeft } from "lucide-react"
 
 
-export default async function RouteParams(props: PageParams<{ username: string }>) {
+export default async function RouteParams(props: PageParams<{ id: string }>) {
 
     const user = await requiredCurrentUser()
 
@@ -22,8 +22,8 @@ export default async function RouteParams(props: PageParams<{ username: string }
             <Link href={`/`}>
                 <ChevronsLeft size={32} className="" />
             </Link>
-            <p>profil de l utilisateur : {props.params.username} </p>
-            <UserForm userId={user.id} username={props.params.username} defaultValues={defaultValues} />
+            <p>profil de l utilisateur : {props.params.id} </p>
+            <UserForm userId={user.id} username={user.username ?? ""} defaultValues={defaultValues} />
         </Layout>
     )
 }

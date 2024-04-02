@@ -21,7 +21,7 @@ export const LoggedInButton = async () => {
             }
         })
         return (
-            <LoggedInDropDown username={user?.username ?? ""} >
+            <LoggedInDropDown id={user?.id ?? ""} >
                 <Button variant="outline" size="sm">
                     <Avatar className='size-6'>
                         <AvatarFallback>{session.user.name?.[0]}</AvatarFallback>
