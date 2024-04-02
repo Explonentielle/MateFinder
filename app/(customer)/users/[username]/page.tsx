@@ -19,17 +19,22 @@ export default async function RouteParams(props: PageParams<{ username: string }
     try {    
         const username = props.params.username
         
-        const userdata = await prisma.user.findUnique({
+        const user = await prisma.user.findUnique({
             where: {
                 username: props.params.username
             },
-            include: {
-                reviews: true,
-                activities: true
-            }
+            // include: {
+            //     reviews: true,
+            //     activities: {
+            //         include: {
+            //             reviews: true,
+            //             candidacies: true
+            //         },
+            //     }
+            // }
         })
         
-        // console.error(userdata)
+        console.error(user)
 
         
         const current = await currentUser()
@@ -63,8 +68,8 @@ export default async function RouteParams(props: PageParams<{ username: string }
             <Layout>
                 <div className="flex justify-between items-center">
                     <LayoutTitle>{username}</LayoutTitle>
-                    {(current?.id === userdata?.id) ? <Button>
-                        <Link href={`/users/${userdata?.username}/edit`}>Update my profile</Link>
+                    {(current?.id === user?.id) ? <Button>
+                        <Link href={`/users/${user?.username}/edit`}>Update my profile</Link>
                     </Button> : <Button>
                         <Link href={``}>Send a message</Link>
                     </Button>}
@@ -74,12 +79,12 @@ export default async function RouteParams(props: PageParams<{ username: string }
 
                     <Card className="shadow-lg m-8 w-2/4 ">
                         <CardHeader className="flex flex-row items-center justify-between">
-                            <CardTitle> {(current?.id === userdata?.id) ? "My Informations" : `Informations of ${userdata?.username}`}</CardTitle>
+                            <CardTitle> {(current?.id === user?.id) ? "My Informations" : `Informations of ${user?.username}`}</CardTitle>
                             <div className="flex items-center">
-                                <CardDescription className="font-bold mr-4"> {userdata?.age ? calculateAge(userdata?.age) : "Unknown"} year s old</CardDescription>
+                                <CardDescription className="font-bold mr-4"> {user?.age ? calculateAge(user?.age) : "Unknown"} year s old</CardDescription>
                                 <Avatar className="size-10 mr-4">
-                                    <AvatarFallback>{userdata?.name?.[0]}</AvatarFallback>
-                                    {userdata?.image && <AvatarImage src={userdata?.image} alt={`${userdata?.name}'s profile picture`} />}
+                                    <AvatarFallback>{user?.name?.[0]}</AvatarFallback>
+                                    {user?.image && <AvatarImage src={user?.image} alt={`${user?.name}'s profile picture`} />}
                                 </Avatar>
                             </div>
                         </CardHeader>
@@ -92,15 +97,15 @@ export default async function RouteParams(props: PageParams<{ username: string }
                                 <CardDescription className="my-2">Username : </CardDescription>
                             </div>
                             <div>
-                                {(current?.id === userdata?.id) ?
-                                    <CardDescription className="my-2"> {userdata?.email}</CardDescription>
+                                {(current?.id === user?.id) ?
+                                    <CardDescription className="my-2"> {user?.email}</CardDescription>
                                     : <Button>
                                         <Link href={``}>Send a message</Link>
                                     </Button>}
                                 <hr />
-                                <CardDescription className="my-2"> {userdata?.name}</CardDescription>
+                                <CardDescription className="my-2"> {user?.name}</CardDescription>
                                 <hr />
-                                <CardDescription className="my-2"> {userdata?.username}</CardDescription>
+                                <CardDescription className="my-2"> {user?.username}</CardDescription>
                             </div>
                         </CardContent>
                     </Card>
@@ -108,24 +113,24 @@ export default async function RouteParams(props: PageParams<{ username: string }
                     <div className="mx-8 flex flex-col justify-center items-center w-4/5">
                         <Card className="shadow-lg my-4  w-full">
                             <CardHeader className="flex flex-row justify-between items-center">
-                                <CardTitle> {(current?.id === userdata?.id) ? "My activities" : `Activities of ${userdata?.username}`}</CardTitle>
-                                <Link href={`/users/${userdata?.username}/activities`}>
+                                <CardTitle> {(current?.id === user?.id) ? "My activities" : `Activities of ${user?.username}`}</CardTitle>
+                                <Link href={`/users/${user?.username}/activities`}>
                                     <Button>
                                         <MousePointerClick size={16} />
                                     </Button>
                                 </Link>
                             </CardHeader>
                             <CardContent>
-                                {userdata?.activities.slice(0, 2).map((activity) => (
+                                {/* {user?.activities.slice(0, 2).map((activity) => (
                                     <Card className="relative shadow-lg p-2 my-2" key={activity.id}>
                                         <Link href={`/activities/${activity.slug}`} key={activity.id}>
-                                            {/* {(current?.id === userdata?.id) &&
+                                            {(current?.id === user?.id) &&
                                                 (activity.candidacies.filter(candidacy => candidacy.status === "PENDING").length > 0 ? (
                                                     <div className=" -translate-x-1/2 -translate-y-1/2 absolute top-0 left-0 rounded-full bg-red-500 size-6 flex justify-center items-center text-white">
                                                         {activity.candidacies.filter(candidacy => candidacy.status === "PENDING").length}
                                                     </div>
                                                 ) : null)
-                                            } */}
+                                            }
                                             <div className="flex justify-between my-4 w-full">
                                                 <CardDescription className="font-extrabold">{activity.Title}</CardDescription>
                                                 <LucideIcons name={activity.Icon as IconName} />
@@ -141,24 +146,24 @@ export default async function RouteParams(props: PageParams<{ username: string }
                                             <div className="flex justify-between">
                                                 <CardDescription>Average rating: </CardDescription>
                                                 <CardDescription className="flex justify-center items-center">
-                                                    {Array.from({ length: 4 }).map((_, index) => (
+                                                    {Array.from({ length: Math.floor(Number(rating(activity))) }).map((_, index) => (
                                                         <Star color="gold" key={index} size={16} />
                                                     ))}
                                                 </CardDescription>
                                             </div>
                                         </Link>
                                     </Card>
-                                ))}
+                                ))} */}
                             </CardContent>
                         </Card>
 
                         <Card className="shadow-lg my-4 w-full">
                             <CardHeader className="flex flex-row justify-between items-center">
-                                <CardTitle> {(current?.id === userdata?.id) ? "My reviews" : `Reviews of ${userdata?.username}`}</CardTitle>
+                                <CardTitle> {(current?.id === user?.id) ? "My reviews" : `Reviews of ${user?.username}`}</CardTitle>
                             </CardHeader>
                             <ScrollArea className="w-full h-[25vh]">
                                 <CardContent>
-                                    {userdata?.reviews.map((review) => (
+                                    {/* {user?.reviews.map((review) => (
                                         <Card className="shadow-lg p-2 my-2" key={review.id}>
                                             <div className="flex justify-between my-4 w-full">
                                                 <CardDescription className="font-extrabold">{review.Title}</CardDescription>
@@ -172,7 +177,7 @@ export default async function RouteParams(props: PageParams<{ username: string }
                                             <CardDescription className="my-2" >{review.createdAt ? new Date(review.createdAt).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' }) : ''}</CardDescription>
                                             <CardDescription className="">{review.content}</CardDescription>
                                         </Card>
-                                    ))}
+                                    ))} */}
                                 </CardContent>
                             </ScrollArea>
                         </Card>
