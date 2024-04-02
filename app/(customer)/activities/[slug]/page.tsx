@@ -75,7 +75,7 @@ export default async function RouteParams(props: PageParams<{ slug: string }>) {
                          <PopoverTrigger asChild>
                              <Button variant="outline">Participate <Send className="ml-4" size={24} /></Button>
                          </PopoverTrigger>
-                         <PopoverContent className="w-1/2">
+                         <PopoverContent className="w-50">
                              <div className="grid gap-4">
                                  <div className="space-y-2">
                                      <p className="text-sm text-muted-foreground">

@@ -117,7 +117,7 @@ export default async function RouteParams(props: PageParams<{ id: string }>) {
                         <Card className="shadow-lg my-4  w-full">
                             <CardHeader className="flex flex-row justify-between items-center">
                                 <CardTitle> {(current?.id === user?.id) ? "My activities" : `Activities of ${user?.username}`}</CardTitle>
-                                <Link href={`/users/${user?.username}/activities`}>
+                                <Link href={`/users/${user?.id}/activities`}>
                                     <Button>
                                         <MousePointerClick size={16} />
                                     </Button>

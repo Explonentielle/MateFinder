@@ -132,7 +132,7 @@ export const Landing = async () => {
                                                     </div>
                                                 </CardHeader>
                                                 <CardContent className="py-4 w-full flex flex-col items-center">
-                                                    <div className="flex justify-center items-center h-full">
+                                                    <div className="my-4 flex items-center w-full">
                                                         {Array.from({ length: Math.floor(averageRating) }).map((_, index) => (
                                                             <Star color="gold" key={index} size={16} />
                                                         ))}
