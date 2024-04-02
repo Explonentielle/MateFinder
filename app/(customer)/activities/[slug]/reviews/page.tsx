@@ -36,9 +36,6 @@ export default async function RouteParams(props: PageParams<{ slug: string }>) {
 
         return (
             <Layout>
-                <Link href={`/activities/${props.params.slug}`}>
-                    <ChevronsLeft size={32} className="" />
-                </Link>
                 <Card key={activity.id} className="my-4">
                     <CardHeader className="flex justify-between flex-row">
                         <LayoutTitle>{activity.Title}</LayoutTitle>

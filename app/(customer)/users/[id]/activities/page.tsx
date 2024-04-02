@@ -28,9 +28,6 @@ export default async function RouteParams(props: PageParams<{ id: string }>) {
 
     return (
         <Layout>
-            <Link href={`/users/${user?.username}`}>
-                <ChevronsLeft size={32} className="" />
-            </Link>
             <Card className="p-4 shadow-lg">
                 <CardHeader>
                     <div className="flex justify-between">

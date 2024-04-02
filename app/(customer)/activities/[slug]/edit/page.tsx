@@ -27,9 +27,6 @@ export default async function RouteParams(props: PageParams<{ slug: string }>) {
 
         return (
             <Layout>
-                <Link href={`/activities/${props.params.slug}/reviews`}>
-                    <ChevronsLeft size={32} className="" />
-                </Link>
                 <LayoutTitle>
                     Create Activities
                 </LayoutTitle>

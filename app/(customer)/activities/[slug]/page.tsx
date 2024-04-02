@@ -47,9 +47,6 @@ export default async function RouteParams(props: PageParams<{ slug: string }>) {
 
     return (
         <Layout>
-            <Link href={"/activities"}>
-                <ChevronsLeft size={32} className="" />
-            </Link>
             <Card>
                 <CardHeader className="flex flex-row justify-between">
                     <div className="flex items-center">

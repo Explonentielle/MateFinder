@@ -19,9 +19,6 @@ export default async function RouteParams(props: PageParams<{ id: string }>) {
 
     return (
         <Layout>
-            <Link href={`/`}>
-                <ChevronsLeft size={32} className="" />
-            </Link>
             <p>profil de l utilisateur : {props.params.id} </p>
             <UserForm userId={user.id} username={user.username ?? ""} defaultValues={defaultValues} />
         </Layout>

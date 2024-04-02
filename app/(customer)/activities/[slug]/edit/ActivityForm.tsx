@@ -3,7 +3,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/src/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/src/components/ui/tabs"
 import { ActivitySchema, ActivityType, activityCategories, icons } from "./Activity.schema"
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage, useZodForm } from "@/src/components/ui/form"
+import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage, useFormField, useZodForm } from "@/src/components/ui/form"
 import { CalendarIcon } from "@radix-ui/react-icons"
 import { Input } from "@/src/components/ui/input"
 import { Button } from "@/src/components/ui/button"
@@ -39,6 +39,7 @@ export const ActivityForm = (props: ActivityFormProps) => {
 
   const mutation = useMutation({
     mutationFn: async (values: ActivityType) => {
+
       const { data, serverError } = isCreate ? await createActivityAction(values) :
         await updateActivityAction({
           id: props.activityId ?? "-",
@@ -121,8 +122,7 @@ export const ActivityForm = (props: ActivityFormProps) => {
                           placeholder="my slug"
                           {...field}
                           onChange={(e) => {
-                            const value = e.target.value.replace(" ", "-").toLocaleLowerCase()
-
+                            const value = e.target.value.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^\w\s-]/gi, '').replace(" ", "-").toLocaleLowerCase()
                             field.onChange(value)
                           }} />
                       </FormControl>
@@ -218,7 +218,7 @@ export const ActivityForm = (props: ActivityFormProps) => {
                         <FormDescription>
                           More Informations about activity proposed
                         </FormDescription>
-                        <FormMessage />
+                        <FormMessage  />
                       </FormItem>
                     )}
                   />
