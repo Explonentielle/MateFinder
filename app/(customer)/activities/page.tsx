@@ -10,7 +10,7 @@ import { ChevronsLeft } from "lucide-react";
 import { ScrollArea } from "@/src/components/ui/scroll-area";
 import { Avatar, AvatarFallback, AvatarImage } from "@/src/components/ui/avatar";
 
-export default async function RouteParams(props: PageParams<{}>) {
+export default async function Route() {
 
     const activities = await prisma.activity.findMany({
         include: {
@@ -18,7 +18,6 @@ export default async function RouteParams(props: PageParams<{}>) {
         }
 
     })
-
 
     return (
         <Layout>

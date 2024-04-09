@@ -55,7 +55,7 @@ const ProfileUpdateForm = (userId: UserFormProps) => {
                             </Button>
                         </form>
                     ) : (
-                                <UserForm userId={userId?.userId} username={username} />
+                        <UserForm userId={userId?.userId} username={username} />
                     )}
                 </CardContent>
             </Card>

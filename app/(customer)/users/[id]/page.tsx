@@ -17,10 +17,10 @@ import { notFound } from "next/navigation"
 
 export default async function RouteParams(props: PageParams<{ id: string }>) {
 
-    try {    
+    try {
         const userId = props.params.id
         const current = await currentUser()
-        
+
         const user = await prisma.user.findUnique({
             where: {
                 id: userId
@@ -39,9 +39,9 @@ export default async function RouteParams(props: PageParams<{ id: string }>) {
         if (!user) {
             notFound()
         }
-        
+
         console.error(user)
-        
+
 
         const calculateAge = (date: Date) => {
             const birthDate = new Date(date)
@@ -84,7 +84,6 @@ export default async function RouteParams(props: PageParams<{ id: string }>) {
                         <CardHeader className="flex flex-row items-center justify-between">
                             <CardTitle> {(current?.id === user?.id) ? "My Informations" : `Informations of ${user?.username}`}</CardTitle>
                             <div className="flex items-center">
-                                <CardDescription className="font-bold mr-4"> {user?.age ? calculateAge(user?.age) : "Unknown"} year s old</CardDescription>
                                 <Avatar className="size-10 mr-4">
                                     <AvatarFallback>{user?.name?.[0]}</AvatarFallback>
                                     {user?.image && <AvatarImage src={user?.image} alt={`${user?.name}'s profile picture`} />}
@@ -95,20 +94,33 @@ export default async function RouteParams(props: PageParams<{ id: string }>) {
                             <div>
                                 <CardDescription className="my-2">Email :</CardDescription>
                                 <hr />
-                                <CardDescription className="my-2">Name : </CardDescription>
+                                <CardDescription className="my-2">Age : </CardDescription>
+                                <hr />
+                                <CardDescription className="my-2">Membre since : </CardDescription>
                                 <hr />
                                 <CardDescription className="my-2">Username : </CardDescription>
+                                <hr />
+                                <CardDescription className="my-2">Plan : </CardDescription>
                             </div>
-                            <div>
+                            <div className="flex flex-col items-end">
                                 {(current?.id === user?.id) ?
                                     <CardDescription className="my-2"> {user?.email}</CardDescription>
                                     : <Button>
                                         <Link href={``}>Send a message</Link>
                                     </Button>}
                                 <hr />
-                                <CardDescription className="my-2"> {user?.name}</CardDescription>
+                                <CardDescription className="my-2"> {user?.age ? calculateAge(user?.age) : "Unknown"} year s old</CardDescription>
+                                <hr />
+                                <CardDescription className="my-2"> {user?.createdAt.toLocaleDateString()}</CardDescription>
                                 <hr />
                                 <CardDescription className="my-2"> {user?.username}</CardDescription>
+                                <hr />
+                                {(current?.id === user?.id) ?
+                                    <CardDescription className="my-2">{user?.plan}</CardDescription>
+                                    : <Button className="w-4/5" variant={"outline"}>
+                                        <Link className="text-xs mx-2" href={``}>Be Premium for know it</Link>
+                                     </Button>}
+
                             </div>
                         </CardContent>
                     </Card>

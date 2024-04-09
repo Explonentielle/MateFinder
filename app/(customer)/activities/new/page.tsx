@@ -5,7 +5,7 @@ import { requiredCurrentUser } from "@/src/auth/current-user"
 import RouteError from "../error"
 
 
-export default async function RouteParams(props: PageParams<{}>) {
+export default async function Route() {
     try {
         const user = await requiredCurrentUser()
 
