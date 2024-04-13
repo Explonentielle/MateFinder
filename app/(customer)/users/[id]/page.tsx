@@ -17,7 +17,8 @@ import { notFound } from "next/navigation"
 
 export default async function RouteParams(props: PageParams<{ id: string }>) {
 
-    try {
+    try {  
+        
         const userId = props.params.id
         const current = await currentUser()
 
