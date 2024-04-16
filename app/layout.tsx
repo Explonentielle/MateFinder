@@ -7,6 +7,7 @@ import { Suspense } from "react";
 import { NavigationEvents } from "@/src/components/navigation-events";
 import { getServerUrl } from "@/src/get-server-url";
 import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -30,6 +31,7 @@ export default function RootLayout({
             <NavigationEvents />
           </Suspense>
           <Analytics />
+          <SpeedInsights />
         </Providers>
       </body>
     </html>
