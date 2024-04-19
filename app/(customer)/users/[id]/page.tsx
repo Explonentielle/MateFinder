@@ -10,6 +10,7 @@ import { MousePointerClick, Star } from "lucide-react"
 import { Button } from "@/src/components/ui/button"
 import RouteError from "../../notFound"
 import { notFound } from "next/navigation"
+import { Progress } from "@/src/components/ui/progress"
 
 
 
@@ -28,14 +29,14 @@ export default async function RouteParams(props: PageParams<{ id: string }>) {
                 reviews: true,
                 activities: {
                     include: {
-                        reviews: true,
                         candidacies: {
                             select: {
                                 status: true,
                             }
                         }
                     },
-                }
+                },
+                candidacies: true
             }
         })
 
@@ -60,7 +61,7 @@ export default async function RouteParams(props: PageParams<{ id: string }>) {
                     {(current?.id === user?.id) ?
                         <Button className="p-0">
                             <Link className="p-2" href={`/users/${user?.username}/edit`}>Update my profile</Link>
-                        </Button> 
+                        </Button>
                         :
                         <Button className="p-0">
                             <Link className="p-2" href={``}>Send a message</Link>
@@ -68,66 +69,102 @@ export default async function RouteParams(props: PageParams<{ id: string }>) {
                 </div>
 
                 <Card className="shadow-lg flex flex-row justify-center">
+                    <div className="flex flex-col m-4  w-2/4">
+                        <Card className="shadow-lg ">
+                            <CardHeader className="flex flex-row items-center justify-between">
+                                <CardTitle> {(current?.id === user?.id) ? "My Informations" : `Informations of ${user?.username}`}</CardTitle>
+                                <div className="flex items-center">
+                                    <Avatar className="size-10 mr-4">
+                                        <AvatarFallback>{user?.name?.[0]}</AvatarFallback>
+                                        {user?.image && <AvatarImage src={user?.image} alt={`${user?.name}'s profile picture`} />}
+                                    </Avatar>
+                                </div>
+                            </CardHeader>
+                            <CardContent className="flex flex-row justify-between px-8 ">
+                                <div className="mr-2 flex flex-col items-start">
+                                    <CardDescription className="my-2">Email :</CardDescription>
 
-                    <Card className="shadow-lg m-4 w-2/4 ">
-                        <CardHeader className="flex flex-row items-center justify-between">
-                            <CardTitle> {(current?.id === user?.id) ? "My Informations" : `Informations of ${user?.username}`}</CardTitle>
-                            <div className="flex items-center">
-                                <Avatar className="size-10 mr-4">
-                                    <AvatarFallback>{user?.name?.[0]}</AvatarFallback>
-                                    {user?.image && <AvatarImage src={user?.image} alt={`${user?.name}'s profile picture`} />}
-                                </Avatar>
+                                    <CardDescription className="my-2">Age : </CardDescription>
+
+                                    <CardDescription className="my-2">Membre since : </CardDescription>
+
+                                    <CardDescription className="my-2">Username : </CardDescription>
+
+                                    <CardDescription className="my-2">Location : </CardDescription>
+
+                                    <CardDescription className="my-2">Participation : </CardDescription>
+                                </div>
+                                <div className="flex flex-col items-end">
+                                    {(current?.id === user?.id) ?
+                                        <CardDescription className="my-2"> {user?.email}</CardDescription>
+                                        : <Button>
+                                            <Link href={``}>Send a message</Link>
+                                        </Button>}
+
+                                    <CardDescription className="my-2"> {user?.age ? calculateAge(user?.age) : "Unknown"} year s old</CardDescription>
+
+                                    <CardDescription className="my-2"> {user?.createdAt.toLocaleDateString()}</CardDescription>
+
+                                    <CardDescription className="my-2"> {user?.username}</CardDescription>
+
+                                    <CardDescription className="my-2"> {user?.location}</CardDescription>
+
+                                    <CardDescription className="my-2"> {user?.activities.length}</CardDescription>
+
+                                    {/* {(current?.id === user?.id) ?
+                                        <CardDescription className="my-2">{user?.plan}</CardDescription>
+                                        : <Button className="w-4/5" variant={"outline"}>
+                                            <Link className="text-xs mx-2" href={``}>Be Premium for know it</Link>
+                                        </Button>} */}
+
+                                </div>
+                            </CardContent>
+                        </Card>
+
+                        <Card className="mt-4 px-8 py-4 h-full">
+                            <div className="mb-2 flex flex-row justify-between">
+                                <CardDescription>Plan : </CardDescription>
+                                <CardDescription>{user?.plan}</CardDescription>
                             </div>
-                        </CardHeader>
-                        <CardContent className="flex flex-row justify-between px-8 ">
-                            <div className="mr-2 flex flex-col items-start">
-                                <CardDescription className="my-2">Email :</CardDescription>
-
-                                <CardDescription className="my-2">Age : </CardDescription>
-
-                                <CardDescription className="my-2">Membre since : </CardDescription>
-
-                                <CardDescription className="my-2">Username : </CardDescription>
-
-                                <CardDescription className="my-2">Location : </CardDescription>
-
-                                <CardDescription className="my-2">Plan : </CardDescription>
+                            <div className="my-2 ">
+                                <span className="text-sm">Max 2 activities for month</span>
+                                <Progress className="w-[80%]" value={user.activities.length * 10} />
                             </div>
-                            <div className="flex flex-col items-end">
-                                {(current?.id === user?.id) ?
-                                    <CardDescription className="my-2"> {user?.email}</CardDescription>
-                                    : <Button>
-                                        <Link href={``}>Send a message</Link>
-                                    </Button>}
-
-                                <CardDescription className="my-2"> {user?.age ? calculateAge(user?.age) : "Unknown"} year s old</CardDescription>
-
-                                <CardDescription className="my-2"> {user?.createdAt.toLocaleDateString()}</CardDescription>
-
-                                <CardDescription className="my-2"> {user?.username}</CardDescription>
-
-                                <CardDescription className="my-2"> {user?.location}</CardDescription>
-
-                                {(current?.id === user?.id) ?
-                                    <CardDescription className="my-2">{user?.plan}</CardDescription>
-                                    : <Button className="w-4/5" variant={"outline"}>
-                                        <Link className="text-xs mx-2" href={``}>Be Premium for know it</Link>
-                                    </Button>}
-
+                            <div className="my-2">
+                                <span className="text-sm" >Max 5 activities for month</span>
+                                <Progress className="w-[80%]" value={user?.candidacies.length + 1 * 40} />
                             </div>
-                        </CardContent>
-                    </Card>
+
+                            <Card className="mt-4 p-4 flex flex-row items-center justify-between">
+                                <span className="font-ligth text-xs">You will soon reach the limite of your free plan, please upgrade </span>
+                                <Button className="ml-8">
+                                    Upgrade
+                                </Button>
+                            </Card>
+
+                        </Card>
+                    </div>
 
                     <div className="mx-4 flex flex-col justify-center items-center w-4/5">
                         <Card className="shadow-lg my-4  w-full">
                             <CardHeader className="flex flex-row justify-between items-center">
                                 <CardTitle> {(current?.id === user?.id) ? "My last activities" : `Last activities of ${user?.username}`}</CardTitle>
-                                <Link href={`/users/${user?.id}/activities`}>
-                                    <Button>
-                                        View all
-                                        <MousePointerClick className="ml-2" size={16} />
-                                    </Button>
-                                </Link>
+                                <div>
+                                    {(current?.id === user?.id) ?
+                                        <Link className="mr-4" href={"/activities/new"} >
+                                            <Button variant={"secondary"}>
+                                                Create a New Activity
+
+                                            </Button>
+                                        </Link> : null}
+
+                                    <Link href={`/users/${user?.id}/activities`}>
+                                        <Button>
+                                            View all
+                                            <MousePointerClick className="ml-2" size={16} />
+                                        </Button>
+                                    </Link>
+                                </div>
                             </CardHeader>
                             <CardContent>
                                 {user?.activities.slice(0, 4).map((activity) => (
