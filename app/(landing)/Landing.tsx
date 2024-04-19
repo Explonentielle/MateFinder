@@ -58,9 +58,9 @@ export const Landing = async () => {
                         <p className="mr-4 text-4xl">Welcome to</p><p className="titleBorder font-extrabold text-5xl">Mate Finder</p>
                     </LayoutTitle>
                     <h1 className="text-2xl  pl-6">Discover your perfect mate with Mate Finder</h1>
-                    <Link href={`/activities/page/1`}>
+                    <Link href={`/activities/page/1${user.location}`}>
                         <Button variant="ghost" className="shadow-lg w-full py-6 border-primary border-dashed border-2">
-                            Check All Activities
+                            Check All Activities Next to you
                         </Button>
                     </Link>
                     <Card className="shadow-lg">

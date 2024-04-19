@@ -9,8 +9,27 @@ import { PageParams } from "@/src/types/next";
 
 export default async function RouteParams(props: PageParams<{ page: string }>) {
     
-    const ITEMS_PER_PAGE = 10;
-    const offset = (Number(props.params.page) - 1) * ITEMS_PER_PAGE;
+
+    function splitString(str: string) {
+        let page = '';
+        let location = '';
+        for (let i = 0; i < str.length; i++) {
+            if (i===0) {
+                page = str[i];
+                console.log(page)
+            } 
+            else {
+                location += str[i]
+            }
+        }
+        return { page, location };
+    }
+
+    const { page, location } = splitString(props.params.page)
+    console.log(location)
+
+    const ITEMS_PER_PAGE = 5;
+    const offset = (Number(page) - 1) * ITEMS_PER_PAGE;
     const currentDate = new Date();
 
 
@@ -35,7 +54,8 @@ export default async function RouteParams(props: PageParams<{ page: string }>) {
         where: {
             Date: {
                 gte: currentDate 
-            }
+            },
+             Departement: location
         },
         skip: offset,
         take: ITEMS_PER_PAGE,
@@ -99,13 +119,13 @@ export default async function RouteParams(props: PageParams<{ page: string }>) {
                         </div>
                     </ScrollArea>
                     <div className="flex justify-center mt-4">
-                        {Number(props.params.page) > 1 && (
-                            <Link href={`/activities/page/${Number(props.params.page) - 1}`}>
+                        {Number(page) > 1 && (
+                            <Link href={`/activities/page/${Number(page) - 1}${location}`}>
                                 Previous Page
                             </Link>
                         )}
                         {activities.length === ITEMS_PER_PAGE && (
-                            <Link href={`/activities/page/${Number(props.params.page) + 1}`}>
+                            <Link className="ml-4" href={`/activities/page/${Number(page) + 1}${location}`}>
                                Next Page
                             </Link>
                         )}
