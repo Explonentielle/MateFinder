@@ -18,9 +18,8 @@ import { cn } from "@/src/lib/utils"
 import { Calendar } from "@/src/components/ui/calendar"
 import { format } from "date-fns"
 import LucideIcons, { IconName } from "@/src/components/LucideIcons"
-import { RadioGroup } from "@radix-ui/react-dropdown-menu"
-import { RadioGroupItem } from "@/src/components/ui/radio-group"
 import { Switch } from "@/src/components/ui/switch"
+import { LocationCategories } from "@/app/(customer)/users/[id]/edit/User.schema"
 
 
 export type ActivityFormProps = {
@@ -89,7 +88,7 @@ export const ActivityForm = (props: ActivityFormProps) => {
               <TabsTrigger className="w-full" value="three">Step Three</TabsTrigger>
             </TabsList>
             <TabsContent value="one">
-              <div className="py-4">
+              <div className="py-2">
                 <FormField
                   control={form.control}
                   name="Title"
@@ -110,7 +109,7 @@ export const ActivityForm = (props: ActivityFormProps) => {
                 />
               </div>
 
-              <div className="py-4">
+              <div className="py-2">
                 <FormField
                   control={form.control}
                   name="slug"
@@ -134,7 +133,7 @@ export const ActivityForm = (props: ActivityFormProps) => {
                   )}
                 />
               </div>
-              <div className="py-4">
+              <div className="py-2">
                 <FormField
                   control={form.control}
                   name="categorie"
@@ -142,7 +141,7 @@ export const ActivityForm = (props: ActivityFormProps) => {
                     <FormItem>
                       <FormLabel className="font-bold">Categories</FormLabel>
                       <FormControl>
-                        <Select value={field.value ?? ""} onValueChange={field.onChange}>
+                        <Select value={field.value} onValueChange={field.onChange}>
                           <SelectTrigger>
                             <SelectValue></SelectValue>
                           </SelectTrigger>
@@ -167,7 +166,7 @@ export const ActivityForm = (props: ActivityFormProps) => {
                 />
               </div>
 
-              <div className="py-4">
+              <div className="py-2">
                 <FormField
                   control={form.control}
                   name="Icon"
@@ -202,7 +201,7 @@ export const ActivityForm = (props: ActivityFormProps) => {
 
             <TabsContent value="two">
               <div>
-                <div className="py-4">
+                <div className="py-2">
                   <FormField
                     control={form.control}
                     name="Information"
@@ -218,12 +217,12 @@ export const ActivityForm = (props: ActivityFormProps) => {
                         <FormDescription>
                           More Informations about activity proposed
                         </FormDescription>
-                        <FormMessage  />
+                        <FormMessage />
                       </FormItem>
                     )}
                   />
                 </div>
-                <div className="py-4">
+                <div className="py-2">
                   <FormField
                     control={form.control}
                     name="Date"
@@ -268,7 +267,7 @@ export const ActivityForm = (props: ActivityFormProps) => {
                   />
                 </div>
 
-                <div className="py-4">
+                <div className="py-2">
                   <FormField
                     control={form.control}
                     name="Hour"
@@ -289,20 +288,32 @@ export const ActivityForm = (props: ActivityFormProps) => {
                   />
                 </div>
 
-                <div className="py-4">
+                <div className="py-2">
                   <FormField
                     control={form.control}
-                    name="Location"
+                    name="Departement"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="font-bold">Location</FormLabel>
+                        <FormLabel className="font-bold">Departement</FormLabel>
                         <FormControl>
-                          <Input
-                            placeholder="Location"
-                            {...field} />
+                          <Select value={field.value} onValueChange={field.onChange}>
+                            <SelectTrigger>
+                              <SelectValue></SelectValue>
+                            </SelectTrigger>
+                            <SelectContent>
+                              {LocationCategories.map((location) => {
+                                return (
+                                  <SelectItem value={location} key={location}>
+                                    <div>{location}</div>
+                                  </SelectItem>
+                                );
+                              })}
+                            </SelectContent>
+
+                          </Select>
                         </FormControl>
                         <FormDescription>
-                          Location of the activity take place?
+                          Select your Departement
                         </FormDescription>
                         <FormMessage />
                       </FormItem>
@@ -314,7 +325,29 @@ export const ActivityForm = (props: ActivityFormProps) => {
 
             <TabsContent value="three">
 
-              <div className="py-4">
+              <div className="py-2">
+                <FormField
+                  control={form.control}
+                  name="Location"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="font-bold">Location</FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder="Location"
+                          {...field} />
+                      </FormControl>
+                      <FormDescription>
+                        Location of the activity take place?
+                      </FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+
+
+              <div className="py-2">
                 <FormField
                   control={form.control}
                   name="userWanted"
@@ -346,7 +379,7 @@ export const ActivityForm = (props: ActivityFormProps) => {
                 />
               </div>
 
-              <div className="py-4">
+              <div className="py-2">
                 <FormField
                   control={form.control}
                   name="Free"
@@ -369,7 +402,7 @@ export const ActivityForm = (props: ActivityFormProps) => {
                 />
               </div>
 
-              <div className="py-4">
+              <div className="py-2">
                 <FormField
                   control={form.control}
                   name="Link"

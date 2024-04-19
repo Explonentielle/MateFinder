@@ -4,6 +4,8 @@ import { ActionError, userAction } from "@/src/safe.action";
 import { prisma } from "@/src/prisma";
 import { z } from "zod";
 import { CandidacySchema } from "./Candidacy.schema";
+import { sendEmail } from "@/src/features/email/sendEmail";
+
 
 
 const CreateCandidacySchema = z.object({
@@ -23,6 +25,7 @@ export const createCandidacyAction = userAction(CreateCandidacySchema, async (in
     throw new ActionError("You already have a candidacy for this activity.");
   }
 
+
   const newCandidacy = await prisma.candidacy.create({
     data: {
       userId: context.user.id,
@@ -30,8 +33,26 @@ export const createCandidacyAction = userAction(CreateCandidacySchema, async (in
       status: "PENDING",
     },
   });
+
+  const activity = await prisma.activity.findUnique({
+    where: {
+      id: input.activityId,
+    },
+    select: {
+      Title: true,
+      user: {
+        select: {
+          email: true,
+        },
+      },
+    },
+  });
+
+  sendEmail((activity?.user.email || "" ), `New candidacy for activity ${activity?.Title}`, `You just receive a new candidacy for activity ${activity?.Title} from ${context.user.name} `)
   return newCandidacy;
 });
+
+
 
 export const updateCandidacyAction = userAction(
   z.object({
@@ -49,7 +70,28 @@ export const updateCandidacyAction = userAction(
         status: input.data.status,
       },
     });
+    
+    const candidacy = await prisma.candidacy.findUnique({
+      where: {
+        id: input.id,
+      },
+      include: {
+        user: true,
+        activity: {
+          select: {
+            Title: true,
+            user: {
+              select: {
+                email: true,
+              },
+            },
+          },
+        },
+      },
+    });
 
+
+    sendEmail((candidacy?.user.email || "" ), `Candidacy for ${candidacy?.activity.Title} was ${input.data.status}  `, `We are sorry, your candidacy for activity ${candidacy?.activity.Title} was just rejected. ${input.data.status}, but you will probably find other exciting opportunities to participate in. Keep exploring!`)
     return updatedCandidacy;
   }
 );

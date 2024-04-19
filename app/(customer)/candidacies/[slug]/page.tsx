@@ -10,8 +10,6 @@ import { Check, Cross } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/src/components/ui/avatar";
 import Link from "next/link";
 import CandidacyForm from "../new/CandidacyForm";
-import { Label } from "@/src/components/ui/label";
-import { Input } from "@/src/components/ui/input";
 import { Popover, PopoverContent, PopoverTrigger } from "@/src/components/ui/popover";
 
 
@@ -70,6 +68,7 @@ export default async function RouteParams(props: PageParams<{ slug: string }>) {
                                     <div className="flex">
                                         {candidacy.status === "PENDING" && (
                                             <>
+                                                <CardDescription className="mr-4  mt-2">Approve or reject this candidacy</CardDescription>
                                                 <Popover>
                                                     <PopoverTrigger asChild>
                                                         <Button className="bg-green-300 mr-4" variant="outline"><Check size={24} /></Button>
@@ -108,6 +107,7 @@ export default async function RouteParams(props: PageParams<{ slug: string }>) {
                                         )}
                                         {candidacy.status === "APPROVED" && (
                                             <>
+                                                <CardDescription className="mr-4 mt-2">Candidacy approved</CardDescription>
                                                 <Card className="bg-green-500 mr-4" >
                                                     <CandidacyForm activityId={activity.id} userId={candidacy.userId} icon="Check" candidacyId={candidacy.id} />
                                                 </Card>
@@ -118,6 +118,7 @@ export default async function RouteParams(props: PageParams<{ slug: string }>) {
                                         )}
                                         {candidacy.status === "REJECTED" && (
                                             <>
+                                                <CardDescription className="mr-4  mt-2">Candidacy rejected</CardDescription>
                                                 <Card className="bg-gray-300 mr-4" >
                                                     <CandidacyForm activityId={activity.id} userId={candidacy.userId} icon="Check" candidacyId={candidacy.id} />
                                                 </Card>

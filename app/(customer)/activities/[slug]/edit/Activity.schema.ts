@@ -8,6 +8,7 @@ export const ActivitySchema = z.object({
   Date: z.date(),
   Hour: z.string(),
   Location: z.string(),
+  Departement: z.string(),
   Free: z.boolean(),
   Link: z.string().optional(),
   userWanted: z.string(),

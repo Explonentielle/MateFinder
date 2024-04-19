@@ -3,7 +3,6 @@
 import { ActionError, userAction } from "@/src/safe.action";
 import { UserSchema } from "./User.schema";
 import { prisma } from "@/src/prisma";
-import { z } from "zod";
 
 
 export const verifyUserUniqueness = async (username: string, userId: string, create?: boolean) => {

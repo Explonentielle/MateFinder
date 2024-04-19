@@ -2,9 +2,6 @@ import type { PageParams } from "@/src/types/next"
 import UserForm from "./UserForm"
 import { requiredCurrentUser } from "@/src/auth/current-user"
 import { Layout } from "@/src/components/Layout"
-import Link from "next/link"
-import { ChevronsLeft } from "lucide-react"
-
 
 export default async function RouteParams(props: PageParams<{ id: string }>) {
 
@@ -14,6 +11,7 @@ export default async function RouteParams(props: PageParams<{ id: string }>) {
         name: user?.name || "",
         age: new Date (user?.age || new Date) || new Date,
         username: user?.username || "",
+        location: user?.location || "",
         image: user?.image || "",
     }
 

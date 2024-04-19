@@ -5,8 +5,6 @@ import { requiredCurrentUser } from "@/src/auth/current-user";
 import { prisma } from "@/src/prisma";
 import { notFound } from "next/navigation";
 import RouteError from "../../error";
-import Link from "next/link";
-import { ChevronsLeft } from "lucide-react";
 
 export default async function RouteParams(props: PageParams<{ slug: string }>) {
     try {

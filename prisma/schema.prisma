@@ -51,6 +51,7 @@ model User {
   name          String?
   email         String?   @unique
   emailVerified DateTime?
+  location      String? 
   image         String?
   plan          Plan      @default(FREE)
   age           DateTime?
@@ -72,6 +73,7 @@ enum Plan {
   PREMIUM
 }
 
+
 model Activity {
   id                String    @id @default(cuid())
   slug              String    @unique
@@ -81,6 +83,7 @@ model Activity {
   Date              DateTime
   Hour              String
   Location          String
+  Departement       String
   Free              Boolean @default(true)
   Link              String?
   userWanted        String

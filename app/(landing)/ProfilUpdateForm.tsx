@@ -2,11 +2,9 @@
 
 import React, { FormEvent, useState } from "react";
 import { Layout, LayoutTitle } from "@/src/components/Layout";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/src/components/ui/card";
+import { Card, CardContent } from "@/src/components/ui/card";
 import { Input } from "@/src/components/ui/input";
 import { Button } from "@/src/components/ui/button";
-import Link from "next/link";
-import { ArrowBigRight } from "lucide-react";
 import { verifyUserUniqueness } from "../(customer)/users/[id]/edit/User.action";
 import { toast } from "sonner";
 import UserForm from "../(customer)/users/[id]/edit/UserForm";

@@ -7,8 +7,13 @@ import { ScrollArea } from "@/src/components/ui/scroll-area";
 import { Avatar, AvatarFallback, AvatarImage } from "@/src/components/ui/avatar";
 import { PageParams } from "@/src/types/next";
 
-export default async function RouteParams(props: PageParams<{ }>) {
+export default async function RouteParams(props: PageParams<{ page: string }>) {
     
+    const ITEMS_PER_PAGE = 10;
+    const offset = (Number(props.params.page) - 1) * ITEMS_PER_PAGE;
+    const currentDate = new Date();
+
+
     const activities = await prisma.activity.findMany({
         select: {
             id: true,
@@ -26,6 +31,16 @@ export default async function RouteParams(props: PageParams<{ }>) {
                     image: true
                 }
             }
+        },
+        where: {
+            Date: {
+                gte: currentDate 
+            }
+        },
+        skip: offset,
+        take: ITEMS_PER_PAGE,
+        orderBy: {
+            Date: 'asc'
         }
     });
 
@@ -83,6 +98,18 @@ export default async function RouteParams(props: PageParams<{ }>) {
                             )}
                         </div>
                     </ScrollArea>
+                    <div className="flex justify-center mt-4">
+                        {Number(props.params.page) > 1 && (
+                            <Link href={`/activities/page/${Number(props.params.page) - 1}`}>
+                                Previous Page
+                            </Link>
+                        )}
+                        {activities.length === ITEMS_PER_PAGE && (
+                            <Link href={`/activities/page/${Number(props.params.page) + 1}`}>
+                               Next Page
+                            </Link>
+                        )}
+                    </div>
                 </CardContent>
             </Card>
         </Layout>

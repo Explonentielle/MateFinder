@@ -6,21 +6,21 @@ import { useMutation } from "@tanstack/react-query"
 import { toast } from "sonner"
 import { useRouter } from "next/navigation"
 import { Popover, PopoverContent, PopoverTrigger } from "@/src/components/ui/popover"
-import { UserSchema, UserType } from "./User.schema"
-import { format, isValid, parseISO } from "date-fns"
-import { z } from "zod"
-import React, { useEffect } from "react"
+import { LocationCategories, UserSchema, UserType } from "./User.schema"
+import { format, isValid } from "date-fns"
+import React from "react"
 import { updateUserAction } from "./User.action"
 import { Input } from "@/src/components/ui/input"
 import { Button } from "@/src/components/ui/button"
 import { CalendarIcon } from "@radix-ui/react-icons"
-
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/src/components/ui/select"
 import { cn } from "@/src/lib/utils"
 import { Calendar } from "@/src/components/ui/calendar"
 
 export type UserFormProps = {
   userId?: string
   username?: string
+  location?: string
   defaultValues?: UserType
 }
 
@@ -161,6 +161,36 @@ const UserForm = (props: UserFormProps) => {
                   </FormControl>
                   <FormDescription>
                     Chose your Username
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="location"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="font-bold">Location</FormLabel>
+                  <FormControl>
+                    <Select value={field.value} defaultValue={props.location} onValueChange={field.onChange}>
+                      <SelectTrigger>
+                        <SelectValue></SelectValue>
+                      </SelectTrigger>
+                      <SelectContent>
+                        {LocationCategories.map((location) => {
+                          return (
+                            <SelectItem value={location} key={location}> 
+                              <div>{location}</div>
+                            </SelectItem>
+                          );
+                        })}
+                      </SelectContent>
+
+                    </Select>
+                  </FormControl>
+                  <FormDescription>
+                    Select your Location
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
