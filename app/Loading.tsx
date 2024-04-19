@@ -4,7 +4,7 @@ import { Layout, LayoutTitle } from "@/src/components/Layout";
 export default function Loading() {
     return (
         <Layout>
-            <LayoutTitle>
+            <LayoutTitle className={'flex items-center justify-center'}>
                 ... Loading
             </LayoutTitle>
         </Layout>)

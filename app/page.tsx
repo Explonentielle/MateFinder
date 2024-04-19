@@ -10,9 +10,7 @@ export default async function Home() {
   return (
     <div className="size-full">
       <Header />
-      <Suspense fallback={<p>... loading</p>}>
-        <Landing />
-      </Suspense>
+      <Landing />
     </div>
   );
 }
