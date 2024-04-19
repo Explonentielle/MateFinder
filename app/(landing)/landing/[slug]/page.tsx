@@ -7,7 +7,6 @@ import { Card, CardContent, CardDescription, CardHeader } from "@/src/components
 import { prisma } from "@/src/prisma";
 import Link from "next/link";
 import { ScrollArea } from "@/src/components/ui/scroll-area";
-import { SignInAction } from "@/src/features/auth/auth.action";
 
 export default async function RouteParams(props: PageParams<{ slug: string }>) {
 
@@ -41,15 +40,11 @@ export default async function RouteParams(props: PageParams<{ slug: string }>) {
                     <p className="mr-4 text-4xl">Welcome to</p><p className="titleBorder font-extrabold text-5xl">Mate Finder</p>
                 </LayoutTitle>
                 <h1 className="text-2xl  pl-6">Discover your perfect mate with Mate Finder</h1>
-                <Button
-                    className="shadow-lg w-full py-6 border-primary border-dashed border-2"
-                    variant="ghost"
-                    size="sm"
-                    
-                >
-                    Check All Activities
-                </Button>
-
+                <Link href={`/activities/page/1`}>
+                    <Button variant="ghost" className="shadow-lg w-full py-6 border-primary border-dashed border-2">
+                        Check All Activities
+                    </Button>
+                </Link>
                 <Card className="shadow-lg">
                     <ScrollArea className="h-[55vh] w-full">
                         <CardHeader className="py-2 font-bold text-2xl">
@@ -57,7 +52,7 @@ export default async function RouteParams(props: PageParams<{ slug: string }>) {
                         </CardHeader>
                         <CardContent className="flex flex-wrap">
                             {activities.map(activity => (
-                                <div key={activity.id} className="w-1/2 p-4">
+                                <Link key={activity.id} className="w-1/2 p-4" href={`/activities/${activity.slug}`}>
                                     <Card className="shadow-lg h-full" key={activity.id}>
                                         <CardHeader className="font-bold text-2xl flex flex-row justify-between items-center">
                                             {`${activity.Title.slice(0, 18)}...`}
@@ -87,7 +82,7 @@ export default async function RouteParams(props: PageParams<{ slug: string }>) {
                                             </div>
                                         </CardContent>
                                     </Card>
-                                </div>
+                                </Link>
                             ))}
                         </CardContent>
                     </ScrollArea>

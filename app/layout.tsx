@@ -8,6 +8,7 @@ import { NavigationEvents } from "@/src/components/navigation-events";
 import { getServerUrl } from "@/src/get-server-url";
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
+import Loading from "@/app/Loading";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,14 +26,13 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full">
       <body className={cn(inter.className, 'h-full')}>
-        <Providers>
-          {children}
-          <Suspense fallback={null}>
-            <NavigationEvents />
-          </Suspense>
-          <Analytics />
-          <SpeedInsights />
-        </Providers>
+        <Suspense fallback={<Loading />}>
+          <Providers>
+            {children}
+            <Analytics />
+            <SpeedInsights />
+          </Providers>
+        </Suspense>
       </body>
     </html>
   );

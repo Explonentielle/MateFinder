@@ -7,20 +7,25 @@ import { prisma } from "@/src/prisma";
 import Link from "next/link";
 import ProfileUpdateForm from "./ProfilUpdateForm";
 import { ScrollArea } from "@/src/components/ui/scroll-area";
-import { User } from "@prisma/client";
+import { currentUser } from "@/src/auth/current-user";
+import { LocationForm } from "./LocationForm";
 
 
 
-export const Landing = async ({ user }: { user?: User }) => {
+export const Landing = async () => {
 
+    const user = await currentUser();
 
-    if (user && (!user?.username || !user.age || !user.name)) {
+    if (!user) {
+        return <LocationForm />
+    }
+    else if (user && (!user?.username || !user.age || !user.name)) {
         return <ProfileUpdateForm userId={user?.id} />
 
     } else {
 
         if (!user?.location) {
-            throw  Error
+            throw Error
         }
 
         const currentDate = new Date();
@@ -61,7 +66,7 @@ export const Landing = async ({ user }: { user?: User }) => {
                     <Card className="shadow-lg">
                         <ScrollArea className="h-[55vh] w-full">
                             <CardHeader className="py-2 font-bold text-2xl">
-                                Upcoming Activities Recently next to you 
+                                Upcoming Activities Recently next to you
                             </CardHeader>
                             <CardContent className="flex flex-wrap">
                                 {activities.map(activity => (
