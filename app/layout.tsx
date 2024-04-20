@@ -9,7 +9,6 @@ import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import Loading from "@/app/Loading";
 import { ChatProvider } from "./(customer)/users/chat/ChatContext";
-import Chat from "./(customer)/users/chat/Chat";
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -32,7 +31,6 @@ export default function RootLayout({
           <Providers>
             <ChatProvider>
               {children}
-              <Chat /> 
             </ChatProvider>
             <Analytics />
             <SpeedInsights />

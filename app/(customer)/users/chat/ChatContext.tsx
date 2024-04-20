@@ -1,5 +1,6 @@
 "use client"
 import React, { createContext, useContext, useState, ReactNode } from 'react';
+import Chat from './Chat';
 
 interface User {
   id: string;
@@ -36,6 +37,7 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
   return (
     <ChatContext.Provider value={{ chat, setChat, current, setCurrent, otherUser, setOtherUser }}>
       {children}
+      <Chat/>
     </ChatContext.Provider>
   );
 }

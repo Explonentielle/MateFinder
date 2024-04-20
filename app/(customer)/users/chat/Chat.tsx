@@ -7,14 +7,13 @@ import { useChat } from './ChatContext';
 
 export default function Chat({ }) {
     const chatboxEl = useRef(null);
-    const { chat, setChat, otherUser, current } = useChat();
+    const { chat, setChat, otherUser, current, setCurrent, setOtherUser } = useChat();
 
 
     useEffect(() => {
         if (chat) {
             if (current && otherUser) {
                 Talk.ready.then(() => {
-                    console.log(current)
                     const user1 = new Talk.User({
                         id: current.id,
                         name: current.name || "",
@@ -23,7 +22,7 @@ export default function Chat({ }) {
                         welcomeMessage: 'Hi',
                         role: 'default',
                     });
-                    console.log(otherUser)
+
                     const user2 = new Talk.User({
                         id: otherUser.id,
                         name: otherUser.name || "",
@@ -54,10 +53,13 @@ export default function Chat({ }) {
                 });
             }
         }
-    }, [Chat]);
+    }, [Chat, otherUser, current]);
 
     const handleCloseChat = () => {
         setChat(false); 
+        setCurrent(null)
+        setOtherUser(null)
+
     };
 
     return (
