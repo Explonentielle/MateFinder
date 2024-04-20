@@ -11,6 +11,8 @@ import { Button } from "@/src/components/ui/button"
 import RouteError from "../../notFound"
 import { notFound } from "next/navigation"
 import { Progress } from "@/src/components/ui/progress"
+import ChatButton from "../chat/ChatButton"
+
 
 
 
@@ -19,7 +21,7 @@ export default async function RouteParams(props: PageParams<{ id: string }>) {
     try {
 
         const userId = props.params.id
-        const current = await currentUser()
+        const current = await requiredCurrentUser()
 
         const user = await prisma.user.findUnique({
             where: {
@@ -72,7 +74,7 @@ export default async function RouteParams(props: PageParams<{ id: string }>) {
                     <div className="flex flex-col m-4  w-2/4">
                         <Card className="shadow-lg ">
                             <CardHeader className="flex flex-row items-center justify-between">
-                                <CardTitle> {(current?.id === user?.id) ? "My Informations" : `Informations of ${user?.username}`}</CardTitle>
+                                <CardTitle> {(current.id === user.id) ? "My Informations" : `Informations of ${user?.username}`}</CardTitle>
                                 <div className="flex items-center">
                                     <Avatar className="size-10 mr-4">
                                         <AvatarFallback>{user?.name?.[0]}</AvatarFallback>
@@ -92,14 +94,27 @@ export default async function RouteParams(props: PageParams<{ id: string }>) {
 
                                     <CardDescription className="my-2">Location : </CardDescription>
 
-                                    <CardDescription className="my-2">Participation : </CardDescription>
+                                    <CardDescription className="my-2">Participations : </CardDescription>
                                 </div>
                                 <div className="flex flex-col items-end">
-                                    {(current?.id === user?.id) ?
-                                        <CardDescription className="my-2"> {user?.email}</CardDescription>
-                                        : <Button>
-                                            <Link href={``}>Send a message</Link>
-                                        </Button>}
+                                    {current.id === user.id ? (
+                                        <CardDescription className="my-2">{user.email}</CardDescription>
+                                    ) : (
+                                        <ChatButton
+                                            current={{
+                                                id: current.id ,
+                                                name: current.name,
+                                                email: current.email,
+                                                photoUrl: current.image,
+                                            }}
+                                            otherUser={{
+                                                id: user.id,
+                                                name: user.name,
+                                                email: user.email,
+                                                photoUrl: user?.image,
+                                            }}
+                                        />
+                                    )}
 
                                     <CardDescription className="my-2"> {user?.age ? calculateAge(user?.age) : "Unknown"} year s old</CardDescription>
 
@@ -128,11 +143,11 @@ export default async function RouteParams(props: PageParams<{ id: string }>) {
                             </div>
                             <div className="my-2 ">
                                 <span className="text-sm">Max 2 activities for month</span>
-                                <Progress className="w-[80%]" value={user.activities.length * 10} />
+                                <Progress value={user.activities.length * 10} />
                             </div>
                             <div className="my-2">
                                 <span className="text-sm" >Max 5 activities for month</span>
-                                <Progress className="w-[80%]" value={user?.candidacies.length + 1 * 40} />
+                                <Progress value={user?.candidacies.length + 1 * 40} />
                             </div>
 
                             <Card className="mt-4 p-4 flex flex-row items-center justify-between">
@@ -146,7 +161,7 @@ export default async function RouteParams(props: PageParams<{ id: string }>) {
                     </div>
 
                     <div className="mx-4 flex flex-col justify-center items-center w-4/5">
-                        <Card className="shadow-lg my-4  w-full">
+                        <Card className="shadow-lg my-4  w-full h-full">
                             <CardHeader className="flex flex-row justify-between items-center">
                                 <CardTitle> {(current?.id === user?.id) ? "My last activities" : `Last activities of ${user?.username}`}</CardTitle>
                                 <div>
@@ -167,31 +182,33 @@ export default async function RouteParams(props: PageParams<{ id: string }>) {
                                 </div>
                             </CardHeader>
                             <CardContent>
-                                {user?.activities.slice(0, 4).map((activity) => (
-                                    <Card className="relative shadow-lg p-2 my-2" key={activity.id}>
-                                        <Link href={`/activities/${activity.slug}`} key={activity.id}>
-                                            {(current?.id === user?.id) &&
-                                                (activity.candidacies.filter(candidacy => candidacy.status === "PENDING").length > 0 ? (
+                                {user?.activities.length === 0 ? (
+                                    <CardDescription className="mt-20 flex justify-center items-center text-2xl">No activities found</CardDescription>
+                                ) : (
+                                    user?.activities.slice(0, 4).map((activity) => (
+                                        <Card className="relative shadow-lg p-2 my-2" key={activity.id}>
+                                            <Link href={`/activities/${activity.slug}`} key={activity.id}>
+                                                {(current?.id === user?.id) && (activity.candidacies.filter(candidacy => candidacy.status === "PENDING").length > 0 ? (
                                                     <div className=" -translate-x-1/2 -translate-y-1/2 absolute top-0 left-0 rounded-full bg-red-500 size-6 flex justify-center items-center text-white">
                                                         {activity.candidacies.filter(candidacy => candidacy.status === "PENDING").length}
                                                     </div>
-                                                ) : null)
-                                            }
-                                            <div className="flex justify-between my-4 w-full">
-                                                <CardDescription className="font-extrabold">{activity.Title}</CardDescription>
-                                                <LucideIcons name={activity.Icon as IconName} />
-                                            </div>
-                                            <div className="flex justify-between">
-                                                <CardDescription className="my-2" >{activity.Date ? new Date(activity.Date).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' }) : ''}</CardDescription>
-                                                <CardDescription className="my-2" >{activity.Location}</CardDescription>
-                                                <CardDescription className="my-2" >{(typeof activity.Hour === 'string' && activity.Hour.match(/^\d+$/)) ?
-                                                    `${parseInt(activity.Hour, 10)}h` :
-                                                    activity.Hour}
-                                                </CardDescription>
-                                            </div>
-                                        </Link>
-                                    </Card>
-                                ))}
+                                                ) : null)}
+                                                <div className="flex justify-between my-4 w-full">
+                                                    <CardDescription className="font-extrabold">{activity.Title}</CardDescription>
+                                                    <LucideIcons name={activity.Icon as IconName} />
+                                                </div>
+                                                <div className="flex justify-between">
+                                                    <CardDescription className="my-2" >{activity.Date ? new Date(activity.Date).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' }) : ''}</CardDescription>
+                                                    <CardDescription className="my-2" >{activity.Location}</CardDescription>
+                                                    <CardDescription className="my-2" >{(typeof activity.Hour === 'string' && activity.Hour.match(/^\d+$/)) ?
+                                                        `${parseInt(activity.Hour, 10)}h` :
+                                                        activity.Hour}
+                                                    </CardDescription>
+                                                </div>
+                                            </Link>
+                                        </Card>
+                                    ))
+                                )}
                             </CardContent>
                         </Card>
                     </div>

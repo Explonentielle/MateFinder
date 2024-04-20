@@ -4,11 +4,13 @@ import "./globals.css";
 import { cn } from "@/src/lib/utils";
 import { Providers } from "./Providers";
 import { Suspense } from "react";
-import { NavigationEvents } from "@/src/components/navigation-events";
 import { getServerUrl } from "@/src/get-server-url";
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import Loading from "@/app/Loading";
+import { ChatProvider } from "./(customer)/users/chat/ChatContext";
+import Chat from "./(customer)/users/chat/Chat";
+
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -28,7 +30,10 @@ export default function RootLayout({
       <body className={cn(inter.className, 'h-full')}>
         <Suspense fallback={<Loading />}>
           <Providers>
-            {children}
+            <ChatProvider>
+              {children}
+              <Chat /> 
+            </ChatProvider>
             <Analytics />
             <SpeedInsights />
           </Providers>
