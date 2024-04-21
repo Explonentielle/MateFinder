@@ -13,7 +13,7 @@ export type CandidacyFormProps = {
     activityId?: string
     userId?: string
     status?: string
-    candidacyId: string
+    candidacyId?: string
     icon: string
 }
 

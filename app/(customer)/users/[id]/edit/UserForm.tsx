@@ -18,7 +18,6 @@ import { cn } from "@/src/lib/utils"
 import { Calendar } from "@/src/components/ui/calendar"
 
 export type UserFormProps = {
-  userId?: string
   username?: string
   location?: string
   defaultValues?: UserType

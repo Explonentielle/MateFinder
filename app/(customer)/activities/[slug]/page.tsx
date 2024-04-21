@@ -75,7 +75,7 @@ export default async function RouteParams(props: PageParams<{ slug: string }>) {
                                         </p>
                                     </div>
                                     <div className="items-center">
-                                        <CandidacyForm activityId={activity.id} userId={user?.id} status="PENDING" icon="Send" candidacyId="" />
+                                        <CandidacyForm activityId={activity.id} userId={user?.id} status="PENDING" icon="Send" />
                                     </div>
                                 </div>
                             </PopoverContent>
@@ -113,7 +113,7 @@ export default async function RouteParams(props: PageParams<{ slug: string }>) {
                             <UsersRound />
                         </CardDescription>
                     </Card>
-                    <Link className="m-2 w-1/3  justify-center flex " href={`/users/${activity.user.id}`}>
+                    <Link className="m-2 w-1/3  justify-center flex " href={`/users/${activity.user.username}`}>
                         <Card className="w-full justify-center flex ">
                             <div className="flex items-center">
                                 <span className="text-gray-500 mr-4">Organize by :</span>

@@ -1,6 +1,7 @@
 "use client"
 
-import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from "@/src/components/ui/card"
+import { Card, CardFooter, CardHeader, CardTitle } from "@/src/components/ui/card"
+import { SignInButton } from "@/src/features/auth/SignInButton"
 import { Layout } from "@/src/components/Layout";
 
 
@@ -10,11 +11,11 @@ export default function RouteError() {
             <Card>
                 <CardHeader>
                     <CardTitle>
-                        User not found
+                        Sorry you need to be logged in to view this page
                     </CardTitle>
-                    <CardDescription>The User may deleted or you don t have the permission to view it.</CardDescription>
                 </CardHeader>
                 <CardFooter>
+                    <SignInButton />
                 </CardFooter>
             </Card>
         </Layout>

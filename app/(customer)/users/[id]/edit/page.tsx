@@ -2,10 +2,15 @@ import type { PageParams } from "@/src/types/next"
 import UserForm from "./UserForm"
 import { requiredCurrentUser } from "@/src/auth/current-user"
 import { Layout } from "@/src/components/Layout"
+import { notFound } from "next/navigation";
+
 
 export default async function RouteParams(props: PageParams<{ id: string }>) {
+    const user = await requiredCurrentUser();
 
-    const user = await requiredCurrentUser()
+    if (user?.username !== props.params.id) {
+        return notFound();
+    }
 
     const defaultValues = {
         name: user?.name || "",
@@ -17,8 +22,8 @@ export default async function RouteParams(props: PageParams<{ id: string }>) {
 
     return (
         <Layout>
-            <p>profil de l utilisateur : {props.params.id} </p>
-            <UserForm userId={user.id} username={user.username ?? ""} defaultValues={defaultValues} />
+            <p>Profil de l'utilisateur : {user.username} </p>
+            <UserForm  username={user.username ?? ""} defaultValues={defaultValues} />
         </Layout>
     )
 }

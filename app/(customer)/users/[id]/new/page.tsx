@@ -7,12 +7,11 @@ import { Layout } from "@/src/components/Layout"
 export default async function RouteParams(props: PageParams<{ username: string }>) {
 
     const user = await requiredCurrentUser()
-    console.log("lol")
 
     return (
         <Layout>
             <p>profil de l utilisateur : {props.params.username} </p>
-            <UserForm userId={user.id} username={props.params.username} />
+            <UserForm username={props.params.username} />
         </Layout>
     )
 } 

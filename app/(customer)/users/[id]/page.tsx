@@ -8,7 +8,7 @@ import { prisma } from "@/src/prisma"
 import LucideIcons, { IconName } from "@/src/components/LucideIcons"
 import { MousePointerClick, Star } from "lucide-react"
 import { Button } from "@/src/components/ui/button"
-import RouteError from "../../notFound"
+import RouteError from "../../error"
 import { notFound } from "next/navigation"
 import { Progress } from "@/src/components/ui/progress"
 import ChatButton from "../chat/ChatButton"
@@ -19,13 +19,12 @@ import ChatButton from "../chat/ChatButton"
 export default async function RouteParams(props: PageParams<{ id: string }>) {
 
     try {
-
-        const userId = props.params.id
+        const username = props.params.id
         const current = await requiredCurrentUser()
 
         const user = await prisma.user.findUnique({
             where: {
-                id: userId
+                username: username
             },
             include: {
                 reviews: true,
@@ -102,7 +101,7 @@ export default async function RouteParams(props: PageParams<{ id: string }>) {
                                     ) : (
                                         <ChatButton
                                             current={{
-                                                id: current.id ,
+                                                id: current.id,
                                                 name: current.name,
                                                 email: current.email,
                                                 photoUrl: current.image,
