@@ -52,8 +52,8 @@ export default function Chat({ }) {
 
                 });
             }
-        }
-    }, [Chat, otherUser, current]);
+        } 
+    }, [Chat, otherUser, current]);   
 
     const handleCloseChat = () => {
         setChat(false); 

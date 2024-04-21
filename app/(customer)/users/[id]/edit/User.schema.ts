@@ -4,7 +4,7 @@ export const UserSchema = z.object({
   name: z.string(),
   image: z.string().optional(),
   age: z.date(),
-  username: z.string(), 
+  username: z.string().regex(/^[a-zA-Z0-9_-]*$/).min(5).max(20), 
   location: z.string(), 
 });
 
