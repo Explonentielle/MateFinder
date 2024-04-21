@@ -172,7 +172,7 @@ export default async function RouteParams(props: PageParams<{ id: string }>) {
                                             </Button>
                                         </Link> : null}
 
-                                    <Link href={`/users/${user?.id}/activities`}>
+                                    <Link href={`/users/${user?.username}/activities`}>
                                         <Button>
                                             View all
                                             <MousePointerClick className="ml-2" size={16} />
