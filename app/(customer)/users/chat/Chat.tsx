@@ -12,7 +12,6 @@ export default function Chat({ }) {
 
     useEffect(() => {
         if (chat) {
-            console.log(current, otherUser)
             if (current && otherUser) {
                 Talk.ready.then(() => {
                     const user1 = new Talk.User({
@@ -53,11 +52,11 @@ export default function Chat({ }) {
 
                 });
             }
-        } 
-    }, [Chat, otherUser, current]);   
+        }
+    }, [Chat, otherUser, current]);
 
     const handleCloseChat = () => {
-        setChat(false); 
+        setChat(false);
         setCurrent(null)
         setOtherUser(null)
 

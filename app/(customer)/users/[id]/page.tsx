@@ -29,13 +29,22 @@ export default async function RouteParams(props: PageParams<{ id: string }>) {
             include: {
                 reviews: true,
                 activities: {
+                    where: {
+                        Date: {
+                            gte: new Date()
+                        }
+                    },
+                    orderBy: {
+                        Date: 'asc'
+                    },
+                    take: 3,
                     include: {
                         candidacies: {
                             select: {
-                                status: true,
+                                status: true
                             }
                         }
-                    },
+                    }
                 },
                 candidacies: true
             }
@@ -65,13 +74,13 @@ export default async function RouteParams(props: PageParams<{ id: string }>) {
                         </Button>
                         :
                         <Button className="p-0">
-                            <Link className="p-2" href={``}>Send a message</Link>
+                            <Link className="p-2" href={``}>Send friend request</Link>
                         </Button>}
                 </div>
 
                 <Card className="shadow-lg flex flex-row justify-center">
                     <div className="flex flex-col m-4  w-2/4">
-                        <Card className="shadow-lg ">
+                        <Card className="shadow-lg h-full ">
                             <CardHeader className="flex flex-row items-center justify-between">
                                 <CardTitle> {(current.id === user.id) ? "My Informations" : `Informations of ${user?.username}`}</CardTitle>
                                 <div className="flex items-center">
@@ -93,7 +102,7 @@ export default async function RouteParams(props: PageParams<{ id: string }>) {
 
                                     <CardDescription className="my-2">Location : </CardDescription>
 
-                                    <CardDescription className="my-2">Participations : </CardDescription>
+                                    <CardDescription className="my-2">Activities : </CardDescription>
                                 </div>
                                 <div className="flex flex-col items-end">
                                     {current.id === user.id ? (
@@ -125,43 +134,42 @@ export default async function RouteParams(props: PageParams<{ id: string }>) {
 
                                     <CardDescription className="my-2"> {user?.activities.length}</CardDescription>
 
-                                    {/* {(current?.id === user?.id) ?
-                                        <CardDescription className="my-2">{user?.plan}</CardDescription>
-                                        : <Button className="w-4/5" variant={"outline"}>
-                                            <Link className="text-xs mx-2" href={``}>Be Premium for know it</Link>
-                                        </Button>} */}
+
 
                                 </div>
                             </CardContent>
                         </Card>
 
-                        <Card className="mt-4 px-8 py-4 h-full">
-                            <div className="mb-2 flex flex-row justify-between">
-                                <CardDescription>Plan : </CardDescription>
-                                <CardDescription>{user?.plan}</CardDescription>
-                            </div>
-                            <div className="my-2 ">
-                                <span className="text-sm">Max 2 activities for month</span>
-                                <Progress value={user.activities.length * 10} />
-                            </div>
-                            <div className="my-2">
-                                <span className="text-sm" >Max 5 activities for month</span>
-                                <Progress value={user?.candidacies.length + 1 * 40} />
-                            </div>
+                        {current.id === user.id ?
+                            <Card className="mt-4 px-8 py-4 h-full shadow-lg">
+                                <div className="mb-2 flex flex-row justify-between">
+                                    <CardDescription>Plan : </CardDescription>
+                                    <CardDescription>{user?.plan}</CardDescription>
+                                </div>
+                                <div className="my-2 ">
+                                    <span className="text-sm">Max 2 activities for month</span>
+                                    <Progress value={user.activities.length * 10} />
+                                </div>
+                                <div className="my-2">
+                                    <span className="text-sm" >Max 5 activities for month</span>
+                                    <Progress value={user?.candidacies.length + 1 * 40} />
+                                </div>
 
-                            <Card className="mt-4 p-4 flex flex-row items-center justify-between">
-                                <span className="font-light text-xs">You will soon reach the limite of your free plan, please upgrade </span>
-                                <Button className="ml-8">
-                                    Upgrade
-                                </Button>
+                                <Card className="mt-6 p-4 flex flex-row items-center justify-between">
+                                    <span className="font-light text-xs">You will soon reach the limite of your free plan, please upgrade </span>
+                                    <Button className="ml-8">
+                                        Upgrade
+                                    </Button>
+                                </Card>
                             </Card>
-
-                        </Card>
+                            :
+                            null
+                        }
                     </div>
 
                     <div className="mx-4 flex flex-col justify-center items-center w-4/5">
-                        <Card className="shadow-lg my-4  w-full h-full">
-                            <CardHeader className="flex flex-row justify-between items-center">
+                        <Card className="shadow-lg my-4  w-full h-full ">
+                            <CardHeader className="p-4 px-6 flex flex-row justify-between items-center">
                                 <CardTitle> {(current?.id === user?.id) ? "My last activities" : `Last activities of ${user?.username}`}</CardTitle>
                                 <div>
                                     {(current?.id === user?.id) ?
@@ -210,6 +218,37 @@ export default async function RouteParams(props: PageParams<{ id: string }>) {
                                 )}
                             </CardContent>
                         </Card>
+
+                        {current.id === user.id ?
+                            <Card className="shadow-lg h-full w-full mb-4 p-6">
+                                <div className="w-2/4">
+                                    <div className="flex justify-between items-center">
+                                        <CardDescription className="flex relative">
+                                            <span className="-translate-x-1/2 -translate-y-1/2 absolute top-0 left-0 mr-4 rounded-full bg-red-500 size-6 flex justify-center items-center text-white">
+                                                {user.candidacies.filter(candidacy => candidacy.status === "PENDING").length}
+                                            </span>
+                                            <Link href={`/users/${username}/candidacies`}>
+                                            <Button variant={"outline"}>
+                                                Check all your send candidacies
+                                            </Button>
+                                            </Link>
+                                        </CardDescription>
+                                    </div>
+                                    <div className="flex justify-between mt-4">
+                                        <CardDescription className="relative flex">
+                                            <span className="-translate-x-1/2 -translate-y-1/2 absolute top-0 left-0 mr-4 rounded-full bg-red-500 size-6 flex justify-center items-center text-white">
+                                                {4}
+                                            </span>
+                                            <Button variant={"outline"}>
+                                                Check all your Messages
+                                            </Button>
+                                        </CardDescription>
+                                    </div>
+                                </div>
+                            </Card>
+                            :
+                            null}
+
                     </div>
                 </Card>
             </Layout>
