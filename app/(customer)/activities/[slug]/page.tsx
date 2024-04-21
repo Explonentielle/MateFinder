@@ -108,7 +108,7 @@ export default async function RouteParams(props: PageParams<{ slug: string }>) {
                     </Card>
                     <Card className="p-2 m-2 w-1/3  justify-center flex  ">
                         <CardDescription className="flex justify-center items-center" >
-                            <span className="p-2 font-extrabold text-2xl"> {activity.userWanted}</span>
+                            <span className="p-2 font-extrabold text-2xl"> {activity.candidacies.filter(candidacy => candidacy.status === "APPROVED").length} / {Number(activity.userWanted)}</span>
                             <span className="text-xl mr-2">places remaining</span>
                             <UsersRound />
                         </CardDescription>

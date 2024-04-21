@@ -46,7 +46,8 @@ export default async function RouteParams(props: PageParams<{ page: string }>) {
                     name: true,
                     image: true
                 }
-            }
+            },
+            candidacies: true,
         },
         where: {
             Date: {
@@ -102,7 +103,7 @@ export default async function RouteParams(props: PageParams<{ page: string }>) {
                                                         activity.Hour}
                                                     </CardDescription>
                                                     <CardDescription className="font-mono px-6">{activity.Location}</CardDescription>
-                                                    <CardDescription className="font-mono px-6">{activity.userWanted} places</CardDescription>
+                                                    <CardDescription className="w-full font-mono px-3">{activity.candidacies.filter(candidacy => candidacy.status === "APPROVED").length} / {Number(activity.userWanted)} places</CardDescription>
                                                 </div>
                                             </Card>
                                         </Link>

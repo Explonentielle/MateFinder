@@ -21,8 +21,32 @@ export const createCandidacyAction = userAction(CreateCandidacySchema, async (in
     },
   });
 
+  const activity = await prisma.activity.findUnique({
+    where: {
+      id: input.activityId,
+    },
+    select: {
+      Title: true,
+      userWanted: true,
+      user: {
+        select: {
+          email: true,
+        },
+      },
+      candidacies: {
+        where: {
+          status: "APPROVED"
+        }
+      }
+    },
+  });
+
   if (existingCandidacy) {
     throw new ActionError("You already have a candidacy for this activity.");
+  }
+
+  if (Number(activity?.userWanted) - Number(activity?.candidacies.length) <= 0) {
+    throw new ActionError("No places remaining for this activity.");
   }
 
 
@@ -34,21 +58,8 @@ export const createCandidacyAction = userAction(CreateCandidacySchema, async (in
     },
   });
 
-  const activity = await prisma.activity.findUnique({
-    where: {
-      id: input.activityId,
-    },
-    select: {
-      Title: true,
-      user: {
-        select: {
-          email: true,
-        },
-      },
-    },
-  });
 
-  sendEmail((activity?.user.email || "" ), `New candidacy for activity ${activity?.Title}`, `You just receive a new candidacy for activity ${activity?.Title} from ${context.user.name} `)
+  sendEmail((activity?.user.email || ""), `New candidacy for activity ${activity?.Title}`, `You just receive a new candidacy for activity ${activity?.Title} from ${context.user.name} `)
   return newCandidacy;
 });
 
@@ -60,17 +71,7 @@ export const updateCandidacyAction = userAction(
     data: CandidacySchema,
   }),
   async (input) => {
-    const updatedCandidacy = await prisma.candidacy.update({
-      where: {
-        id: input.id,
-      },
-      data: {
-        userId: input.data.userId,
-        activityId: input.data.activityId,
-        status: input.data.status,
-      },
-    });
-    
+
     const candidacy = await prisma.candidacy.findUnique({
       where: {
         id: input.id,
@@ -80,6 +81,8 @@ export const updateCandidacyAction = userAction(
         activity: {
           select: {
             Title: true,
+            userWanted: true,
+            candidacies: true,
             user: {
               select: {
                 email: true,
@@ -90,8 +93,29 @@ export const updateCandidacyAction = userAction(
       },
     });
 
+    if (Number(candidacy?.activity?.userWanted) - Number(candidacy?.activity?.candidacies.length) <= 0) {
+      throw new ActionError("No places remaining for this activity.");
+    }
 
-    sendEmail((candidacy?.user.email || "" ), `Candidacy for ${candidacy?.activity.Title} was ${input.data.status}  `, `We are sorry, your candidacy for activity ${candidacy?.activity.Title} was just rejected. ${input.data.status}, but you will probably find other exciting opportunities to participate in. Keep exploring!`)
+    const updatedCandidacy = await prisma.candidacy.update({
+      where: {
+        id: input.id,
+      },
+      data: {
+        userId: input.data.userId,
+        activityId: input.data.activityId,
+        status: input.data.status,
+      },
+    });
+
+
+
+    if (input.data.status === "APPROVED") {
+      sendEmail((candidacy?.user.email || ""), `Candidacy for ${candidacy?.activity.Title} was ${input.data.status}  `, `We are happy to inform you that your candidacy for activity ${candidacy?.activity.Title} was just ${input.data.status}!`)
+    }
+    else {
+      sendEmail((candidacy?.user.email || ""), `Candidacy for ${candidacy?.activity.Title} was ${input.data.status}  `, `We are sorry, your candidacy for activity ${candidacy?.activity.Title} was just ${input.data.status}, but you will probably find other exciting opportunities to participate in. Keep exploring!`)
+    }
     return updatedCandidacy;
   }
 );

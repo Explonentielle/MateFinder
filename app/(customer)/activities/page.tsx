@@ -20,6 +20,7 @@ export default async function RouteParams(props: PageParams<{ }>) {
             Hour: true,
             Location: true,
             userWanted: true,
+            candidacies: true,
             user: {
                 select: {
                     name: true,
@@ -70,7 +71,7 @@ export default async function RouteParams(props: PageParams<{ }>) {
                                                         activity.Hour}
                                                     </CardDescription>
                                                     <CardDescription className="font-mono px-6">{activity.Location}</CardDescription>
-                                                    <CardDescription className="font-mono px-6">{activity.userWanted} places</CardDescription>
+                                                    <CardDescription className="w-full font-mono px-3">{Number(activity.userWanted) - activity.candidacies.filter(candidacy => candidacy.status === "APPROVED").length} / {Number(activity.userWanted)} places</CardDescription>
                                                 </div>
                                             </Card>
                                         </Link>

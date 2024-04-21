@@ -30,7 +30,6 @@ export const LocationForm = () => {
                 <h1 className="text-2xl  pl-6">Discover your perfect mate with Mate Finder</h1>
                 <Card>
                     <CardHeader>
-
                         <CardTitle>Select your Department</CardTitle>
                     </CardHeader>
                     <CardContent className="shadow-lg p-8">
@@ -46,16 +45,16 @@ export const LocationForm = () => {
                                 ))}
                             </SelectContent>
                         </Select>
-                        {selected ? 
-                        <Link href={`/landing/${selectedLocation}`}>
+                        {selected ?
+                            <Link href={`/landing/${selectedLocation}`}>
+                                <Button className="w-full my-4" variant="default">
+                                    Choose this Department
+                                </Button>
+                            </Link>
+                            :
                             <Button className="w-full my-4" variant="default">
                                 Choose this Department
-                            </Button>
-                        </Link> 
-                        : 
-                        <Button className="w-full my-4" variant="default">
-                            Choose this Department
-                        </Button>}
+                            </Button>}
                     </CardContent>
                 </Card>
             </Layout>

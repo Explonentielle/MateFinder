@@ -29,7 +29,8 @@ export default async function RouteParams(props: PageParams<{ slug: string }>) {
                     image: true,
                     name: true,
                 }
-            }
+            },
+            candidacies: true
         },
     });
 
@@ -78,7 +79,7 @@ export default async function RouteParams(props: PageParams<{ slug: string }>) {
                                                     `${parseInt(activity.Hour, 10)}h` :
                                                     activity.Hour}
                                                 </CardDescription>
-                                                <CardDescription className="w-full font-mono px-3">{activity.userWanted} places</CardDescription>
+                                                <CardDescription className="w-full font-mono px-3">{activity.candidacies.filter(candidacy => candidacy.status === "APPROVED").length} / {Number(activity.userWanted)} places</CardDescription>
                                             </div>
                                         </CardContent>
                                     </Card>

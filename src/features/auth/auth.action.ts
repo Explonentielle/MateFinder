@@ -8,4 +8,5 @@ export const SignOutAction = async () => {
 
 export const SignInAction = async () => {
     await signIn()
+    console.error("sign in")
 }

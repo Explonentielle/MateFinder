@@ -45,8 +45,10 @@ export const Landing = async () => {
                     select: {
                         image: true,
                         name: true,
-                    }
-                }
+                    },
+                }, 
+                candidacies: true
+               
             },
         });
 
@@ -96,7 +98,7 @@ export const Landing = async () => {
                                                         `${parseInt(activity.Hour, 10)}h` :
                                                         activity.Hour}
                                                     </CardDescription>
-                                                    <CardDescription className="w-full font-mono px-3">{activity.userWanted} places</CardDescription>
+                                                    <CardDescription className="w-full font-mono px-3">{activity.candidacies.filter(candidacy => candidacy.status === "APPROVED").length} / {Number(activity.userWanted)} places</CardDescription>
                                                 </div>
                                             </CardContent>
                                         </Card>
