@@ -224,21 +224,21 @@ export default async function RouteParams(props: PageParams<{ id: string }>) {
                                 <div className="w-2/4">
                                     <div className="flex justify-between items-center">
                                         <CardDescription className="flex relative">
-                                            <span className="-translate-x-1/2 -translate-y-1/2 absolute top-0 left-0 mr-4 rounded-full bg-red-500 size-6 flex justify-center items-center text-white">
+                                            {user.candidacies.filter(candidacy => candidacy.status === "PENDING").length > 0 ? <span className="-translate-x-1/2 -translate-y-1/2 absolute top-0 left-0 mr-4 rounded-full bg-red-500 size-6 flex justify-center items-center text-white">
                                                 {user.candidacies.filter(candidacy => candidacy.status === "PENDING").length}
-                                            </span>
+                                            </span> : null}
                                             <Link href={`/users/${username}/candidacies`}>
-                                            <Button variant={"outline"}>
-                                                Check all your send candidacies
-                                            </Button>
+                                                <Button variant={"outline"}>
+                                                    Check all your send candidacies
+                                                </Button>
                                             </Link>
                                         </CardDescription>
                                     </div>
                                     <div className="flex justify-between mt-4">
                                         <CardDescription className="relative flex">
-                                            <span className="-translate-x-1/2 -translate-y-1/2 absolute top-0 left-0 mr-4 rounded-full bg-red-500 size-6 flex justify-center items-center text-white">
+                                            {/* <span className="-translate-x-1/2 -translate-y-1/2 absolute top-0 left-0 mr-4 rounded-full bg-red-500 size-6 flex justify-center items-center text-white">
                                                 {4}
-                                            </span>
+                                            </span> */}
                                             <Button variant={"outline"}>
                                                 Check all your Messages
                                             </Button>
