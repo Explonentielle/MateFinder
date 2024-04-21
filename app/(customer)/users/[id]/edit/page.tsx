@@ -24,7 +24,7 @@ export default async function RouteParams(props: PageParams<{ id: string }>) {
 
     return (
         <Layout>
-            <p>Profil de l'utilisateur : {user.username} </p>
+            <p>Profil de l utilisateur : {user.username} </p>
             <UserForm username={user.username} defaultValues={defaultValues} />
         </Layout>
     )

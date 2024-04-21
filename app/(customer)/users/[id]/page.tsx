@@ -150,7 +150,7 @@ export default async function RouteParams(props: PageParams<{ id: string }>) {
                             </div>
 
                             <Card className="mt-4 p-4 flex flex-row items-center justify-between">
-                                <span className="font-ligth text-xs">You will soon reach the limite of your free plan, please upgrade </span>
+                                <span className="font-light text-xs">You will soon reach the limite of your free plan, please upgrade </span>
                                 <Button className="ml-8">
                                     Upgrade
                                 </Button>

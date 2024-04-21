@@ -12,6 +12,7 @@ export default function Chat({ }) {
 
     useEffect(() => {
         if (chat) {
+            console.log(current, otherUser)
             if (current && otherUser) {
                 Talk.ready.then(() => {
                     const user1 = new Talk.User({
