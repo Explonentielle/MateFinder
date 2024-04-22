@@ -7,6 +7,7 @@ import { Card, CardContent, CardDescription, CardHeader } from "@/src/components
 import { prisma } from "@/src/prisma";
 import Link from "next/link";
 import { ScrollArea } from "@/src/components/ui/scroll-area";
+import { UserAvatar } from "@/src/components/UserAvatar";
 
 export default async function RouteParams(props: PageParams<{ slug: string }>) {
 
@@ -28,6 +29,7 @@ export default async function RouteParams(props: PageParams<{ slug: string }>) {
                 select: {
                     image: true,
                     name: true,
+                    email: true,
                 }
             },
             candidacies: true
@@ -58,12 +60,7 @@ export default async function RouteParams(props: PageParams<{ slug: string }>) {
                                         <CardHeader className="p-2 md:p-6 font-bold text-md md:text-2xl flex flex-row justify-between items-center">
                                             {`${activity.Title.slice(0, 18)}...`}
                                             <div className="flex">
-                                                <Avatar className='size-6 mr-4'>
-                                                    <AvatarFallback>{activity.user.name?.[0]}</AvatarFallback>
-                                                    {activity.user.image ? (
-                                                        <AvatarImage src={activity.user.image} alt={`${activity.user.name}'s profile picture`} />
-                                                    ) : null}
-                                                </Avatar>
+                                                <UserAvatar email={activity.user.email || ""} image={activity.user.image || undefined} />                                               
                                                 <LucideIcons name={activity.Icon as IconName} size={24} />
                                             </div>
                                         </CardHeader>

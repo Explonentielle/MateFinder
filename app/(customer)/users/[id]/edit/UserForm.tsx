@@ -16,6 +16,7 @@ import { CalendarIcon } from "@radix-ui/react-icons"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/src/components/ui/select"
 import { cn } from "@/src/lib/utils"
 import { Calendar } from "@/src/components/ui/calendar"
+import { UserAvatar } from "@/src/components/UserAvatar"
 
 export type UserFormProps = {
   username?: string
@@ -32,6 +33,14 @@ const UserForm = (props: UserFormProps) => {
   const isCreate = !Boolean(props.defaultValues)
   const [year, setYear] = React.useState<Date | undefined>(props.defaultValues?.age);
   const [inputYear, setInputYear] = React.useState<number | undefined>(year?.getFullYear());
+  const [avatarLink, setAvatarLink] = React.useState<string | undefined>(props.defaultValues?.image);
+
+  const handleRandomizeAvatar = () => {
+    const randomString = generateRandomString(15);
+    setAvatarLink(randomString);
+
+    form.setValue('image', randomString);
+  }
 
 
   const router = useRouter();
@@ -55,6 +64,16 @@ const UserForm = (props: UserFormProps) => {
       }
     }
   });
+
+  const generateRandomString = (length: number) => {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let result = '';
+    const charactersLength = characters.length;
+    for (let i = 0; i < length; i++) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+  }
 
 
   return (
@@ -179,7 +198,7 @@ const UserForm = (props: UserFormProps) => {
                       <SelectContent>
                         {LocationCategories.map((location) => {
                           return (
-                            <SelectItem value={location} key={location}> 
+                            <SelectItem value={location} key={location}>
                               <div>{location}</div>
                             </SelectItem>
                           );
@@ -200,14 +219,20 @@ const UserForm = (props: UserFormProps) => {
               name="image"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="font-bold">Avatar (optional)</FormLabel>
+                  <FormLabel className="font-bold">Avatar</FormLabel>
                   <FormControl>
                     <Input
+                      type="hidden"
                       placeholder="Avatar Link"
-                      {...field} />
+                      defaultValue={props.defaultValues?.image}
+                      value={field.value}
+                      />
                   </FormControl>
-                  <FormDescription>
-                    Past the link of Avatar of your profil
+                  <FormDescription className="flex ">
+                    <Button type="button" onClick={handleRandomizeAvatar} className="mr-8">
+                      Randomize your Avatar profils
+                    </Button>
+                    <UserAvatar email={props.defaultValues?.name || ""} image={avatarLink} size={10} />
                   </FormDescription>
                   <FormMessage />
                 </FormItem>

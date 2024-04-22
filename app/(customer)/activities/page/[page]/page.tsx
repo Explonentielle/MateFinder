@@ -6,6 +6,7 @@ import LucideIcons, { IconName } from "@/src/components/LucideIcons";
 import { ScrollArea } from "@/src/components/ui/scroll-area";
 import { Avatar, AvatarFallback, AvatarImage } from "@/src/components/ui/avatar";
 import { PageParams } from "@/src/types/next";
+import { UserAvatar } from "@/src/components/UserAvatar";
 
 export default async function RouteParams(props: PageParams<{ page: string }>) {
 
@@ -44,7 +45,8 @@ export default async function RouteParams(props: PageParams<{ page: string }>) {
             user: {
                 select: {
                     name: true,
-                    image: true
+                    image: true,
+                    email: true,
                 }
             },
             candidacies: true,
@@ -85,12 +87,7 @@ export default async function RouteParams(props: PageParams<{ page: string }>) {
                                                     <span className="font-mono mr-4">{`${activity.Title.slice(0, 18)}...`}</span>
                                                     {activity.user.name ? (
                                                         <CardDescription className="flex justify-center items-center" >
-                                                            <Avatar className='size-6'>
-                                                                <AvatarFallback>{activity.user.name[0]}</AvatarFallback>
-                                                                {activity.user.image ? (
-                                                                    <AvatarImage src={activity.user.image} alt={`${activity}'s profile picture`} />
-                                                                ) : null}
-                                                            </Avatar>
+                                                            <UserAvatar email={activity.user.email || ""} image={activity.user.image || undefined}/>                                                   
                                                         </CardDescription>
                                                     ) : null}
                                                 </CardHeader>

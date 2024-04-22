@@ -1,5 +1,5 @@
-import { currentUser, requiredCurrentUser } from "@/src/auth/current-user";
-import { Layout, LayoutTitle } from "@/src/components/Layout";
+import { requiredCurrentUser } from "@/src/auth/current-user";
+import { Layout } from "@/src/components/Layout";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/src/components/ui/card";
 import { prisma } from "@/src/prisma";
 import type { PageParams } from "@/src/types/next"
@@ -7,10 +7,10 @@ import { notFound } from "next/navigation";
 import RouteError from "../error";
 import { Button } from "@/src/components/ui/button";
 import { Check, Cross } from "lucide-react";
-import { Avatar, AvatarFallback, AvatarImage } from "@/src/components/ui/avatar";
 import Link from "next/link";
 import CandidacyForm from "../new/CandidacyForm";
 import { Popover, PopoverContent, PopoverTrigger } from "@/src/components/ui/popover";
+import { UserAvatar } from "@/src/components/UserAvatar";
 
 
 export default async function RouteParams(props: PageParams<{ slug: string }>) {
@@ -55,12 +55,7 @@ export default async function RouteParams(props: PageParams<{ slug: string }>) {
                                         <Link className="flex items-center p-4" href={`/users/${candidacy.user.username}`}>
                                             <CardDescription className="mr-4 ">{candidacy.user.username}</CardDescription>
                                             <CardDescription className="flex justify-center items-center" >
-                                                <Avatar className='size-6'>
-                                                    <AvatarFallback>{candidacy.user.username?.[0]}</AvatarFallback>
-                                                    {candidacy.user.image ? (
-                                                        <AvatarImage src={candidacy?.user.image} alt={`${candidacy.user.username}'s profile picture`} />
-                                                    ) : null}
-                                                </Avatar>
+                                                <UserAvatar email={candidacy.user.email || ""} image={candidacy.user.image || undefined} />
                                             </CardDescription>
                                         </Link>
                                     </Button>

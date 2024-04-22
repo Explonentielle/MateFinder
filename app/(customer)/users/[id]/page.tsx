@@ -1,9 +1,8 @@
-import type { Activity, PageParams } from "@/src/types/next"
-import { currentUser, requiredCurrentUser } from "@/src/auth/current-user"
+import type {  PageParams } from "@/src/types/next"
+import { requiredCurrentUser } from "@/src/auth/current-user"
 import { Layout, LayoutTitle } from "@/src/components/Layout"
 import Link from "next/link"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/src/components/ui/card"
-import { Avatar, AvatarFallback, AvatarImage } from "@/src/components/ui/avatar"
 import { prisma } from "@/src/prisma"
 import LucideIcons, { IconName } from "@/src/components/LucideIcons"
 import { MousePointerClick, Star } from "lucide-react"
@@ -12,6 +11,7 @@ import RouteError from "../../error"
 import { notFound } from "next/navigation"
 import { Progress } from "@/src/components/ui/progress"
 import ChatButton from "../chat/ChatButton"
+import { UserAvatar } from "@/src/components/UserAvatar"
 
 
 
@@ -84,10 +84,7 @@ export default async function RouteParams(props: PageParams<{ id: string }>) {
                             <CardHeader className="p-2 md:p-6 flex flex-row items-center justify-between">
                                 <CardTitle> {(current.id === user.id) ? "My Informations" : `Informations of ${user?.username}`}</CardTitle>
                                 <div className="flex items-center">
-                                    <Avatar className="size-10 mr-4">
-                                        <AvatarFallback>{user?.name?.[0]}</AvatarFallback>
-                                        {user?.image && <AvatarImage src={user?.image} alt={`${user?.name}'s profile picture`} />}
-                                    </Avatar>
+                                    <UserAvatar email={user.email || ""} image={user.image || undefined} />
                                 </div>
                             </CardHeader>
                             <CardContent className="p-2 md:p-6 flex flex-row justify-between px-2 md:px-8 ">

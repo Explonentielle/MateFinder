@@ -12,6 +12,8 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/src/components/ui/avatar"
 import Link from "next/link"
 import CandidacyForm from "../../candidacies/new/CandidacyForm"
 import { Popover, PopoverContent, PopoverTrigger } from "@/src/components/ui/popover"
+import { UserAvatar } from "@/src/components/UserAvatar"
+
 
 
 
@@ -119,12 +121,7 @@ export default async function RouteParams(props: PageParams<{ slug: string }>) {
                                 <span className="text-sm md:text-xl text-gray-500 mr-0 md:mr-4">Organize by :</span>
                                 <CardDescription className="flex mx-6 md:mx-0 flex-col-reverse md:flex-row justify-center items-center" >
                                     <span className="mr-0 md:mr-4">{activity.user.username}</span>
-                                    <Avatar className='size-6'>
-                                        <AvatarFallback>{activity.user.name?.[0]}</AvatarFallback>
-                                        {activity.user.image ? (
-                                            <AvatarImage src={activity.user.image} alt={`${activity.user.name}'s profile picture`} />
-                                        ) : null}
-                                    </Avatar>
+                                   <UserAvatar email={activity.user.email || ""} image={activity.user.image || undefined}/>
                                 </CardDescription>
                             </div>
                         </Card>
@@ -154,12 +151,7 @@ export default async function RouteParams(props: PageParams<{ slug: string }>) {
                             {activity.candidacies.map((candidacy) => (
                                 (candidacy.status === "APPROVED" &&
                                     <Link href={`/users/${candidacy.user.id}`} key={candidacy.id}>
-                                        <Avatar className='size-8 mr-1' key={candidacy.id}>
-                                            <AvatarFallback>{candidacy.user.name?.[0]}</AvatarFallback>
-                                            {candidacy.user.image ? (
-                                                <AvatarImage src={candidacy.user.image} alt={`${candidacy.user.name}'s profile picture`} />
-                                            ) : null}
-                                        </Avatar>
+                                        <UserAvatar email={candidacy.user.email || ""} image={candidacy.user.image || undefined}/>
                                     </Link>)
                             ))}
                         </CardDescription>
