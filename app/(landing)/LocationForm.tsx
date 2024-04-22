@@ -28,7 +28,7 @@ export const LocationForm = () => {
                     <p className="mr-4 text-4xl">Welcome to</p><p className="titleBorder font-extrabold text-5xl">Mate Finder</p>
                 </LayoutTitle>
                 <h1 className="text-2xl  pl-6">Discover your perfect mate with Mate Finder</h1>
-                <Card>
+                {/* <Card>
                     <CardHeader>
                         <CardTitle>Select your Department</CardTitle>
                     </CardHeader>
@@ -56,7 +56,7 @@ export const LocationForm = () => {
                                 Choose this Department
                             </Button>}
                     </CardContent>
-                </Card>
+                </Card> */}
             </Layout>
         </Layout>
     );

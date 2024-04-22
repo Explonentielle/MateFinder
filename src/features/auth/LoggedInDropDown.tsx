@@ -21,12 +21,12 @@ export const LoggedInDropDown = (props: LoggedInDropDownProps) => {
                 {children}
             </DropdownMenuTrigger>
             <DropdownMenuContent>
-                <Link href={`/users/${id}`}>
+                {/* <Link href={`/users/${id}`}>
                     <DropdownMenuItem >
                         <User size='16' className="mr-2" />
                         Profil
                     </DropdownMenuItem>
-                </Link>
+                </Link> */}
                 <DropdownMenuItem onClick={() => {
                     SignOutAction();
                 }}>
