@@ -7,7 +7,7 @@ export default async function Home() {
   return (
     <div className="size-full">
       <Header />
-      {/* <Landing /> */}
+      <Landing />
     </div>
   );
 }
