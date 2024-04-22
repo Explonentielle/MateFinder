@@ -37,7 +37,7 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
   return (
     <ChatContext.Provider value={{ chat, setChat, current, setCurrent, otherUser, setOtherUser }}>
       {children}
-      {/* <Chat/> */}
+      <Chat/>
     </ChatContext.Provider>
   );
 }

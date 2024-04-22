@@ -32,8 +32,8 @@ export default function RootLayout({
             <ChatProvider>
               {children}
             </ChatProvider>
-            {/* <Analytics />
-            <SpeedInsights /> */}
+            <Analytics />
+            <SpeedInsights />
           </Providers>
         </Suspense>
       </body>

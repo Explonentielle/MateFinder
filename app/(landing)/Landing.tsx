@@ -29,28 +29,28 @@ export const Landing = async () => {
         }
 
         const currentDate = new Date();
-        // const activities = await prisma.activity.findMany({
-        //     where: {
-        //         Date: {
-        //             gte: currentDate
-        //         },
-        //         Departement: user.location
-        //     },
-        //     take: 6,
-        //     orderBy: {
-        //         Date: "asc",
-        //     },
-        //     include: {
-        //         user: {
-        //             select: {
-        //                 image: true,
-        //                 name: true,
-        //             },
-        //         }, 
-        //         candidacies: true
+        const activities = await prisma.activity.findMany({
+            where: {
+                Date: {
+                    gte: currentDate
+                },
+                Departement: user.location
+            },
+            take: 6,
+            orderBy: {
+                Date: "asc",
+            },
+            include: {
+                user: {
+                    select: {
+                        image: true,
+                        name: true,
+                    },
+                }, 
+                candidacies: true
                
-        //     },
-        // });
+            },
+        });
 
 
         return (
@@ -60,12 +60,12 @@ export const Landing = async () => {
                         <p className="mr-4 text-4xl">Welcome to</p><p className="titleBorder font-extrabold text-5xl">Mate Finder</p>
                     </LayoutTitle>
                     <h1 className="text-2xl  pl-6">Discover your perfect mate with Mate Finder</h1>
-                    {/* <Link href={`/activities/page/1${user.location}`}>
+                    <Link href={`/activities/page/1${user.location}`}>
                         <Button variant="ghost" className="shadow-lg w-full py-6 border-primary border-dashed border-2">
                             Check All Activities Next to you
                         </Button>
-                    </Link> */}
-                    {/* <Card className="shadow-lg">
+                    </Link>
+                    <Card className="shadow-lg">
                         <ScrollArea className="h-[55vh] w-full">
                             <CardHeader className="py-2 font-bold text-2xl">
                                 Upcoming Activities Recently next to you
@@ -106,7 +106,7 @@ export const Landing = async () => {
                                 ))}
                             </CardContent>
                         </ScrollArea>
-                    </Card> */}
+                    </Card>
                 </Layout>
             </div >
         )
