@@ -29,9 +29,9 @@ export default function RootLayout({
       <body cz-shortcut-listen="true" className={cn(inter.className, 'h-full')}>
         <Suspense fallback={<Loading />}>
           <Providers>
-            <ChatProvider>
+            {/* <ChatProvider> */}
               {children}
-            </ChatProvider>
+            {/* </ChatProvider> */}
             <Analytics />
             <SpeedInsights />
           </Providers>
