@@ -47,24 +47,24 @@ export default async function RouteParams(props: PageParams<{ id: string }>) {
                     {user?.candidacies && user.candidacies.length > 0 ? (
                         user.candidacies.map((candidacy) => (
                             <Card className="shadow-lg m-4" key={candidacy.id}>
-                                <CardContent className="flex items-center justify-between p-4 w-full">
+                                <CardContent className="flex flex-col md:flex-row items-center justify-between p-4 w-full">
                                     <Link className="p-2" href={`/activities/${candidacy.activity.slug}`}>
                                         <Button className="flex flex-col items-center  m-2 shadow-lg h-full" variant={"secondary"}>
-                                            <CardDescription className="mr-4 font-bold text-xl p-2">{candidacy.activity.Title}</CardDescription>
+                                            <CardDescription className="mr-4 font-bold text-md md:text-xl p-2">{candidacy.activity.Title}</CardDescription>
                                             <div className="flex">
                                                 <CardDescription className="mr-4 ">{candidacy.activity.Location}</CardDescription>
                                                 <CardDescription className="mr-4">{candidacy.activity.Date.toLocaleDateString()}</CardDescription>
                                             </div>
                                         </Button>
                                     </Link>
-                                    <CardDescription className="mr-4 flex flex-col items-center"> <span className="font-bold">Candidacy sent on</span>  {candidacy.createdAt.toLocaleDateString()}</CardDescription>
+                                    <CardDescription className="mr-4 flex flex-row md:flex-col items-center"> <span className="font-bold mr-2">Candidacy sent on</span>  {candidacy.createdAt.toLocaleDateString()}</CardDescription>
                                     <div className="flex">
                                         {candidacy.status === "PENDING" && (
-                                            <CardDescription className="mr-10 flex flex-col items-center"><span className="font-bold">Candidacy statut</span>  Pending</CardDescription>
+                                            <CardDescription className="mr-4 mt-2 md:mt-0 flex flex items-center"><span className="font-bold mr-4">Candidacy statut</span>  Pending</CardDescription>
                                         )}
                                         {candidacy.status === "APPROVED" && (
                                             <>
-                                                <CardDescription className="mr-10 flex flex-col items-center"><span className="font-bold">Candidacy statut</span> Approved</CardDescription>
+                                                <CardDescription className="w-content mr-4 flex flex items-center"><span className="w-[8rem] font-bold mr-4">Candidacy statut</span> Approved</CardDescription>
                                                 <Card className="w-full flex items-center justify-center bg-green-500" >
                                                     <Check color="white" size={36} />
                                                 </Card>
@@ -72,7 +72,7 @@ export default async function RouteParams(props: PageParams<{ id: string }>) {
                                         )}
                                         {candidacy.status === "REJECTED" && (
                                             <>
-                                                <CardDescription className="mr-10 flex flex-col items-center"><span className="font-bold">Candidacy statut</span>Rrejected</CardDescription>
+                                                <CardDescription className="w-content mr-4 flex flex items-center"><span className="font-bold mr-4">Candidacy statut</span>Rrejected</CardDescription>
                                                 <Card className="w-full  flex items-center justify-center bg-red-500 ">
                                                     <Cross className={'rotate-45'} color="white" size={36} />
                                                 </Card>

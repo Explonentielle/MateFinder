@@ -65,7 +65,7 @@ export default function Chat({ }) {
     return (
         <>
             {chat && (
-                <main className='h-[50vh] w-[28vw] absolute top-[45vh] right-[2vw] z-10'>
+                <main className='h-[50vh] w-[80vw] md:w-[28vw] absolute top-[45vh] right-[2vw] z-10'>
                     <button className="" onClick={handleCloseChat}>
                         <Plus className="h-6 w-6 rotate-45 text-red-600" />
                     </button>

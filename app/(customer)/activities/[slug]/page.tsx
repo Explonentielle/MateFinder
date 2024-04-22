@@ -43,9 +43,9 @@ export default async function RouteParams(props: PageParams<{ slug: string }>) {
     return (
         <Layout>
             <Card>
-                <CardHeader className="flex flex-row justify-between">
-                    <div className="flex items-center">
-                        <LayoutTitle className="mr-4"  >{activity.Title}</LayoutTitle>
+                <CardHeader className="p-4 md:p-6 flex flex-row items-center justify-between">
+                    <div className="flex mr-2 items-center">
+                        <LayoutTitle className="mr2 md:mr-4 text-xl md:text-4xl"  >{activity.Title}</LayoutTitle>
                         <LucideIcons name={activity.Icon as IconName} size={36} />
                     </div>
                     {isCreate! ?
@@ -57,11 +57,11 @@ export default async function RouteParams(props: PageParams<{ slug: string }>) {
                                     </div>
                                 )
                                     : null)}
-                                <Button variant={"secondary"} className="mr-4">
+                                <Button variant={"secondary"} className="mb-4 md:mb-0 mr-4">
                                     Manage candidacies
                                 </Button>
                             </Link>
-                            <EditButton slug={activity.slug} />
+                            <EditButton  slug={activity.slug} />
                         </div> :
                         <Popover>
                             <PopoverTrigger asChild>
@@ -82,14 +82,14 @@ export default async function RouteParams(props: PageParams<{ slug: string }>) {
                         </Popover>
                     }
                 </CardHeader>
-                <CardContent className="flex flex-col justify-center">
-                    <div className="flex justify-center">
-                        <Card className="p-2 m-2 w-1/2  ">
+                <CardContent className="p-4 md:p-6 flex flex-col justify-center">
+                    <div className="flex flex-col md:flex-row justify-center">
+                        <Card className="p-2 w-full md:w-1/2 ">
                             <CardDescription className="flex justify-center items-center">
                                 <span className="py-2 px-6 font-bold">{activity.Information}</span>
                             </CardDescription>
                         </Card>
-                        <Card className="p-2 m-2 w-1/2 justify-center flex  ">
+                        <Card className="p-2 my-2 mx-0 md:my-0 md:mx-2  w-full md:w-1/2 justify-center flex  ">
                             <CardDescription className="flex justify-center items-center">
                                 <span className="py-2 font-extrabold text-2xl">{activity.Date ? new Date(activity.Date).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' }) : ''}</span>
                                 <span className="ml-8 font-extrabold text-xl">{(typeof activity.Hour === 'string' && activity.Hour.match(/^\d+$/)) ?
@@ -101,24 +101,24 @@ export default async function RouteParams(props: PageParams<{ slug: string }>) {
                     </div>
                 </CardContent>
                 <CardContent className="flex justify-center">
-                    <Card className="p-2 m-2 w-1/3 ">
+                    <Card className="p-2 m-2 w-1/3 flex justify-center items-center ">
                         <CardDescription className="flex justify-center items-center" >
-                            <span className="p-2 font-extrabold text-2xl">{activity.categorie}</span>
+                            <span className="p-2 font-extrabold text-lg md:text-2xl">{activity.categorie}</span>
                         </CardDescription>
                     </Card>
-                    <Card className="p-2 m-2 w-1/3  justify-center flex  ">
-                        <CardDescription className="flex justify-center items-center" >
-                            <span className="p-2 font-extrabold text-2xl"> {activity.candidacies.filter(candidacy => candidacy.status === "APPROVED").length} / {Number(activity.userWanted)}</span>
-                            <span className="text-xl mr-2">places remaining</span>
+                    <Card className="p-2 m-2 w-1/3  flex flex-col md:flex-row justify-center items-center  ">
+                        <CardDescription className="justify-between items-center flex">
+                            <span className="pr-2 font-extrabold text-md md:text-2xl"> {activity.candidacies.filter(candidacy => candidacy.status === "APPROVED").length} / {Number(activity.userWanted)}</span>
                             <UsersRound />
                         </CardDescription>
+                        <CardDescription className="text-sm md:text-xl ml-0 md:ml-2">places remaining</CardDescription>
                     </Card>
                     <Link className="m-2 w-1/3  justify-center flex " href={`/users/${activity.user.username}`}>
-                        <Card className="w-full justify-center flex ">
-                            <div className="flex items-center">
-                                <span className="text-gray-500 mr-4">Organize by :</span>
-                                <CardDescription className="flex justify-center items-center" >
-                                    <span className="mr-4">{activity.user.username}</span>
+                        <Card className="w-full p-2 justify-center flex ">
+                            <div className="flex flex-col md:flex-row justify-between items-center">
+                                <span className="text-sm md:text-xl text-gray-500 mr-0 md:mr-4">Organize by :</span>
+                                <CardDescription className="flex mx-6 md:mx-0 flex-col-reverse md:flex-row justify-center items-center" >
+                                    <span className="mr-0 md:mr-4">{activity.user.username}</span>
                                     <Avatar className='size-6'>
                                         <AvatarFallback>{activity.user.name?.[0]}</AvatarFallback>
                                         {activity.user.image ? (
@@ -131,25 +131,25 @@ export default async function RouteParams(props: PageParams<{ slug: string }>) {
                     </Link>
                 </CardContent>
                 <CardContent className="flex justify-center">
-                    <Card className="p-2 m-2 w-1/3 ">
+                    <Card className="p-2 m-2 w-1/3 flex justify-center items-center">
                         <CardDescription className="flex justify-center items-center" >
-                            <span className="p-2 font-extrabold text-2xl">{activity.Location}</span>
+                            <span className="p-2 font-extrabold text-lg md:text-2xl">{activity.Location}</span>
                         </CardDescription>
                     </Card>
-                    <Card className="p-2 m-2 w-1/3  justify-center flex  ">
+                    <Card className="p-2 m-2 w-1/3 justify-center flex">
                         {activity.Free ? (
-                            <CardDescription className="flex justify-center items-center" >
-                                <span className="mr-4"> Free : </span>
-                                <Check />
+                            <CardDescription className="flex flex-col md:flex-row justify-center items-center" >
+                                <span className="mr-0 md:mr-4"> Free :</span>
+                                <Check className="mx-6" />
                             </CardDescription>
                         ) :
-                            <CardDescription className="flex justify-center items-center" >
-                                <span className="mr-4"> Not Free : </span>
+                            <CardDescription className="flex flex-col md:flex-row justify-center items-center" >
+                                <span className="mr-0 md:mr-4"> Not Free : </span>
                                 <HandCoins />
                             </CardDescription>}
                     </Card>
-                    <Card className="p-2 m-2 w-1/3 justify-center flex ">
-                        <span className="content-center text-gray-500 mr-4">Participants :</span>
+                    <Card className="p-2 m-2 w-1/3 justify-center flex flex-col md:flex-row ">
+                        <span className="text-sm md:text-xl content-center text-gray-500 mr-0 md:mr-4">Participants:</span>
                         <CardDescription className="flex justify-center items-center" >
                             {activity.candidacies.map((candidacy) => (
                                 (candidacy.status === "APPROVED" &&
@@ -165,7 +165,7 @@ export default async function RouteParams(props: PageParams<{ slug: string }>) {
                         </CardDescription>
                     </Card>
                 </CardContent>
-                <CardFooter className="flex justify-center"> 
+                <CardFooter className="flex justify-center">
 
                 </CardFooter>
             </Card >
