@@ -52,7 +52,7 @@ export default async function RouteParams(props: PageParams<{ slug: string }>) {
                             <Card className="shadow-lg m-4" key={candidacy.id}>
                                 <CardContent className="flex flex-col md:flex-row items-center justify-between p-4 w-full">
                                     <Button className="m-2 shadow-lg" variant={"secondary"}>
-                                        <Link className="flex items-center p-4" href={`/users/${candidacy.user.id}`}>
+                                        <Link className="flex items-center p-4" href={`/users/${candidacy.user.username}`}>
                                             <CardDescription className="mr-4 ">{candidacy.user.username}</CardDescription>
                                             <CardDescription className="flex justify-center items-center" >
                                                 <Avatar className='size-6'>
