@@ -174,7 +174,6 @@ const UserForm = (props: UserFormProps) => {
                   <FormControl>
                     <Input
                       placeholder="Username"
-                      defaultValue={props.username}
                       {...field} />
                   </FormControl>
                   <FormDescription>
@@ -191,7 +190,7 @@ const UserForm = (props: UserFormProps) => {
                 <FormItem>
                   <FormLabel className="font-bold">Location</FormLabel>
                   <FormControl>
-                    <Select value={field.value} defaultValue={props.location} onValueChange={field.onChange}>
+                    <Select value={field.value} onValueChange={field.onChange}>
                       <SelectTrigger>
                         <SelectValue></SelectValue>
                       </SelectTrigger>
@@ -224,15 +223,14 @@ const UserForm = (props: UserFormProps) => {
                     <Input
                       type="hidden"
                       placeholder="Avatar Link"
-                      defaultValue={props.defaultValues?.image}
                       value={field.value}
                       />
                   </FormControl>
-                  <FormDescription className="flex ">
-                    <Button type="button" onClick={handleRandomizeAvatar} className="mr-8">
-                      Randomize your Avatar profils
+                  <FormDescription className="flex items-center">
+                    <Button type="button" onClick={handleRandomizeAvatar} className="mr-8 w-3/4 md:w-1/4">
+                      Randomize your avatar 
                     </Button>
-                    <UserAvatar email={props.defaultValues?.name || ""} image={avatarLink} size={10} />
+                    <UserAvatar email={props.defaultValues?.name || ""} image={avatarLink} size={"size-14 md:size-20"} />
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
