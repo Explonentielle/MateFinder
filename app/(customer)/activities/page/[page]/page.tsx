@@ -8,15 +8,15 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/src/components/ui/avatar"
 import { PageParams } from "@/src/types/next";
 
 export default async function RouteParams(props: PageParams<{ page: string }>) {
-    
+
 
     function splitString(str: string) {
         let page = '';
         let location = '';
         for (let i = 0; i < str.length; i++) {
-            if (i===0) {
+            if (i === 0) {
                 page = str[i];
-            } 
+            }
             else {
                 location += str[i]
             }
@@ -51,9 +51,9 @@ export default async function RouteParams(props: PageParams<{ page: string }>) {
         },
         where: {
             Date: {
-                gte: currentDate 
+                gte: currentDate
             },
-             Departement: location
+            Departement: location
         },
         skip: offset,
         take: ITEMS_PER_PAGE,
@@ -65,24 +65,24 @@ export default async function RouteParams(props: PageParams<{ page: string }>) {
     return (
         <Layout>
             <Card className="p-4 shadow-lg">
-                <CardHeader>
-                    <div className="flex justify-between">
-                        <LayoutTitle>Check all Activities</LayoutTitle>
-                        <Link href={"/activities/new"} className="shadow-lg flex items-center justify-center hover:bg-primary transition rounded-md border-2 border-dashed border-primary bg-accent p-2 w-1/5">
+                <CardHeader className="p-2 md:p-6">
+                    <div className="flex justify-between items-center">
+                        <LayoutTitle className="text-xl md:text-4xl">Check all Activities</LayoutTitle>
+                        <Link href={"/activities/new"} className="shadow-lg flex items-center justify-center text-center hover:bg-primary transition rounded-md border-2 border-dashed border-primary bg-accent p-2 w-1/3 md:w-1/5">
                             Create Activity
                         </Link>
                     </div>
                 </CardHeader>
-                <CardContent>
-                    <ScrollArea className="h-[65vh] w-full rounded-md border">
-                        <div className="p-4">
+                <CardContent className="p-2 pt-6 md:p-6">
+                    <ScrollArea className="h-[62vh] w-full rounded-md border">
+                        <div className="p-2 md:p-4">
                             {activities.length ? (
                                 <div>
                                     {activities.map(activity => (
                                         <Link key={activity.id} href={`/activities/${activity.slug}`}>
-                                            <Card key={activity.id} className="mb-4 flex items-center shadow-lg">
-                                                <CardHeader className="flex flex-row items-center w-1/3">
-                                                    <span className="font-mono mr-4">{activity.Title}</span>
+                                            <Card key={activity.id} className="mb-4 flex flex-col md:flex-row items-center shadow-lg">
+                                                <CardHeader className="p-2 md:p-4 flex flex-row justify-between items-center w-full md:w-1/3">
+                                                    <span className="font-mono mr-4">{`${activity.Title.slice(0, 18)}...`}</span>
                                                     {activity.user.name ? (
                                                         <CardDescription className="flex justify-center items-center" >
                                                             <Avatar className='size-6'>
@@ -94,16 +94,20 @@ export default async function RouteParams(props: PageParams<{ page: string }>) {
                                                         </CardDescription>
                                                     ) : null}
                                                 </CardHeader>
-                                                <div className="flex w-2/3 items-center justify-end">
-                                                    <LucideIcons name={activity.Icon as IconName} size={24} />
-                                                    <CardDescription className="font-mono px-6">{activity.categorie}</CardDescription>
-                                                    <CardDescription className="font-mono px-6">{activity.Date?.toLocaleDateString()}</CardDescription>
-                                                    <CardDescription className="font-mono px-6"> {(typeof activity.Hour === 'string' && activity.Hour.match(/^\d+$/)) ?
-                                                        `${parseInt(activity.Hour, 10)}h` :
-                                                        activity.Hour}
-                                                    </CardDescription>
-                                                    <CardDescription className="font-mono px-6">{activity.Location}</CardDescription>
-                                                    <CardDescription className="w-full font-mono px-3">{activity.candidacies.filter(candidacy => candidacy.status === "APPROVED").length} / {Number(activity.userWanted)} places</CardDescription>
+                                                <div className="p-2 flex flex-col md:flex-row w-full md:w-2/3 items-center justify-end">
+                                                    <div className="w-full flex items-center justify-between">
+                                                        <LucideIcons name={activity.Icon as IconName} size={24} />
+                                                        <CardDescription className="font-mono px-2 md:px-6">{activity.categorie}</CardDescription>
+                                                        <CardDescription className="font-mono px-2 md:px-6">{activity.Date?.toLocaleDateString()}</CardDescription>
+                                                    </div>
+                                                    <div  className="w-full flex items-center justify-between">
+                                                        <CardDescription className="font-mono px-2 md:px-6"> {(typeof activity.Hour === 'string' && activity.Hour.match(/^\d+$/)) ?
+                                                            `${parseInt(activity.Hour, 10)}h` :
+                                                            activity.Hour}
+                                                        </CardDescription>
+                                                        <CardDescription className="font-mono px-2 md:px-6">{activity.Location}</CardDescription>
+                                                        <CardDescription className="font-mono px-2 md:px-6">{activity.candidacies.filter(candidacy => candidacy.status === "APPROVED").length} / {Number(activity.userWanted)} places</CardDescription>
+                                                    </div>
                                                 </div>
                                             </Card>
                                         </Link>
@@ -124,7 +128,7 @@ export default async function RouteParams(props: PageParams<{ page: string }>) {
                         )}
                         {activities.length === ITEMS_PER_PAGE && (
                             <Link className="ml-4" href={`/activities/page/${Number(page) + 1}${location}`}>
-                               Next Page
+                                Next Page
                             </Link>
                         )}
                     </div>

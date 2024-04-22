@@ -72,10 +72,10 @@ export const ActivityForm = (props: ActivityFormProps) => {
 
   return (
     <Card>
-      <CardHeader>
+      <CardHeader className="p-2 md:p-6">
         <CardTitle>{isCreate
-          ? <p className="font-extrabold text-2xl">Create avtivity</p>
-          : <p className="font-extrabold text-2xl">{`Edit activity : ${props.defaultValues?.Title}`}</p>}
+          ? <p className="font-extrabold text-lg md:text-2xl">Create avtivity</p>
+          : <p className="font-extrabold text-lg md:text-2xl">{`Edit activity : ${props.defaultValues?.Title}`}</p>}
         </CardTitle>
       </CardHeader>
 

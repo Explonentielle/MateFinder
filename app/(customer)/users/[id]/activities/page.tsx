@@ -29,20 +29,20 @@ export default async function RouteParams(props: PageParams<{ id: string }>) {
     return (
         <Layout>
             <Card className="p-4 shadow-lg">
-                <CardHeader>
+                <CardHeader className="p-2 md:p-6">
                     <div className="flex justify-between">
-                        <LayoutTitle>Check all Activities of {id}</LayoutTitle>
-                        {(user?.username === id) ? <Link href={"/activities/new"} className="shadow-lg flex items-center justify-center hover:bg-primary transition rounded-md border-2 border-dashed border-primary bg-accent p-2 w-1/5">
+                        <LayoutTitle className="text-lg md:text-4xl">Check all Activities of {id}</LayoutTitle>
+                        {(user?.username === id) ? <Link href={"/activities/new"} className="shadow-lg flex items-center justify-center text-center hover:bg-primary transition rounded-md border-2 border-dashed border-primary bg-accent p-2 w-1/3 md:w-1/5">
                             Create Activity
                         </Link> : null}
                     </div>
                 </CardHeader>
-                <CardContent>
-                    <ScrollArea className="h-[60vh] w-full rounded-md border">
-                        <div className="p-4">
+                <CardContent className="p-2 py-6 md:p-6">
+                    <ScrollArea className="h-[62vh] w-full rounded-md border">
+                        <div className="p-2 md:p-4">
                             {activities.map(activity => (
                                 <Link href={`/activities/${activity.slug}`} key={activity.id}>
-                                    <Card className="relative mb-4 flex items-center shadow-lg">
+                                    <Card className="relative mb-4 flex flex-col md:flex-row items-center shadow-lg">
                                         {(user?.username === id) &&
                                             (activity.candidacies.filter(candidacy => candidacy.status === "PENDING").length > 0 ? (
                                                 <div className=" -translate-x-1/2 -translate-y-1/2 absolute top-0 left-0 rounded-full bg-red-500 size-6 flex justify-center items-center text-white">
@@ -50,7 +50,7 @@ export default async function RouteParams(props: PageParams<{ id: string }>) {
                                                 </div>
                                             ) : null)
                                         }
-                                        <CardHeader className="flex flex-row items-center w-1/3">
+                                        <CardHeader className="p-2 md:p-4 flex flex-row justify-between items-center w-full md:w-1/3">
                                             <span className="font-mono mr-4">{activity.Title}</span>
                                             {activity.user.name ? (
                                                 <CardDescription className="flex justify-center items-center" >
@@ -63,16 +63,18 @@ export default async function RouteParams(props: PageParams<{ id: string }>) {
                                                 </CardDescription>
                                             ) : null}
                                         </CardHeader>
-                                        <div className="flex w-2/3 items-center justify-end">
+                                        <div className="w-full flex items-center justify-between">
                                             <LucideIcons name={activity.Icon as IconName} size={24} />
-                                            <CardDescription className="font-mono px-6">{activity.categorie}</CardDescription>
-                                            <CardDescription className="font-mono px-6">{activity.Date?.toLocaleDateString()}</CardDescription>
-                                            <CardDescription className="font-mono px-6"> {(typeof activity.Hour === 'string' && activity.Hour.match(/^\d+$/)) ?
+                                            <CardDescription className="font-mono px-2 md:px-6">{activity.categorie}</CardDescription>
+                                            <CardDescription className="font-mono px-2 md:px-6">{activity.Date?.toLocaleDateString()}</CardDescription>
+                                        </div>
+                                        <div className="w-full flex items-center justify-between">
+                                            <CardDescription className="font-mono px-2 md:px-6"> {(typeof activity.Hour === 'string' && activity.Hour.match(/^\d+$/)) ?
                                                 `${parseInt(activity.Hour, 10)}h` :
                                                 activity.Hour}
                                             </CardDescription>
-                                            <CardDescription className="font-mono px-6">{activity.Location}</CardDescription>
-                                            <CardDescription className="font-mono px-6">{activity.userWanted} places</CardDescription>
+                                            <CardDescription className="font-mono px-2 md:px-6">{activity.Location}</CardDescription>
+                                            <CardDescription className="font-mono px-2 md:px-6">{activity.candidacies.filter(candidacy => candidacy.status === "APPROVED").length} / {Number(activity.userWanted)} places</CardDescription>
                                         </div>
                                     </Card>
                                 </Link>

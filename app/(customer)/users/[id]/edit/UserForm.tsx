@@ -61,8 +61,8 @@ const UserForm = (props: UserFormProps) => {
     <Card>
       <CardHeader>
         <CardTitle>{isCreate
-          ? <p className="font-extrabold text-2xl">Create Profil</p>
-          : <p className="font-extrabold text-2xl">{`Update Profil : ${props.defaultValues?.username}`}</p>}
+          ? <p className="font-extrabold text-lg md:text-2xl">Create Profil</p>
+          : <p className="font-extrabold text-lg md:text-2xl">{`Update Profil : ${props.defaultValues?.username}`}</p>}
         </CardTitle>
       </CardHeader>
 

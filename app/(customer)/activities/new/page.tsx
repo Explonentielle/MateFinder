@@ -11,8 +11,8 @@ export default async function Route() {
 
         return (
             <Layout>
-                <LayoutTitle className="flex font-bold">Ready to Join the<p className="ml-2 titleBorder">Community?</p></LayoutTitle>
-                <h1 className="font-bold text-xl"> Propose Your Activity with Mate Finder!</h1>
+                <LayoutTitle className="flex text-xl md:text-4xl font-bold">Ready to Join the<p className="ml-2 titleBorder">Community?</p></LayoutTitle>
+                <h1 className="font-bold text-lg md:text-xl"> Propose Your Activity with Mate Finder!</h1>
                 <ActivityForm />
             </Layout>
         )

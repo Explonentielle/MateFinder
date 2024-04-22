@@ -46,9 +46,9 @@ export const Landing = async () => {
                         image: true,
                         name: true,
                     },
-                }, 
+                },
                 candidacies: true
-               
+
             },
         });
 
@@ -57,9 +57,9 @@ export const Landing = async () => {
             <div className="size-full">
                 <Layout>
                     <LayoutTitle className="flex items-center">
-                        <p className="mr-4 text-4xl">Welcome to</p><p className="titleBorder font-extrabold text-5xl">Mate Finder</p>
+                        <p className="mr-2 md:mr-4 text-xl md:text-4xl">Welcome to</p><p className="titleBorder font-extrabold text-3xl md:text-5xl">Mate Finder</p>
                     </LayoutTitle>
-                    <h1 className="text-2xl  pl-6">Discover your perfect mate with Mate Finder</h1>
+                    <h1 className="text-xl md:text-2xl  pl-6">Discover your perfect mate with Mate Finder</h1>
                     <Link href={`/activities/page/1${user.location}`}>
                         <Button variant="ghost" className="shadow-lg w-full py-6 border-primary border-dashed border-2">
                             Check All Activities Next to you
@@ -67,14 +67,14 @@ export const Landing = async () => {
                     </Link>
                     <Card className="shadow-lg">
                         <ScrollArea className="h-[55vh] w-full">
-                            <CardHeader className="py-2 font-bold text-2xl">
+                            <CardHeader className="py-2 font-bold text-lg md:text-2xl">
                                 Upcoming Activities Recently next to you
                             </CardHeader>
-                            <CardContent className="flex flex-wrap">
+                            <CardContent className="p-2 md:p-6 flex flex-col md:flex-row md:flex-wrap">
                                 {activities.map(activity => (
-                                    <Link key={activity.id} className="w-1/2 p-4" href={`/activities/${activity.slug}`}>
+                                    <Link key={activity.id} className="w-full md:w-1/2 p-2 md:p-4" href={`/activities/${activity.slug}`}>
                                         <Card className="shadow-lg h-full" key={activity.id}>
-                                            <CardHeader className="font-bold text-2xl flex flex-row justify-between items-center">
+                                            <CardHeader className="p-2 md:p-6 font-bold text-md md:text-2xl flex flex-row justify-between items-center">
                                                 {`${activity.Title.slice(0, 18)}...`}
                                                 <div className="flex">
                                                     <Avatar className='size-6 mr-4'>
@@ -86,7 +86,7 @@ export const Landing = async () => {
                                                     <LucideIcons name={activity.Icon as IconName} size={24} />
                                                 </div>
                                             </CardHeader>
-                                            <CardContent className="py-4 w-full flex flex-col items-center">
+                                            <CardContent className="p-2 md:p-6 w-full flex flex-col items-center">
                                                 <div className="flex w-full items-center justify-center">
                                                     <CardDescription className="w-1/2 font-mono px-3">{activity.Free ? "Free" : "Not Free"}</CardDescription>
                                                     <CardDescription className="w-full font-mono px-3">{activity.Location}</CardDescription>
