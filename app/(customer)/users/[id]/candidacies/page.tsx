@@ -50,7 +50,7 @@ export default async function RouteParams(props: PageParams<{ id: string }>) {
                                 <CardContent className="flex flex-col md:flex-row items-center justify-between p-4 w-full">
                                     <Link className="p-2" href={`/activities/${candidacy.activity.slug}`}>
                                         <Button className="flex flex-col items-center  m-2 shadow-lg h-full" variant={"secondary"}>
-                                            <CardDescription className="mr-4 font-bold text-md md:text-xl p-2">{`${candidacy.activity.Title.slice(0, 30)}...`}</CardDescription>
+                                            <CardDescription className="mr-4 font-bold text-md md:text-xl p-2">{`${candidacy.activity.Title.slice(0, 20)}...`}</CardDescription>
                                             <div className="flex">
                                                 <CardDescription className="mr-4 ">{candidacy.activity.Location}</CardDescription>
                                                 <CardDescription className="mr-4">{candidacy.activity.Date.toLocaleDateString()}</CardDescription>
