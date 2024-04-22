@@ -50,7 +50,7 @@ export default async function RouteParams(props: PageParams<{ slug: string }>) {
                     {activity?.candidacies && activity.candidacies.length > 0 ? (
                         activity.candidacies.map((candidacy) => (
                             <Card className="shadow-lg m-4" key={candidacy.id}>
-                                <CardContent className="flex items-center justify-between p-4 w-full">
+                                <CardContent className="flex flex-col md:flex-row items-center justify-between p-4 w-full">
                                     <Button className="m-2 shadow-lg" variant={"secondary"}>
                                         <Link className="flex items-center p-4" href={`/users/${candidacy.user.id}`}>
                                             <CardDescription className="mr-4 ">{candidacy.user.username}</CardDescription>
