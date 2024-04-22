@@ -2,7 +2,7 @@
 
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/src/components/ui/dropdown-menu"
 import { PropsWithChildren } from "react"
-import { SignOutAction } from "./auth.action"
+import { singOutAction } from "./auth.action"
 import { LogOut, User } from "lucide-react"
 import Link from "next/link"
 
@@ -28,7 +28,7 @@ export const LoggedInDropDown = (props: LoggedInDropDownProps) => {
                     </DropdownMenuItem>
                 </Link>
                 <DropdownMenuItem onClick={() => {
-                    SignOutAction();
+                    singOutAction();
                 }}>
                     <LogOut size='16' className="mr-2" />
                     LogOut

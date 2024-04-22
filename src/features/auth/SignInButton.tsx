@@ -2,7 +2,7 @@
 
 import { Button } from "@/src/components/ui/button"
 import { LogIn } from "lucide-react";
-import { SignInAction } from "./auth.action";
+import { signInAction } from "./auth.action";
 
 export const SignInButton = async () => {
     return (
@@ -10,8 +10,8 @@ export const SignInButton = async () => {
             <Button
                 variant="secondary"
                 size="sm"
-                onClick={async () => {
-                    await SignInAction();
+                onClick={() => {
+                    signInAction();
                 }}
             >
                 <LogIn size='16' className="mr-2" />
