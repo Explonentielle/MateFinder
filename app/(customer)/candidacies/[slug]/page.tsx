@@ -111,17 +111,11 @@ export default async function RouteParams(props: PageParams<{ slug: string }>) {
                                                 <Card className="bg-green-500 mr-4" >
                                                     <CandidacyForm activityId={activity.id} userId={candidacy.userId} icon="Check" candidacyId={candidacy.id} />
                                                 </Card>
-                                                <Card className="bg-gray-300">
-                                                    <CandidacyForm activityId={activity.id} userId={candidacy.userId} icon="Cross" candidacyId={candidacy.id} />
-                                                </Card>
                                             </>
                                         )}
                                         {candidacy.status === "REJECTED" && (
                                             <>
                                                 <CardDescription className="mr-4  mt-2">Candidacy rejected</CardDescription>
-                                                <Card className="bg-gray-300 mr-4" >
-                                                    <CandidacyForm activityId={activity.id} userId={candidacy.userId} icon="Check" candidacyId={candidacy.id} />
-                                                </Card>
                                                 <Card className="bg-red-500">
                                                     <CandidacyForm activityId={activity.id} userId={candidacy.userId} icon="Cross" candidacyId={candidacy.id} />
                                                 </Card>
