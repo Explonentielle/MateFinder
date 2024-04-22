@@ -10,6 +10,7 @@ export const { handlers, auth: baseAuth, signIn, signOut } = NextAuth({
   theme: {
     logo: "/iconTitle.png",
   },
+  debug: true,
   providers: [
     Google({
       clientId: env.GOOGLE_CLIENT_ID,
