@@ -6,17 +6,16 @@ import { signInAction } from "./auth.action";
 
 export const SignInButton = async () => {
     return (
-        <form>
-            <Button
-                variant="secondary"
-                size="sm"
-                onClick={() => {
-                    signInAction();
-                }}
-            >
-                <LogIn size='16' className="mr-2" />
-                Sign In
-            </Button>
-        </form>
+        <Button
+            variant="secondary"
+            size="sm"
+            onClick={() => {
+                signInAction();
+            }}
+        >
+            <LogIn size={16} className="mr-2" />
+            Sign In
+        </Button>
     )
 }
+  
