@@ -13,7 +13,6 @@ import Link from "next/link"
 import CandidacyForm from "../../candidacies/new/CandidacyForm"
 import { Popover, PopoverContent, PopoverTrigger } from "@/src/components/ui/popover"
 import { UserAvatar } from "@/src/components/UserAvatar"
-import { Footer } from "@/src/features/layout/Footer"
 
 
 
@@ -44,7 +43,7 @@ export default async function RouteParams(props: PageParams<{ slug: string }>) {
 
 
     return (
-        <Layout className="h-3/4">
+        <Layout>
             <Card>
                 <CardHeader className="p-4 md:p-6 flex flex-row items-center justify-between">
                     <div className="flex mr-2 items-center">
@@ -64,7 +63,7 @@ export default async function RouteParams(props: PageParams<{ slug: string }>) {
                                     Manage candidacies
                                 </Button>
                             </Link>
-                            <EditButton slug={activity.slug} />
+                            <EditButton  slug={activity.slug} />
                         </div> :
                         <Popover>
                             <PopoverTrigger asChild>
@@ -122,7 +121,7 @@ export default async function RouteParams(props: PageParams<{ slug: string }>) {
                                 <span className="text-sm md:text-xl text-gray-500 mr-0 md:mr-4">Organize by :</span>
                                 <CardDescription className="flex mx-6 md:mx-0 flex-col-reverse md:flex-row justify-center items-center" >
                                     <span className="mr-0 md:mr-4">{activity.user.username}</span>
-                                    <UserAvatar email={activity.user.email || ""} image={activity.user.image || undefined} />
+                                   <UserAvatar email={activity.user.email || ""} image={activity.user.image || undefined}/>
                                 </CardDescription>
                             </div>
                         </Card>
@@ -152,7 +151,7 @@ export default async function RouteParams(props: PageParams<{ slug: string }>) {
                             {activity.candidacies.map((candidacy) => (
                                 (candidacy.status === "APPROVED" &&
                                     <Link href={`/users/${candidacy.user.id}`} key={candidacy.id}>
-                                        <UserAvatar email={candidacy.user.email || ""} image={candidacy.user.image || undefined} />
+                                        <UserAvatar email={candidacy.user.email || ""} image={candidacy.user.image || undefined}/>
                                     </Link>)
                             ))}
                         </CardDescription>
@@ -162,9 +161,6 @@ export default async function RouteParams(props: PageParams<{ slug: string }>) {
 
                 </CardFooter>
             </Card >
-            <div className="w-[85%] absolute bottom-0">
-                <Footer />
-            </div>
         </Layout >
     )
 }
