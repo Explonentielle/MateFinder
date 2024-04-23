@@ -26,7 +26,7 @@ export default async function RouteParams(props: PageParams<{ page: string }>) {
     }
 
     const { page, location } = splitString(props.params.page)
-    const ITEMS_PER_PAGE = 8;
+    const ITEMS_PER_PAGE = 7;
     const offset = (Number(page) - 1) * ITEMS_PER_PAGE;
     const currentDate = new Date();
 
