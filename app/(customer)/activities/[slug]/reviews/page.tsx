@@ -46,7 +46,7 @@ export default async function RouteParams(props: PageParams<{ slug: string }>) {
                             `${parseInt(activity.Hour, 10)}h` :
                             activity.Hour}
                         </CardDescription>
-                        <CardDescription className="font-mono px-6">{activity.Date?.toLocaleDateString()}</CardDescription>
+                        <CardDescription className="font-mono px-6">{activity.Date?.toDateString()}</CardDescription>
                         <span className="mr-4">{activity.user.name?.split(' ')[0]}</span>
                         <UserAvatar email={activity.user.email || ""} image={activity.user.image || undefined} />
                         <LucideIcons name={activity.Icon as IconName} size={24} />

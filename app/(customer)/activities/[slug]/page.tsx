@@ -93,7 +93,7 @@ export default async function RouteParams(props: PageParams<{ slug: string }>) {
                         </Card>
                         <Card className="p-2 my-2 mx-0 md:my-0 md:mx-2  w-full md:w-1/2 justify-center flex  ">
                             <CardDescription className="flex justify-center items-center">
-                                <span className="py-2 font-extrabold text-2xl">{activity.Date ? new Date(activity.Date).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' }) : ''}</span>
+                                <span className="py-2 font-extrabold text-2xl">{activity.Date ? activity.Date.toLocaleString(undefined, { year: 'numeric', month: 'long', day: 'numeric' }) : ''}</span>
                                 <span className="ml-8 font-extrabold text-xl">{(typeof activity.Hour === 'string' && activity.Hour.match(/^\d+$/)) ?
                                     `${parseInt(activity.Hour, 10)}h` :
                                     activity.Hour}
