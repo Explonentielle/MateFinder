@@ -17,7 +17,6 @@ export default async function Home() {
   if (!user) {
     return (
       <div className="size-full">
-        l
         <Header />
         <LocationForm />
         <BannerLanding />
