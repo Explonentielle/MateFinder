@@ -31,9 +31,10 @@ export default async function Home() {
     return (
       <div className="size-full">
         <Header />
-        <LandingHero />
-        <ProfileUpdateForm userId={user?.id} />
-        <Footer />
+        <Layout>
+          <LandingHero />
+          <ProfileUpdateForm userId={user?.id} />
+        </Layout>
       </div>
     )
 
