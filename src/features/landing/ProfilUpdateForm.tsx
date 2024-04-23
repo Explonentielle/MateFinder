@@ -5,9 +5,9 @@ import { Layout, LayoutTitle } from "@/src/components/Layout";
 import { Card, CardContent } from "@/src/components/ui/card";
 import { Input } from "@/src/components/ui/input";
 import { Button } from "@/src/components/ui/button";
-import { verifyUserUniqueness } from "../(customer)/users/[id]/edit/User.action";
+import { verifyUserUniqueness } from "../../../app/(customer)/users/[id]/edit/User.action";
 import { toast } from "sonner";
-import UserForm from "../(customer)/users/[id]/edit/UserForm";
+import UserForm from "../../../app/(customer)/users/[id]/edit/UserForm";
 
 
 export type UserFormProps = {
