@@ -16,15 +16,19 @@ interface ChatContextValue {
   setCurrent: (user: User | null) => void;
   otherUser: User | null;
   setOtherUser: (user: User | null) => void;
+  messages: number;
+  setMessages: (number: number) => void;
 }
 
 const defaultContextValue: ChatContextValue = {
   chat: false,
-  setChat: () => {},
+  setChat: () => { },
   current: null,
-  setCurrent: () => {},
+  setCurrent: () => { },
   otherUser: null,
-  setOtherUser: () => {},
+  setOtherUser: () => { },
+  messages:  0,
+  setMessages: () => { },
 };
 
 export const ChatContext = createContext<ChatContextValue>(defaultContextValue);
@@ -33,11 +37,13 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
   const [chat, setChat] = useState<boolean>(false);
   const [current, setCurrent] = useState<User | null>(null);
   const [otherUser, setOtherUser] = useState<User | null>(null);
+  const [messages, setMessages] = useState<number>(0);
+
 
   return (
-    <ChatContext.Provider value={{ chat, setChat, current, setCurrent, otherUser, setOtherUser }}>
+    <ChatContext.Provider value={{ chat, setChat, current, setCurrent, otherUser, setOtherUser, messages, setMessages }}>
       {children}
-      <Chat/>
+      <Chat />
     </ChatContext.Provider>
   );
 }

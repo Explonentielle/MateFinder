@@ -3,7 +3,6 @@ import React from 'react';
 import { Button } from "@/src/components/ui/button"
 import { SignInButton } from "./SignInButton";
 import { baseAuth } from '@/src/auth/auth';
-import { Avatar, AvatarFallback, AvatarImage } from '@/src/components/ui/avatar';
 import { LoggedInDropDown } from './LoggedInDropDown';
 import { prisma } from '@/src/prisma';
 import { UserAvatar } from '@/src/components/UserAvatar';
@@ -21,12 +20,23 @@ export const LoggedInButton = async () => {
                 id: session.user.id
             }
         })
-        return (
-            <LoggedInDropDown id={user?.username ?? ""} >
-                <Button variant="outline" size="sm">
-                    <UserAvatar email={session.user.email || ""} image={session.user.image || undefined} />
-                </Button>
-            </LoggedInDropDown>
-        )
+
+        if (user) {
+            const current = {
+                id: user.id,
+                name: user.name || "",
+                email: user.email || "",
+                photoUrl: user.image || "",
+            }
+
+
+            return (
+                <LoggedInDropDown current={current} id={user?.username ?? ""} >
+                    <Button variant="outline" size="sm">
+                        <UserAvatar email={session.user.email || ""} image={session.user.image || undefined} />
+                    </Button>
+                </LoggedInDropDown>
+            )
+        }
     }
 }

@@ -38,11 +38,11 @@ export default async function Home() {
       </div>
     )
 
-
   } else {
     if (!user?.location) {
       throw Error
     }
+
     return (
       <div className="size-full">
         <Header />

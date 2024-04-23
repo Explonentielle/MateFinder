@@ -34,11 +34,14 @@ const UserForm = (props: UserFormProps) => {
   const [year, setYear] = React.useState<Date | undefined>(props.defaultValues?.age);
   const [inputYear, setInputYear] = React.useState<number | undefined>(year?.getFullYear());
   const [avatarLink, setAvatarLink] = React.useState<string | undefined>(props.defaultValues?.image);
+  
+  if (props.username) {
+    form.setValue('username', props.username);
+  }
 
   const handleRandomizeAvatar = () => {
     const randomString = generateRandomString(15);
     setAvatarLink(randomString);
-
     form.setValue('image', randomString);
   }
 
@@ -224,11 +227,11 @@ const UserForm = (props: UserFormProps) => {
                       type="hidden"
                       placeholder="Avatar Link"
                       value={field.value}
-                      />
+                    />
                   </FormControl>
                   <FormDescription className="flex items-center">
                     <Button type="button" onClick={handleRandomizeAvatar} className="mr-8 w-3/4 md:w-1/4">
-                      Randomize your avatar 
+                      Randomize your avatar
                     </Button>
                     <UserAvatar email={props.defaultValues?.name || ""} image={avatarLink} size={"size-14 md:size-20"} />
                   </FormDescription>

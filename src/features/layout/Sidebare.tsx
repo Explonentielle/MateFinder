@@ -7,7 +7,7 @@ import Link from "next/link"
 export const Header = async () => {
 
   return (
-    <div className="w-full border-b border-border px-4">
+    <div className="w-[15vw] bg-red-500 h-full border-r border-border px-4">
      
         
  
