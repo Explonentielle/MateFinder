@@ -1,10 +1,11 @@
 "use client"
 
 import Talk from 'talkjs';
-import { useEffect, useRef } from 'react';
+import { Suspense, useEffect, useRef } from 'react';
 import { MessageCircleMore, Plus } from 'lucide-react';
 import { useChat } from './ChatContext';
 import { toast } from 'sonner';
+import Loading from '@/app/Loading';
 
 export default function Chat() {
     const chatboxEl = useRef(null);
@@ -111,7 +112,9 @@ export default function Chat() {
                         <button className="" onClick={handleCloseChat}>
                             <Plus className="translate-y-1/3 h-6 w-6 rotate-45 text-red-600" />
                         </button>
-                        <div className=' h-[65vh]' ref={chatboxEl} />
+                        <Suspense fallback={<Loading/>}>
+                            <div className=' h-[65vh]' ref={chatboxEl} />
+                        </Suspense>
                     </main>
                 ) :
                     <div className='fixed bottom-[5vh] right-[2vw] z-10'>
