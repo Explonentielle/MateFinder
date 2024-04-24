@@ -8,6 +8,7 @@ import { BannerLanding } from "@/src/features/landing/BannerLanding";
 import { Footer } from "@/src/features/layout/Footer";
 import { LandingHero } from "@/src/features/landing/LandingHero";
 import { Layout } from "@/src/components/Layout";
+import { Sidebar } from "@/src/features/sidebar/Sidebar";
 
 
 export default async function Home() {
@@ -18,6 +19,7 @@ export default async function Home() {
     return (
       <div className="size-full">
         <Header />
+        <Sidebar/>
         <LocationForm />
         <BannerLanding />
         <FAQSection />
@@ -31,6 +33,7 @@ export default async function Home() {
     return (
       <div className="size-full">
         <Header />
+        <Sidebar/>
         <Layout>
           <LandingHero />
           <ProfileUpdateForm userId={user?.id} />
@@ -46,6 +49,7 @@ export default async function Home() {
     return (
       <div className="size-full">
         <Header />
+        <Sidebar/>
         <Landing location={user.location} />
       </div>
     );

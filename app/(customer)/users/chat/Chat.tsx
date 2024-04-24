@@ -30,11 +30,11 @@ export default function Chat() {
 
                 session.unreads.onChange(function (unreadConversations) {
                     const sender = unreadConversations[unreadConversations.length - 1].lastMessage.sender
-                    if (sender) {
+                    if (unreadConversations.length > 0 && sender) {
                         setOtherUser({
                             id: sender.id.toString(),
                             name: sender.name || "",
-                            email: "alex59debonnieres@gmail.com",
+                            email: "",
                             photoUrl: sender.photoUrl,
     
                         })
@@ -46,7 +46,7 @@ export default function Chat() {
                         const user1 = new Talk.User({
                             id: current.id,
                             name: current.name || "",
-                            email: current.email,
+                            email: "current.email",
                             photoUrl: current.photoUrl,
                             welcomeMessage: 'Hi',
                             role: 'default',
@@ -55,7 +55,7 @@ export default function Chat() {
                         const user2 = new Talk.User({
                             id: otherUser.id,
                             name: otherUser.name || "",
-                            email: otherUser.email || "",
+                            email: "otherUser.email" || "",
                             photoUrl: otherUser.photoUrl || "",
                             welcomeMessage: 'Hi',
                             role: 'default',
@@ -86,32 +86,35 @@ export default function Chat() {
     };
 
     const handleOpenChat = () => {
-        if (current) {
+        if (current && otherUser) {
             setChat(true);
         } else {
-            toast.error("Not logged or not recent conversation");
+            toast.info("Not recent conversation");
         }
     };
 
-    return (
-        <>
-            {chat ? (
-                <main className='h-[50vh] w-[80vw] md:w-[28vw] fixed top-[45vh] right-[2vw] z-10'>
-                    <button className="" onClick={handleCloseChat}>
-                        <Plus className="h-6 w-6 rotate-45 text-red-600" />
-                    </button>
-                    <div className=' h-[50vh]' ref={chatboxEl} />
-                </main>
-            ) :
-            <div className='fixed bottom-[5vh] right-[2vw] z-10'>
-                    <MessageCircleMore onClick={handleOpenChat} size={42} />
-                    {messages > 0 && (
-                        <span className="-translate-x-1/3 -translate-y-1/3 absolute top-0 left-0 mr-4 rounded-full bg-red-500 size-6 flex justify-center items-center text-white">
-                            {messages}
-                        </span>
-                    )}
-                </div>
-            }
-        </>
-    );
+
+    if (current) {
+        return (
+            <>
+                {chat ? (
+                    <main className='h-[65vh] w-[92vw] md:w-[28vw] fixed top-[28vh] md:top-[30vh] right-[4vw] md:right-[1vw] z-10'>
+                        <button className="" onClick={handleCloseChat}>
+                            <Plus className="translate-y-1/3 h-6 w-6 rotate-45 text-red-600" />
+                        </button>
+                        <div className=' h-[65vh]' ref={chatboxEl} />
+                    </main>
+                ) :
+                <div className='fixed bottom-[5vh] right-[2vw] z-10'>
+                        <MessageCircleMore onClick={handleOpenChat} size={42} />
+                        {messages > 0 && (
+                            <span className="-translate-x-1/3 -translate-y-1/3 absolute top-0 left-0 mr-4 rounded-full bg-red-500 size-6 flex justify-center items-center text-white">
+                                {messages}
+                            </span>
+                        )}
+                    </div>
+                }
+            </>
+        );
+    } 
 }

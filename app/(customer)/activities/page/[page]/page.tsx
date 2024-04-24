@@ -4,7 +4,6 @@ import { prisma } from "@/src/prisma";
 import Link from "next/link";
 import LucideIcons, { IconName } from "@/src/components/LucideIcons";
 import { ScrollArea } from "@/src/components/ui/scroll-area";
-import { Avatar, AvatarFallback, AvatarImage } from "@/src/components/ui/avatar";
 import { PageParams } from "@/src/types/next";
 import { UserAvatar } from "@/src/components/UserAvatar";
 
@@ -26,7 +25,7 @@ export default async function RouteParams(props: PageParams<{ page: string }>) {
     }
 
     const { page, location } = splitString(props.params.page)
-    const ITEMS_PER_PAGE = 7;
+    const ITEMS_PER_PAGE = 7; 
     const offset = (Number(page) - 1) * ITEMS_PER_PAGE;
     const currentDate = new Date();
 
