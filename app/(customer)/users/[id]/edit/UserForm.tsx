@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation"
 import { Popover, PopoverContent, PopoverTrigger } from "@/src/components/ui/popover"
 import { LocationCategories, UserSchema, UserType } from "./User.schema"
 import { format, isValid, addYears } from "date-fns"
-import React from "react"
+import React, { useEffect } from "react"
 import { updateUserAction } from "./User.action"
 import { Input } from "@/src/components/ui/input"
 import { Button } from "@/src/components/ui/button"
@@ -47,6 +47,10 @@ const UserForm = (props: UserFormProps) => {
     setAvatarLink(randomString);
     form.setValue('image', randomString);
   }
+
+  useEffect(() => {
+
+  }, [date])
 
 
   const router = useRouter();
@@ -130,7 +134,7 @@ const UserForm = (props: UserFormProps) => {
                             className={cn(
                               "w-[240px] pl-3 text-left font-normal",
                               !isValid(field.value) && "text-muted-foreground"
-                            )} 
+                            )}
                           >
                             {field.value ? (
                               format(field.value, "PPP")
@@ -142,22 +146,24 @@ const UserForm = (props: UserFormProps) => {
                         </div>
                       </PopoverTrigger>
                       <PopoverContent className="w-auto p-0" align="start">
-                        <div className="rounded-md border">
-                          <Select onValueChange={(value) => handlePresetSelection(parseInt(value))}>
-                            <SelectTrigger>
-                              <SelectValue placeholder="Select" />
-                            </SelectTrigger>
-                            <SelectContent position="popper">
-                              {Array.from({ length: 81 }, (_, index) => (
-                                <SelectItem key={index} value={String(index)}>
-                                  {format(addYears(new Date(), -index), "yyyy")}
-                                </SelectItem>
-                              ))}
-                            </SelectContent>
-                          </Select>
-                          <div className="rounded-md border">
-                            <Calendar mode="single" toYear={date?.getFullYear()} selected={field.value} onSelect={field.onChange}/>
-                          </div>
+                        <div className="w-full rounded-md border">
+                          {!date ?
+                              <Select onValueChange={(value) => handlePresetSelection(parseInt(value))}>
+                                <SelectTrigger>
+                                  <SelectValue placeholder="Select your birth year here" />
+                                </SelectTrigger>
+                                <SelectContent position="popper">
+                                  {Array.from({ length: 81 }, (_, index) => (
+                                    <SelectItem key={index} value={String(index)}>
+                                      {format(addYears(new Date(), -index), "yyyy")}
+                                    </SelectItem>
+                                  ))}
+                                </SelectContent>
+                              </Select>
+                            :
+                            <div className="rounded-md border">
+                              <Calendar mode="single" toYear={date.getFullYear()} selected={field.value} onSelect={field.onChange} />
+                            </div>}
                         </div>
                       </PopoverContent>
                     </Popover>

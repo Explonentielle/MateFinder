@@ -4,7 +4,6 @@ import { prisma } from "@/src/prisma";
 import Link from "next/link";
 import LucideIcons, { IconName } from "@/src/components/LucideIcons";
 import { ScrollArea } from "@/src/components/ui/scroll-area";
-import { Avatar, AvatarFallback, AvatarImage } from "@/src/components/ui/avatar";
 import { PageParams } from "@/src/types/next";
 import { UserAvatar } from "@/src/components/UserAvatar";
 
