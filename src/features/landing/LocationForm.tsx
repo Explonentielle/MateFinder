@@ -22,14 +22,14 @@ export const LocationForm = () => {
 
 
     return (
-        <Layout>
+        <>
             <LayoutTitle className="flex items-center">
                 <p className="mr-2 md:mr-4 text-lg md:text-4xl">Welcome to</p><p className="titleBorder font-extrabold text-2xl md:text-5xl">Mate Finder</p>
             </LayoutTitle>
             <h1 className="text-xl md:text-2xl  pl-6">Discover your perfect mate with Mate Finder</h1>
             <Card>
                 <CardHeader>
-                    <CardTitle>Find all activities arround you</CardTitle>
+                    <span className="text-md">Find all activities arround you</span>
                 </CardHeader>
                 <CardContent className="shadow-lg p-8">
                     <Select required value={selectedLocation} onValueChange={handleSelectChange}>
@@ -45,17 +45,17 @@ export const LocationForm = () => {
                         </SelectContent>
                     </Select>
                     {selected ?
-                        <Link href={`/landing/${selectedLocation}`}>
-                            <Button className="w-full my-4" variant="default">
-                                Choose this Department
+                        <Link aria-label="Select location" href={`/landing/${selectedLocation}`}>
+                            <Button aria-label="Select location" className="w-full my-4" variant="default">
+                                Select this Department
                             </Button>
                         </Link>
                         :
-                        <Button className="w-full my-4" variant="default">
-                            Choose this Department
+                        <Button aria-label="Select location" className="w-full my-4" variant="default">
+                            Select this Department
                         </Button>}
                 </CardContent>
             </Card>
-        </Layout>
+        </>
     );
 }

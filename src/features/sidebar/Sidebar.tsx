@@ -57,16 +57,16 @@ export const Sidebar = async () => {
   return (
     <div className={`flex flex-row lg:flex-col-reverse justify-between lg:justify-end items-start w-full lg:w-[14vw] h-[10vh] lg:h-full  lg:fixed border-b lg:border-r border-border px-4 transition-all duration-300 z-10`}>
       <div className="flex lg:flex-col items-center lg:items-start">
-        <h4>online users :</h4>
+        <span>online users :</span>
         <ul className="mt-2 flex flex-row lg:flex-col">
           {onlineUsersInfo.map(user => (
-            <div className="flex flex-row lg:flex-col ml-2 lg:ml-0" key={user.username}>
-              <li className="flex items-center mb-2">
+            <li className="flex flex-row lg:flex-col ml-2 lg:ml-0" key={user.username}>
+              <div className="flex items-center mb-2">
                 <UserAvatar email={user.username || ""} image={user.image || ""} size="size-4" />
                 <span className="ml-2 text-xs">{user.username}</span>
                 <div className="w-2 h-2 bg-green-500 rounded-full ml-2"></div>
-              </li>
-            </div>
+              </div>
+            </li>
           ))}
         </ul>
       </div>

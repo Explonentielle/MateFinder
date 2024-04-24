@@ -1,5 +1,5 @@
 import type { PageParams } from "@/src/types/next"
-import UserForm from "../edit/UserForm"
+import UserForm from "../[id]/edit/UserForm"
 import { requiredCurrentUser } from "@/src/auth/current-user"
 import { Layout } from "@/src/components/Layout"
 
@@ -10,8 +10,8 @@ export default async function RouteParams(props: PageParams<{ username: string }
 
     return (
         <Layout>
-            <p>profil de l utilisateur : {props.params.username} </p>
-            <UserForm username={props.params.username} />
+            <p>New profil </p>
+            <UserForm />
         </Layout>
     )
 } 

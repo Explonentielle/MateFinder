@@ -7,10 +7,8 @@ import { MoveRight } from "lucide-react";
 export const BannerLanding = () => {
     return (
         <Section className="text-center">
-            <a
-                href="#"
+            <p
                 className="mb-7  inline-flex items-center justify-between rounded-full bg-accent/50 p-1 pr-4 text-sm text-card-foreground hover:bg-accent"
-                role="alert"
             >
                 <span className="mr-3 rounded-full bg-primary px-4 py-1.5 text-xs text-primary-foreground">
                     Available soon
@@ -30,7 +28,7 @@ export const BannerLanding = () => {
                         clipRule="evenodd"
                     ></path>
                 </svg>
-            </a>
+            </p>
             <h1 className="mb-4 text-4xl font-extrabold leading-none tracking-tight text-foreground  md:text-5xl lg:text-6xl">
                 Go Premium and Create Unlimited Activities and Matches!
             </h1>

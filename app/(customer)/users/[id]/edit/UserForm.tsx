@@ -19,8 +19,6 @@ import { Calendar } from "@/src/components/ui/calendar"
 import { UserAvatar } from "@/src/components/UserAvatar"
 
 export type UserFormProps = {
-  username?: string
-  location?: string
   defaultValues?: UserType
 }
 
@@ -37,10 +35,6 @@ const UserForm = (props: UserFormProps) => {
   const handlePresetSelection = (yearsToAdd: number) => {
     setDate(addYears(new Date(), -yearsToAdd));
   };
-
-  if (props.username) {
-    form.setValue('username', props.username);
-  }
 
   const handleRandomizeAvatar = () => {
     const randomString = generateRandomString(15);

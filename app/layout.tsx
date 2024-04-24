@@ -9,6 +9,7 @@ import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import Loading from "@/app/Loading";
 import { ChatProvider } from "./(customer)/users/chat/ChatContext";
+import { Sidebar } from "@/src/features/sidebar/Sidebar";
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -29,9 +30,8 @@ export default function RootLayout({
       <body cz-shortcut-listen="true" className={cn(inter.className, 'h-full')}>
         <Suspense fallback={<Loading />}>
           <Providers>
-            <ChatProvider>
-              {children}
-            </ChatProvider>
+            {children}
+            {/* <Sidebar /> */}
             <Analytics />
             <SpeedInsights />
           </Providers>

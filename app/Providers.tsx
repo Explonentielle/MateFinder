@@ -8,6 +8,9 @@ import {
     QueryClientProvider,
 } from '@tanstack/react-query'
 import { SessionProvider } from "next-auth/react";
+import { ChatProvider } from "./(customer)/users/chat/ChatContext"
+import { Analytics } from "@vercel/analytics/react"
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 const queryClient = new QueryClient()
 
@@ -23,8 +26,10 @@ export const Providers = (props: ProvidersProps) => {
                 disableTransitionOnChange
             >
                 <QueryClientProvider client={queryClient}>
-                    <Toaster />
-                    {props.children}
+                    <ChatProvider>
+                        <Toaster />
+                        {props.children}
+                    </ChatProvider>
                 </QueryClientProvider>
             </ThemeProvider>
         </SessionProvider>
