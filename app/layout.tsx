@@ -25,7 +25,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="h-full">
+    <html suppressHydrationWarning lang="en" className="h-full ">
       <body cz-shortcut-listen="true" className={cn(inter.className, 'h-full')}>
         <Suspense fallback={<Loading />}>
           <Providers>

@@ -1,3 +1,5 @@
+"use client"
+
 import Talk from 'talkjs';
 import { useEffect, useRef } from 'react';
 import { MessageCircleMore, Plus } from 'lucide-react';
@@ -23,23 +25,26 @@ export default function Chat() {
                     })
                 });
 
-                session.unreads.onChange(function (unreadConversations) {
-                    const amountOfUnreads = unreadConversations.length;
-                    setMessages(amountOfUnreads)
-                })
 
                 session.unreads.onChange(function (unreadConversations) {
-                    const sender = unreadConversations[unreadConversations.length - 1].lastMessage.sender
-                    if (unreadConversations.length > 0 && sender) {
-                        setOtherUser({
-                            id: sender.id.toString(),
-                            name: sender.name || "",
-                            email: "",
-                            photoUrl: sender.photoUrl,
-    
-                        })
+                    const amountOfUnreads = unreadConversations.length;
+                    setMessages(amountOfUnreads);
+
+                    if (amountOfUnreads > 0) {
+                        const lastConversation = unreadConversations[unreadConversations.length - 1];
+                        if (lastConversation.lastMessage) {
+                            const sender = lastConversation.lastMessage.sender;
+                            if (sender) {
+                                setOtherUser({
+                                    id: sender.id.toString(),
+                                    name: sender.name || "",
+                                    email: "",
+                                    photoUrl: sender.photoUrl,
+                                });
+                            }
+                        }
                     }
-                })
+                });
 
                 if (chat && otherUser) {
                     Talk.ready.then(() => {
@@ -82,7 +87,11 @@ export default function Chat() {
     }, [chat, otherUser, current]);
 
     const handleCloseChat = () => {
-        setChat(false);
+        if (current && otherUser) {
+            setChat(false);
+        } else {
+            toast.info("Not recent conversation");
+        }
     };
 
     const handleOpenChat = () => {
@@ -105,7 +114,7 @@ export default function Chat() {
                         <div className=' h-[65vh]' ref={chatboxEl} />
                     </main>
                 ) :
-                <div className='fixed bottom-[5vh] right-[2vw] z-10'>
+                    <div className='fixed bottom-[5vh] right-[2vw] z-10'>
                         <MessageCircleMore onClick={handleOpenChat} size={42} />
                         {messages > 0 && (
                             <span className="-translate-x-1/3 -translate-y-1/3 absolute top-0 left-0 mr-4 rounded-full bg-red-500 size-6 flex justify-center items-center text-white">
@@ -116,5 +125,5 @@ export default function Chat() {
                 }
             </>
         );
-    } 
+    }
 }

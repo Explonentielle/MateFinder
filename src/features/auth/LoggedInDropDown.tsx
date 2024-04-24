@@ -1,7 +1,7 @@
 "use client"
 
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/src/components/ui/dropdown-menu"
-import { PropsWithChildren } from "react"
+import { PropsWithChildren, useEffect } from "react"
 import { singOutAction } from "./auth.action"
 import { LogOut, User } from "lucide-react"
 import Link from "next/link"
@@ -22,7 +22,10 @@ interface LoggedInDropDownProps extends PropsWithChildren {
 export const LoggedInDropDown = (props: LoggedInDropDownProps) => {
     const { id, current, children } = props;
     const { setCurrent, setOtherUser } = useChat();
-    setCurrent(current)
+
+    useEffect(() => {
+        setCurrent(current);
+    }, [setCurrent, current]);
 
     return (
         <DropdownMenu>

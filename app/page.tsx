@@ -19,7 +19,7 @@ export default async function Home() {
     return (
       <div className="size-full">
         <Header />
-        <Sidebar/>
+        <Sidebar />
         <LocationForm />
         <BannerLanding />
         <FAQSection />
@@ -33,7 +33,7 @@ export default async function Home() {
     return (
       <div className="size-full">
         <Header />
-        <Sidebar/>
+        <Sidebar />
         <Layout>
           <LandingHero />
           <ProfileUpdateForm userId={user?.id} />
@@ -49,7 +49,7 @@ export default async function Home() {
     return (
       <div className="size-full">
         <Header />
-        <Sidebar/>
+        <Sidebar />
         <Landing location={user.location} />
       </div>
     );
