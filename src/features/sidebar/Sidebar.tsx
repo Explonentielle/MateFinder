@@ -60,7 +60,7 @@ export const Sidebar = async () => {
       <div className="flex lg:flex-col items-center lg:items-start">
         <span>online users :</span>
 
-        <ScrollArea className="whitespace-nowrap">
+        <ScrollArea className="lg:w-full whitespace-nowrap">
           <div className="mt-2 flex lg:flex-col pl-2">
             {onlineUsersInfo.map(user => (
               <li className="flex flex-row lg:flex-col ml-2 lg:ml-0" key={user.username}>
