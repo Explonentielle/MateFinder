@@ -58,7 +58,7 @@ export const Sidebar = async () => {
   return (
     <div className={`relative overflow-hidden flex flex-row lg:flex-col-reverse justify-between lg:justify-end items-start w-full lg:w-[14vw] h-[10vh] lg:h-full  lg:fixed border-b lg:border-r border-border px-4 transition-all duration-300 z-10`}>
       <div className="flex lg:flex-col items-center lg:items-start">
-        <span>online users:</span>
+        <span>Online</span>
 
         <ScrollArea className="lg:w-full whitespace-nowrap">
           <div className="mt-2 flex lg:flex-col pl-2">
