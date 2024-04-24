@@ -7,7 +7,7 @@ import { toast } from "sonner"
 import { useRouter } from "next/navigation"
 import { Popover, PopoverContent, PopoverTrigger } from "@/src/components/ui/popover"
 import { LocationCategories, UserSchema, UserType } from "./User.schema"
-import { format, isValid } from "date-fns"
+import { format, isValid, addYears } from "date-fns"
 import React from "react"
 import { updateUserAction } from "./User.action"
 import { Input } from "@/src/components/ui/input"
@@ -31,10 +31,13 @@ const UserForm = (props: UserFormProps) => {
     defaultValues: props.defaultValues
   })
   const isCreate = !Boolean(props.defaultValues)
-  const [year, setYear] = React.useState<Date | undefined>(props.defaultValues?.age);
-  const [inputYear, setInputYear] = React.useState<number | undefined>(year?.getFullYear());
+  const [date, setDate] = React.useState<Date>();
   const [avatarLink, setAvatarLink] = React.useState<string | undefined>(props.defaultValues?.image);
-  
+
+  const handlePresetSelection = (yearsToAdd: number) => {
+    setDate(addYears(new Date(), -yearsToAdd));
+  };
+
   if (props.username) {
     form.setValue('username', props.username);
   }
@@ -117,50 +120,48 @@ const UserForm = (props: UserFormProps) => {
               render={({ field }) => (
                 <FormItem className="flex flex-col">
                   <FormLabel>Date of birth</FormLabel>
-                  <Popover>
-                    <PopoverTrigger asChild>
-                      <div className="flex items-center">
-                        <Button
-                          type="button"
-                          variant={"outline"}
-                          className={cn(
-                            "w-[240px] pl-3 text-left font-normal",
-                            !isValid(field.value) && "text-muted-foreground"
-                          )}
-                        >
-                          {field.value ? (
-                            format(field.value, "PPP")
-                          ) : (
-                            <span>Pick a date</span>
-                          )}
-                          <CalendarIcon className="ml-auto size-4 opacity-50" />
-                        </Button>
-                      </div>
-                    </PopoverTrigger>
-                    <PopoverContent className="w-auto p-0" align="start">
-                      <Input
-                        type="text"
-                        placeholder="Enter year"
-                        onChange={(e) => {
-                          setInputYear(Number(e.target.value));
-                        }}
-                        className="w-full"
-                      />
-                      <div className="rounded-md border">
-                        <Calendar
-                          mode="single"
-                          selected={field.value}
-                          onSelect={field.onChange}
-                          disabled={(date) =>
-                            date > new Date() || date < new Date("1900-01-01")
-                          }
-                          toYear={inputYear ? inputYear : year?.getFullYear()}
-                          toDate={year}
-                          toMonth={year}
-                        />
-                      </div>
-                    </PopoverContent>
-                  </Popover>
+                  <div className="flex">
+                    <Popover>
+                      <PopoverTrigger asChild>
+                        <div className="flex items-center">
+                          <Button
+                            type="button"
+                            variant={"outline"}
+                            className={cn(
+                              "w-[240px] pl-3 text-left font-normal",
+                              !isValid(field.value) && "text-muted-foreground"
+                            )} 
+                          >
+                            {field.value ? (
+                              format(field.value, "PPP")
+                            ) : (
+                              <span>Pick a date</span>
+                            )}
+                            <CalendarIcon className="ml-auto size-4 opacity-50" />
+                          </Button>
+                        </div>
+                      </PopoverTrigger>
+                      <PopoverContent className="w-auto p-0" align="start">
+                        <div className="rounded-md border">
+                          <Select onValueChange={(value) => handlePresetSelection(parseInt(value))}>
+                            <SelectTrigger>
+                              <SelectValue placeholder="Select" />
+                            </SelectTrigger>
+                            <SelectContent position="popper">
+                              {Array.from({ length: 81 }, (_, index) => (
+                                <SelectItem key={index} value={String(index)}>
+                                  {format(addYears(new Date(), -index), "yyyy")}
+                                </SelectItem>
+                              ))}
+                            </SelectContent>
+                          </Select>
+                          <div className="rounded-md border">
+                            <Calendar mode="single" toYear={date?.getFullYear()} selected={field.value} onSelect={field.onChange}/>
+                          </div>
+                        </div>
+                      </PopoverContent>
+                    </Popover>
+                  </div>
                   <FormDescription>
                     Your date of birth is used to calculate your age.
                   </FormDescription>

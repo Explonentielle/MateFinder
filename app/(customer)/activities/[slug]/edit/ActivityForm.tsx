@@ -57,17 +57,7 @@ export const ActivityForm = (props: ActivityFormProps) => {
       router.push(`/activities/${data.slug}`)
     }
   })
-  const availablesPlaces = [
-    "1",
-    "2",
-    "3",
-    "4",
-    "5",
-    "6",
-    "7",
-    "8",
-    "9",
-  ]
+  const availablesPlaces = ["1","2","3","4","5","6","7","8","9",]
 
 
   return (
