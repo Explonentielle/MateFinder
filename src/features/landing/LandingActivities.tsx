@@ -23,7 +23,7 @@ export const LandiongActivities = async (props: LandingProps) => {
             },
             Departement: props.location
         },
-        take: 6,
+        take: 10,
         orderBy: {
             Date: "asc",
         },
@@ -55,20 +55,20 @@ export const LandiongActivities = async (props: LandingProps) => {
                         {activities.map(activity => (
                             <Link key={activity.id} className="w-full md:w-1/2 p-2 md:p-4" href={`/activities/${activity.slug}`}>
                                 <Card className="shadow-lg h-full" key={activity.id}>
-                                    <CardHeader className="p-2 md:p-6 font-bold text-md md:text-2xl flex flex-row justify-between items-center">
-                                        {`${activity.Title.slice(0, 18)}...`}
-                                        <div className="flex">
-                                            <UserAvatar email={activity.user.email || ""} image={activity.user.image || undefined} />
+                                    <CardHeader className="p-2 font-bold text-md md:text-2xl flex flex-row justify-between items-center">
+                                        {`${activity.Title.slice(0, 20)}...`}
+                                        <div className="flex items-center">
+                                            <UserAvatar className={`mr-2`} size="size-8" email={activity.user.email || ""} image={activity.user.image || undefined} />
                                             <LucideIcons name={activity.Icon as IconName} size={24} />
                                         </div>
                                     </CardHeader>
-                                    <CardContent className="p-2 md:p-6 w-full flex flex-col items-center">
-                                        <div className="flex w-full items-center justify-center">
+                                    <CardContent className="p-2 w-full flex flex-col items-center">
+                                        {/* <div className="flex w-full items-center justify-center">
                                             <CardDescription className="w-1/2 font-mono px-3">{activity.Free ? "Free" : "Not Free"}</CardDescription>
-                                            <CardDescription className="w-full font-mono px-3">{activity.Location}</CardDescription>
-                                        </div>
-                                        <div className="flex w-full items-center justify-center">
                                             <CardDescription className="w-full font-mono px-3">{activity.categorie}</CardDescription>
+                                        </div> */}
+                                        <div className="flex w-full items-center justify-center">
+                                            <CardDescription className="w-full font-mono px-3">{activity.Location}</CardDescription>
                                             <CardDescription className="w-1/2 font-mono px-3">{activity.Date?.toLocaleDateString()}</CardDescription>
                                             <CardDescription className="w-1/2 font-mono px-3"> {(typeof activity.Hour === 'string' && activity.Hour.match(/^\d+$/)) ?
                                                 `${parseInt(activity.Hour, 10)}h` :

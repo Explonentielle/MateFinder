@@ -63,13 +63,13 @@ export const Sidebar = async () => {
         <ScrollArea className="lg:w-full whitespace-nowrap">
           <div className="mt-2 flex lg:flex-col pl-2">
             {onlineUsersInfo.map(user => (
-              <li className="flex flex-row lg:flex-col ml-2 lg:ml-0" key={user.username}>
+              <div className="flex flex-row lg:flex-col ml-2 lg:ml-0" key={user.username}>
                 <div className="flex items-center mb-2">
                   <UserAvatar email={user.username || ""} image={user.image || ""} size="size-4" />
                   <span className="ml-2 text-xs">{user.username}</span>
                   <div className="w-2 h-2 bg-green-500 rounded-full ml-2"></div>
                 </div>
-              </li>
+              </div>
             ))}
           </div>
           <ScrollBar orientation="horizontal" />
