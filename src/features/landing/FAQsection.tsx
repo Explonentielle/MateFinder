@@ -3,7 +3,7 @@ import {
     AccordionContent,
     AccordionItem,
     AccordionTrigger,
-  } from "@/components/ui/accordion";
+  } from "@/src/components/ui/accordion";
   import { Section } from "./Section";
   
   const FAQS: { question: string; answer: string }[] = [

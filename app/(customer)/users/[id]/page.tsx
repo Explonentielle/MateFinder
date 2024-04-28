@@ -84,7 +84,7 @@ export default async function RouteParams(props: PageParams<{ id: string }>) {
                             <CardHeader className="p-2 md:p-6 flex flex-row items-center justify-between">
                                 <CardTitle> {(current.id === user.id) ? "My Informations" : `Informations of ${user?.username}`}</CardTitle>
                                 <div className="flex items-center">
-                                    <UserAvatar email={user.email || ""} image={user.image || undefined} />
+                                    <UserAvatar size="size-12" email={user.email || ""} image={user.image || undefined} />
                                 </div>
                             </CardHeader>
                             <CardContent className="p-2 md:p-6 flex flex-row justify-between px-2 md:px-8 ">

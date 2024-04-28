@@ -31,7 +31,6 @@ export default function RootLayout({
         <Suspense fallback={<Loading />}>
           <Providers>
             {children}
-            {/* <Sidebar /> */}
             <Analytics />
             <SpeedInsights />
           </Providers>
