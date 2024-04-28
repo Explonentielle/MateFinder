@@ -42,14 +42,7 @@ export const SidebarClient: FC<SidebarClientProps> = ({ usersInfo, users }) => {
                     <div className="flex lg:flex-col items-center lg:items-start">
                         <span>Online</span>
                         <ScrollArea className="w-2/3 md:w-full whitespace-nowrap">
-                            <div className="mt-2 flex lg:flex-col pl-2">
-                                <div className="flex flex-row lg:flex-col ml-2 lg:ml-0" >
-                                    <div className="flex items-center mb-2">
-                                        <UserAvatar email={""} image={"qfef"} size="size-4" />
-                                        <span className="ml-2 text-xs">{"MateAdmin"}</span>
-                                        <div className="w-2 h-2 bg-green-500 rounded-full ml-2"></div>
-                                    </div>
-                                </div>
+                            <div className="mt-2 flex lg:flex-col pl-2">              
                                 <div className="flex flex-row lg:flex-col ml-2 lg:ml-0" >
                                     <div className="flex items-center mb-2">
                                         <UserAvatar email={""} image={"qfef"} size="size-4" />
