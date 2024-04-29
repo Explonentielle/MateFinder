@@ -67,13 +67,13 @@ export default async function RouteParams(props: PageParams<{ slug: string }>) {
                         </div> :
                         <Popover>
                             <PopoverTrigger asChild>
-                                <Button variant="outline">Participer <Send className="ml-4" size={24} /></Button>
+                                <Button variant="outline">Participer<Send className="ml-4" size={24} /></Button>
                             </PopoverTrigger>
                             <PopoverContent className="w-50">
                                 <div className="grid gap-4">
                                     <div className="space-y-2">
                                         <p className="text-sm text-muted-foreground">
-                                            Etes vous sure d'envoyer une candidature
+                                            Etes vous sure d envoyer une candidature
                                         </p>
                                     </div>
                                     <div className="items-center">
