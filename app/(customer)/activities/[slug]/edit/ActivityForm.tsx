@@ -91,7 +91,7 @@ export const ActivityForm = (props: ActivityFormProps) => {
                           {...field} />
                       </FormControl>
                       <FormDescription>
-                         Titre de lactivité proposé
+                         Titre de l activité proposé
                       </FormDescription>
                       <FormMessage />
                     </FormItem>
@@ -205,7 +205,7 @@ export const ActivityForm = (props: ActivityFormProps) => {
                             onChange={(e) => field.onChange(e.target.value)} />
                         </FormControl>
                         <FormDescription>
-                          Plus Informations a propos de l'activité proposée
+                          Plus Informations à propos de l activité proposée
                         </FormDescription>
                         <FormMessage />
                       </FormItem>
@@ -328,7 +328,7 @@ export const ActivityForm = (props: ActivityFormProps) => {
                           {...field} />
                       </FormControl>
                       <FormDescription>
-                        Lieux ou l'activité ce déroulera
+                        Lieux ou l activité ce déroulera
                       </FormDescription>
                       <FormMessage />
                     </FormItem>

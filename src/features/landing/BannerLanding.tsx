@@ -14,7 +14,7 @@ export const BannerLanding = () => {
                     Bientôt disponible
                 </span>{" "}
                 <span className="text-sm font-medium">
-                    Assistant vocal IA pour la création d'activités
+                    Assistant vocal IA pour la création d activités
                 </span>
                 <svg
                     className="ml-2 size-5"
