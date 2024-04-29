@@ -4,7 +4,7 @@ import type { LayoutParams } from "@/src/types/next"
 
 export default async function RouteLayout(props: LayoutParams<{}>) {
     return (
-        <div className="size-content">
+        <div className="size-full relative">
             <Header />
             <Sidebar />
             {props.children}

@@ -63,10 +63,6 @@ export const LandiongActivities = async (props: LandingProps) => {
                                         </div>
                                     </CardHeader>
                                     <CardContent className="p-2 w-full flex flex-col items-center">
-                                        {/* <div className="flex w-full items-center justify-center">
-                                            <CardDescription className="w-1/2 font-mono px-3">{activity.Free ? "Free" : "Not Free"}</CardDescription>
-                                            <CardDescription className="w-full font-mono px-3">{activity.categorie}</CardDescription>
-                                        </div> */}
                                         <div className="flex w-full items-center justify-center">
                                             <CardDescription className="w-full font-mono px-3">{activity.Location}</CardDescription>
                                             <CardDescription className="w-1/2 font-mono px-3">{activity.Date?.toLocaleDateString()}</CardDescription>
