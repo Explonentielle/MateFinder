@@ -8,44 +8,44 @@ import {
   
   const FAQS: { question: string; answer: string }[] = [
     {
-      question: "How can I create a new activity on Mate Finder?",
+      question: "Comment puis-je créer une nouvelle activité sur Mate Finder ?",
       answer:
-        "To create a new activity on Mate Finder, log in to your account, go to the 'Create Activity' section, fill in the required information such as title, description, date, and time, then submit the form.",
+        "Pour créer une nouvelle activité sur Mate Finder, connectez-vous à votre compte, accédez à la section 'Créer une activité', remplissez les informations requises telles que le titre, la description, la date et l'heure, puis soumettez le formulaire.",
     },
     {
-      question: "Can I add specific details to my activity, such as location and cost?",
+      question: "Puis-je ajouter des détails spécifiques à mon activité, tels que l'emplacement et le coût ?",
       answer:
-        "Yes, when creating your activity, you can specify details such as the event location, any potential cost, and other relevant information for participants.",
+        "Oui, lors de la création de votre activité, vous pouvez spécifier des détails tels que l'emplacement de l'événement, tout coût éventuel et d'autres informations pertinentes pour les participants.",
     },
     {
-      question: "How can I find partners to participate in an activity on Mate Finder?",
+      question: "Comment puis-je trouver des partenaires pour participer à une activité sur Mate Finder ?",
       answer:
-        "You can find partners for your activity by posting details about the event, sharing your activity on social media, or joining groups and communities related to your interests on Mate Finder.",
+        "Vous pouvez trouver des partenaires pour votre activité en publiant des détails sur l'événement, en partageant votre activité sur les réseaux sociaux ou en rejoignant des groupes et des communautés liés à vos intérêts sur Mate Finder.",
     },
     {
-      question: "Does Mate Finder offer activities based on my interests and location?",
+      question: "Mate Finder propose-t-il des activités en fonction de mes intérêts et de ma localisation ?",
       answer:
-        "Yes, Mate Finder provides a variety of activities based on your interests and location. You can explore different categories and filters to find activities that match your preferences.",
+        "Oui, Mate Finder propose une variété d'activités en fonction de vos intérêts et de votre localisation. Vous pouvez explorer différentes catégories et filtres pour trouver des activités qui correspondent à vos préférences.",
     },
     {
-      question: "Can I invite friends to join an activity on Mate Finder?",
+      question: "Puis-je inviter des amis à participer à une activité sur Mate Finder ?",
       answer:
-        "Yes, you can invite friends to join an activity on Mate Finder by sharing the activity link with them or inviting them directly through the platform.",
+        "Oui, vous pouvez inviter des amis à participer à une activité sur Mate Finder en partageant le lien de l'activité avec eux ou en les invitant directement via la plateforme.",
     },
     {
-      question: "Is there a messaging feature to communicate with other participants?",
+      question: "Y a-t-il une fonctionnalité de messagerie pour communiquer avec les autres participants ?",
       answer:
-        "Yes, Mate Finder offers a messaging feature that allows you to communicate with other participants before, during, and after the activity. You can use this feature to coordinate plans and ask questions.",
+        "Oui, Mate Finder propose une fonctionnalité de messagerie qui vous permet de communiquer avec les autres participants avant, pendant et après l'activité. Vous pouvez utiliser cette fonctionnalité pour coordonner les plans et poser des questions.",
     },
     {
-      question: "How do I ensure the safety of participants during activities?",
+      question: "Comment puis-je garantir la sécurité des participants pendant les activités ?",
       answer:
-        "Mate Finder prioritizes the safety of its users. We encourage users to review safety guidelines and communicate with other participants to ensure a safe and enjoyable experience.",
+        "Mate Finder donne la priorité à la sécurité de ses utilisateurs. Nous encourageons les utilisateurs à consulter les directives de sécurité et à communiquer avec les autres participants pour garantir une expérience sûre et agréable.",
     },
     {
-      question: "What should I do if I encounter any issues or need assistance?",
+      question: "Que dois-je faire si je rencontre des problèmes ou si j'ai besoin d'aide ?",
       answer:
-        "If you encounter any issues or need assistance, you can reach out to our support team through the Help Center or contact us directly via email. We're here to help!",
+        "Si vous rencontrez des problèmes ou si vous avez besoin d'aide, vous pouvez contacter notre équipe de support via le Centre d'aide ou nous contacter directement par e-mail. Nous sommes là pour vous aider !",
     },
   ];
   

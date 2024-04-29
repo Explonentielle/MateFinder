@@ -36,9 +36,9 @@ export default async function RouteParams(props: PageParams<{ }>) {
             <Card className="p-4 shadow-lg">
                 <CardHeader>
                     <div className="flex justify-between">
-                        <LayoutTitle>Check all Activities</LayoutTitle>
+                        <LayoutTitle>Voir toutes les activités</LayoutTitle>
                         <Link href={"/activities/new"} className="shadow-lg flex items-center justify-center hover:bg-primary transition rounded-md border-2 border-dashed border-primary bg-accent p-2 w-1/5">
-                            Create Activity
+                            Crée une activité
                         </Link>
                     </div>
                 </CardHeader>
@@ -75,7 +75,7 @@ export default async function RouteParams(props: PageParams<{ }>) {
                                 </div>
                             ) : (
                                 <Link href={"/activities/new"} className="flex items-center justify-center hover:bg-accent transition rounded-md border-2 border-dashed border-primary py-8 p-12 w-full">
-                                    Create Activity
+                                    Créer une activité
                                 </Link>
                             )}
                         </div>

@@ -68,9 +68,9 @@ export default async function RouteParams(props: PageParams<{ page: string }>) {
             <Card className="p-4 shadow-lg">
                 <CardHeader className="p-2 md:p-6">
                     <div className="flex justify-between items-center">
-                        <LayoutTitle className="text-xl md:text-4xl">Check all Activities</LayoutTitle>
+                        <LayoutTitle className="text-xl md:text-4xl">Voir toutes les activités</LayoutTitle>
                         <Link href={"/activities/new"} className="shadow-lg flex items-center justify-center text-center hover:bg-primary transition rounded-md border-2 border-dashed border-primary bg-accent p-2 w-1/3 md:w-1/5">
-                            Create Activity
+                            Créer une activité
                         </Link>
                     </div>
                 </CardHeader>
@@ -111,7 +111,7 @@ export default async function RouteParams(props: PageParams<{ page: string }>) {
                                 </div>
                             ) : (
                                 <Link href={"/activities/new"} className="flex items-center justify-center hover:bg-accent transition rounded-md border-2 border-dashed border-primary py-8 p-12 w-full">
-                                    Create Activity
+                                    Créer une activité
                                 </Link>
                             )}
                         </div>
@@ -119,12 +119,12 @@ export default async function RouteParams(props: PageParams<{ page: string }>) {
                     <div className="flex justify-center mt-4">
                         {Number(page) > 1 && (
                             <Link href={`/activities/page/${Number(page) - 1}${location}`}>
-                                Previous Page
+                                Page précédente 
                             </Link>
                         )}
                         {activities.length === ITEMS_PER_PAGE && (
                             <Link className="ml-4" href={`/activities/page/${Number(page) + 1}${location}`}>
-                                Next Page
+                                Page suivante
                             </Link>
                         )}
                     </div>

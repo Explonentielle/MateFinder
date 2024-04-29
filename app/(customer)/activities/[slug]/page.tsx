@@ -60,20 +60,20 @@ export default async function RouteParams(props: PageParams<{ slug: string }>) {
                                 )
                                     : null)}
                                 <Button variant={"secondary"} className="mb-4 md:mb-0 mr-4">
-                                    Manage candidacies
+                                    Gerez vos candidatures
                                 </Button>
                             </Link>
                             <EditButton  slug={activity.slug} />
                         </div> :
                         <Popover>
                             <PopoverTrigger asChild>
-                                <Button variant="outline">Participate <Send className="ml-4" size={24} /></Button>
+                                <Button variant="outline">Participer <Send className="ml-4" size={24} /></Button>
                             </PopoverTrigger>
                             <PopoverContent className="w-50">
                                 <div className="grid gap-4">
                                     <div className="space-y-2">
                                         <p className="text-sm text-muted-foreground">
-                                            Are your sure to send your candidacy
+                                            Etes vous sure d'envoyer une candidature
                                         </p>
                                     </div>
                                     <div className="items-center">
@@ -113,12 +113,12 @@ export default async function RouteParams(props: PageParams<{ slug: string }>) {
                             <span className="pr-2 font-extrabold text-md md:text-2xl"> {activity.candidacies.filter(candidacy => candidacy.status === "APPROVED").length} / {Number(activity.userWanted)}</span>
                             <UsersRound />
                         </CardDescription>
-                        <CardDescription className="text-sm md:text-xl ml-0 md:ml-2">places remaining</CardDescription>
+                        <CardDescription className="text-sm md:text-xl ml-0 md:ml-2">Places restantes</CardDescription>
                     </Card>
                     <Link className="m-2 w-1/3  justify-center flex " href={`/users/${activity.user.username}`}>
                         <Card className="w-full p-2 justify-center flex ">
                             <div className="flex flex-col md:flex-row justify-between items-center">
-                                <span className="text-sm md:text-xl text-gray-500 mr-0 md:mr-4">Organize by :</span>
+                                <span className="text-sm md:text-xl text-gray-500 mr-0 md:mr-4">Organisateur:</span>
                                 <CardDescription className="flex mx-6 md:mx-0 flex-col-reverse md:flex-row justify-center items-center" >
                                     <span className="mr-0 md:mr-4">{activity.user.username}</span>
                                    <UserAvatar email={activity.user.email || ""} image={activity.user.image || undefined}/>
@@ -136,12 +136,12 @@ export default async function RouteParams(props: PageParams<{ slug: string }>) {
                     <Card className="p-2 m-2 w-1/3 justify-center flex">
                         {activity.Free ? (
                             <CardDescription className="flex flex-col md:flex-row justify-center items-center" >
-                                <span className="mr-0 md:mr-4"> Free :</span>
+                                <span className="mr-0 md:mr-4"> Gratuit :</span>
                                 <Check className="mx-6" />
                             </CardDescription>
                         ) :
                             <CardDescription className="flex flex-col md:flex-row justify-center items-center" >
-                                <span className="mr-0 md:mr-4"> Not Free : </span>
+                                <span className="mr-0 md:mr-4"> Payant : </span>
                                 <HandCoins />
                             </CardDescription>}
                     </Card>

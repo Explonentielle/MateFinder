@@ -10,7 +10,7 @@ export default async function RouteParams(props: PageParams<{ username: string }
 
     return (
         <Layout>
-            <p>New profil </p>
+            <p>Nouveau profil </p>
             <UserForm />
         </Layout>
     )

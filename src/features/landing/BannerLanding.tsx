@@ -11,10 +11,10 @@ export const BannerLanding = () => {
                 className="mb-7  inline-flex items-center justify-between rounded-full bg-accent/50 p-1 pr-4 text-sm text-card-foreground hover:bg-accent"
             >
                 <span className="mr-3 rounded-full bg-primary px-4 py-1.5 text-xs text-primary-foreground">
-                    Available soon
+                    Bientôt disponible
                 </span>{" "}
                 <span className="text-sm font-medium">
-                    AI Vocal helper for activity creation
+                    Assistant vocal IA pour la création d'activités
                 </span>
                 <svg
                     className="ml-2 size-5"
@@ -30,10 +30,10 @@ export const BannerLanding = () => {
                 </svg>
             </p>
             <h1 className="mb-4 text-4xl font-extrabold leading-none tracking-tight text-foreground  md:text-5xl lg:text-6xl">
-                Go Premium and Create Unlimited Activities and Matches!
+                Devenez Premium et créez des activités et des matchs illimités !
             </h1>
             <p className="mb-8 text-lg font-normal text-muted-foreground sm:px-16 lg:text-xl xl:px-48">
-                Unlock premium perks: Highlight and customize your activities, and craft a professional profile.
+                Débloquez des avantages Premium: Mettez en avant et personnalisez vos activités, et créez un profil professionnel.
             </p>
             <div className="mb-0 flex flex-col space-y-4 md:flex-row md:justify-center md:space-x-4 md:space-y-0 md:mb-2">
                 <Link
@@ -42,8 +42,8 @@ export const BannerLanding = () => {
                         size: "lg",
                     })}
                 >
-                    Learn more
-                    <MoveRight className="ml-4"/>
+                    En savoir plus
+                    <MoveRight className="ml-4" />
                 </Link>
                 <Link
                     href="#"
@@ -52,7 +52,7 @@ export const BannerLanding = () => {
                         variant: "secondary",
                     })}
                 >
-                    Go Premium
+                    Devenez Premium
                 </Link>
             </div>
         </Section>

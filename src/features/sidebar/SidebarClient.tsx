@@ -51,7 +51,7 @@ export const SidebarClient: FC<SidebarClientProps> = ({ usersInfo, users }) => {
             {isOpen &&
                 (<>
                     <div className="flex lg:flex-col items-center lg:items-start">
-                        <span>Online</span>
+                        <span>En ligne:</span>
                         <ScrollArea className="w-2/3 md:w-full whitespace-nowrap">
                             <div className="mt-2 flex lg:flex-col pl-2">              
                                 <div className="flex flex-row lg:flex-col ml-2 lg:ml-0" >
@@ -75,7 +75,7 @@ export const SidebarClient: FC<SidebarClientProps> = ({ usersInfo, users }) => {
                         </ScrollArea>
                     </div>
                     <div className="overflow-visible flex items-center lg:items-start flex-row lg:flex-col my-2 lg:my-4">
-                        <span>Find user</span>
+                        <span className='text-md'>Rechercher</span>
                         <div>
                             <Input
                                 className="w-2/3 lg:w-full mt-0 lg:mt-2 ml-4 lg:ml-0 rounded-2xl"

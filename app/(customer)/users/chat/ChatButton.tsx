@@ -23,7 +23,7 @@ function ChatButton({ current, otherUser }: { current: User, otherUser: User }) 
     return (
         <CardDescription className='w-full'>
             <Button className="px-2" onClick={handleClick}>
-                Send a message   
+                Envoyer un message   
             </Button>
         </CardDescription>
     );

@@ -30,9 +30,9 @@ export default async function RouteParams(props: PageParams<{ id: string }>) {
             <Card className="p-4 shadow-lg">
                 <CardHeader className="p-2 md:p-6">
                     <div className="flex justify-between">
-                        <LayoutTitle className="text-lg md:text-4xl">Check all Activities of {id}</LayoutTitle>
+                        <LayoutTitle className="text-lg md:text-4xl">Voir toutes les activités de {id}</LayoutTitle>
                         {(user?.username === id) ? <Link href={"/activities/new"} className="shadow-lg flex items-center justify-center text-center hover:bg-primary transition rounded-md border-2 border-dashed border-primary bg-accent p-2 w-1/3 md:w-1/5">
-                            Create Activity
+                            Crer une activité
                         </Link> : null}
                     </div>
                 </CardHeader>

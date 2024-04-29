@@ -43,13 +43,13 @@ export const LandiongActivities = async (props: LandingProps) => {
         <>
             <Link className="pb-4" href={`/activities/page/1${props.location}`}>
                 <Button variant="ghost" className="shadow-lg w-full py-6 border-primary border-dashed border-2">
-                    Check All Activities Next to you
+                    Voir toutes les activités proche de vous
                 </Button>
             </Link>
             <Card className="shadow-lg">
                 <ScrollArea className="h-[70vh] w-full">
                     <CardHeader className="py-4 font-bold text-lg md:text-2xl">
-                        Upcoming Activities Recently next to you
+                        Activités à venir récemment près de chez vous.
                     </CardHeader>
                     <CardContent className="p-2 md:p-6 flex flex-col md:flex-row md:flex-wrap">
                         {activities.map(activity => (

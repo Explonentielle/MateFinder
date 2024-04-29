@@ -12,3 +12,10 @@ export default async function Home() {
     redirect("/landing");
   }
 }
+
+
+
+
+
+
+

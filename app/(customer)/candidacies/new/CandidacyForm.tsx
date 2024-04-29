@@ -82,7 +82,7 @@ const CandidacyForm = (props: CandidacyFormProps) => {
 
             <Button type="submit" variant={"ghost"}>
                 {props.icon === "Send" && (
-                    <span className="mr-2">Participate</span>
+                    <span className="mr-2">Participer</span>
                 )}
                 <div className={props.icon === "Cross" ? " rotate-45" : ""}>
                     <LucideIcons name={props.icon as IconName} size={16} />

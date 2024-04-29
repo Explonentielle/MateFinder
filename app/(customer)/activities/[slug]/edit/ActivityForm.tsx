@@ -64,7 +64,7 @@ export const ActivityForm = (props: ActivityFormProps) => {
     <Card>
       <CardHeader className="p-2 md:p-6">
         <CardTitle>{isCreate
-          ? <p className="font-extrabold text-lg md:text-2xl">Create avtivity</p>
+          ? <p className="font-extrabold text-lg md:text-2xl">Créer une activité</p>
           : <p className="font-extrabold text-lg md:text-2xl">{`Edit activity : ${props.defaultValues?.Title}`}</p>}
         </CardTitle>
       </CardHeader>
@@ -73,9 +73,9 @@ export const ActivityForm = (props: ActivityFormProps) => {
         <Form className="flex flex-col gap-4" form={form} onSubmit={async (values) => await mutation.mutateAsync(values)}>
           <Tabs defaultValue="one" className="w-full flex flex-col justify-center">
             <TabsList >
-              <TabsTrigger className="w-full" value="one">Step One</TabsTrigger>
-              <TabsTrigger className="w-full" value="two">Step Two</TabsTrigger>
-              <TabsTrigger className="w-full" value="three">Step Three</TabsTrigger>
+              <TabsTrigger className="w-full" value="one">Etape One</TabsTrigger>
+              <TabsTrigger className="w-full" value="two">Etape Two</TabsTrigger>
+              <TabsTrigger className="w-full" value="three">Etape Three</TabsTrigger>
             </TabsList>
             <TabsContent value="one">
               <div className="py-2">
@@ -84,14 +84,14 @@ export const ActivityForm = (props: ActivityFormProps) => {
                   name="Title"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="font-bold">Title</FormLabel>
+                      <FormLabel className="font-bold">Titre</FormLabel>
                       <FormControl>
                         <Input
                           placeholder="Running"
                           {...field} />
                       </FormControl>
                       <FormDescription>
-                        The Title of the activity proposed
+                         Titre de lactivité proposé
                       </FormDescription>
                       <FormMessage />
                     </FormItem>
@@ -116,7 +116,7 @@ export const ActivityForm = (props: ActivityFormProps) => {
                           }} />
                       </FormControl>
                       <FormDescription>
-                        The Slug in the url of your activity page max 20 chars no spécial chars no space
+                        Le Slug dans l url de la page de votre activité.  max 20 chars no spécial chars no space
                       </FormDescription>
                       <FormMessage />
                     </FormItem>
@@ -148,7 +148,7 @@ export const ActivityForm = (props: ActivityFormProps) => {
                         </Select>
                       </FormControl>
                       <FormDescription>
-                        Select your activity Categorie
+                        Selectionez la categorie de votre activité
                       </FormDescription>
                       <FormMessage />
                     </FormItem>
@@ -180,7 +180,7 @@ export const ActivityForm = (props: ActivityFormProps) => {
                         </Select>
                       </FormControl>
                       <FormDescription>
-                        Select your icon
+                        Selectionez votre icon
                       </FormDescription>
                       <FormMessage />
                     </FormItem>
@@ -205,7 +205,7 @@ export const ActivityForm = (props: ActivityFormProps) => {
                             onChange={(e) => field.onChange(e.target.value)} />
                         </FormControl>
                         <FormDescription>
-                          More Informations about activity proposed
+                          Plus Informations a propos de l'activité proposée
                         </FormDescription>
                         <FormMessage />
                       </FormItem>
@@ -218,7 +218,7 @@ export const ActivityForm = (props: ActivityFormProps) => {
                     name="Date"
                     render={({ field }) => (
                       <FormItem className="flex flex-col">
-                        <FormLabel className="font-bold">Select the scheduled date for this activity.</FormLabel>
+                        <FormLabel className="font-bold">Selectionez une date pour cette activité</FormLabel>
                         <Popover>
                           <PopoverTrigger asChild>
                             <FormControl>
@@ -232,7 +232,7 @@ export const ActivityForm = (props: ActivityFormProps) => {
                                 {field.value ? (
                                   format(field.value, "PPP")
                                 ) : (
-                                  <span>Pick a date</span>
+                                  <span>selectionnez une date</span>
                                 )}
                                 <CalendarIcon className="ml-auto size-4 opacity-50" />
                               </Button>
@@ -249,7 +249,7 @@ export const ActivityForm = (props: ActivityFormProps) => {
                           </PopoverContent>
                         </Popover>
                         <FormDescription>
-                          Your activity date.
+                          Date de votre activité
                         </FormDescription>
                         <FormMessage />
                       </FormItem>
@@ -263,14 +263,14 @@ export const ActivityForm = (props: ActivityFormProps) => {
                     name="Hour"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="font-bold">Hours</FormLabel>
+                        <FormLabel className="font-bold">Heur</FormLabel>
                         <FormControl>
                           <Input
                             placeholder="Hours"
                             {...field} />
                         </FormControl>
                         <FormDescription>
-                          What time will the activity take place?
+                          L heur à l aquel votre activité ce déroule
                         </FormDescription>
                         <FormMessage />
                       </FormItem>
@@ -303,7 +303,7 @@ export const ActivityForm = (props: ActivityFormProps) => {
                           </Select>
                         </FormControl>
                         <FormDescription>
-                          Select your Departement
+                          Selectionez votre Departement
                         </FormDescription>
                         <FormMessage />
                       </FormItem>
@@ -321,14 +321,14 @@ export const ActivityForm = (props: ActivityFormProps) => {
                   name="Location"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="font-bold">Location</FormLabel>
+                      <FormLabel className="font-bold">Lieux</FormLabel>
                       <FormControl>
                         <Input
                           placeholder="Location"
                           {...field} />
                       </FormControl>
                       <FormDescription>
-                        Location of the activity take place?
+                        Lieux ou l'activité ce déroulera
                       </FormDescription>
                       <FormMessage />
                     </FormItem>
@@ -343,7 +343,7 @@ export const ActivityForm = (props: ActivityFormProps) => {
                   name="userWanted"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="font-bold">Available spots</FormLabel>
+                      <FormLabel className="font-bold">Places disponible</FormLabel>
                       <FormControl>
                         <Select value={field.value ?? ""} onValueChange={field.onChange}>
                           <SelectTrigger>
@@ -361,7 +361,7 @@ export const ActivityForm = (props: ActivityFormProps) => {
                         </Select>
                       </FormControl>
                       <FormDescription>
-                        Enter the number of available spots for your activity
+                        Entrer le nombre de places disponible pour votre activité
                       </FormDescription>
                       <FormMessage />
                     </FormItem>
@@ -378,7 +378,7 @@ export const ActivityForm = (props: ActivityFormProps) => {
                       <div className="space-y-0.5">
                         <FormLabel>FREE</FormLabel>
                         <FormDescription>
-                          This activity is free or not.
+                          Cette activité est gratuit ou non.
                         </FormDescription>
                       </div>
                       <FormControl>
@@ -398,14 +398,14 @@ export const ActivityForm = (props: ActivityFormProps) => {
                   name="Link"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="font-bold">Link  *optional</FormLabel>
+                      <FormLabel className="font-bold">Liens  *optionel</FormLabel>
                       <FormControl>
                         <Input
                           placeholder="Link"
                           {...field} />
                       </FormControl>
                       <FormDescription>
-                        Links to the establishment offering the activity.
+                        Liens vers l etablissement proposant l activité.
                       </FormDescription>
                       <FormMessage />
                     </FormItem>
@@ -413,7 +413,7 @@ export const ActivityForm = (props: ActivityFormProps) => {
                 />
               </div>
 
-              <Button className="w-full" variant={'default'} type="submit">Edit Activity</Button>
+              <Button className="w-full" variant={'default'} type="submit">Créer cette activité</Button>
 
             </TabsContent>
           </Tabs>

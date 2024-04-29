@@ -84,7 +84,7 @@ const UserForm = (props: UserFormProps) => {
     <Card>
       <CardHeader>
         <CardTitle>{isCreate
-          ? <p className="font-extrabold text-lg md:text-2xl">Create Profil</p>
+          ? <p className="font-extrabold text-lg md:text-2xl">Créer votre profil</p>
           : <p className="font-extrabold text-lg md:text-2xl">{`Update Profil : ${props.defaultValues?.username}`}</p>}
         </CardTitle>
       </CardHeader>
@@ -99,14 +99,14 @@ const UserForm = (props: UserFormProps) => {
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="font-bold">Firstname Lastname</FormLabel>
+                  <FormLabel className="font-bold">Nom Prénom</FormLabel>
                   <FormControl>
                     <Input
                       placeholder="jhon doe"
                       {...field} />
                   </FormControl>
                   <FormDescription>
-                    Your  Firstname and Lastname
+                    Votre Nom  et Prénom
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
@@ -117,7 +117,7 @@ const UserForm = (props: UserFormProps) => {
               name="age"
               render={({ field }) => (
                 <FormItem className="flex flex-col">
-                  <FormLabel>Date of birth</FormLabel>
+                  <FormLabel>Date de naissance</FormLabel>
                   <div className="flex">
                     <Popover>
                       <PopoverTrigger asChild>
@@ -133,7 +133,7 @@ const UserForm = (props: UserFormProps) => {
                             {field.value ? (
                               format(field.value, "PPP")
                             ) : (
-                              <span>Pick a date</span>
+                              <span>Séléctioner une date</span>
                             )}
                             <CalendarIcon className="ml-auto size-4 opacity-50" />
                           </Button>
@@ -163,7 +163,7 @@ const UserForm = (props: UserFormProps) => {
                     </Popover>
                   </div>
                   <FormDescription>
-                    Your date of birth is used to calculate your age.
+                    Votre Date de naissance
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
@@ -174,14 +174,14 @@ const UserForm = (props: UserFormProps) => {
               name="username"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="font-bold">Username</FormLabel>
+                  <FormLabel className="font-bold">Nom d utilisateur</FormLabel>
                   <FormControl>
                     <Input
                       placeholder="Username"
                       {...field} />
                   </FormControl>
                   <FormDescription>
-                    Chose your Username
+                    Choisissez votre nom d utilisateur
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
@@ -192,7 +192,7 @@ const UserForm = (props: UserFormProps) => {
               name="location"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="font-bold">Location</FormLabel>
+                  <FormLabel className="font-bold">Localisation</FormLabel>
                   <FormControl>
                     <Select value={field.value} onValueChange={field.onChange}>
                       <SelectTrigger>
@@ -211,7 +211,7 @@ const UserForm = (props: UserFormProps) => {
                     </Select>
                   </FormControl>
                   <FormDescription>
-                    Select your Location
+                    Selectioner votre Localisation
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
@@ -232,7 +232,7 @@ const UserForm = (props: UserFormProps) => {
                   </FormControl>
                   <FormDescription className="flex items-center">
                     <Button type="button" onClick={handleRandomizeAvatar} className="mr-8 w-3/4 md:w-1/4">
-                      Randomize your avatar
+                      Generer un avatar aleatoire
                     </Button>
                     <UserAvatar email={props.defaultValues?.name || ""} image={avatarLink} size={"size-14 md:size-20"} />
                   </FormDescription>
@@ -242,7 +242,7 @@ const UserForm = (props: UserFormProps) => {
             />
           </div>
 
-          <Button className="w-full" variant={'default'} type="submit">Edit Profil</Button>
+          <Button className="w-full" variant={'default'} type="submit">Mettre a jour le Profil</Button>
         </Form>
       </CardContent>
 

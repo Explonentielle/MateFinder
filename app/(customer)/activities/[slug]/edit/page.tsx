@@ -26,7 +26,7 @@ export default async function RouteParams(props: PageParams<{ slug: string }>) {
         return (
             <Layout>
                 <LayoutTitle>
-                    Create Activities
+                    Créer une activité
                 </LayoutTitle>
                 <ActivityForm defaultValues={activityWithValidLink} activityId={activity.id} />
             </Layout>

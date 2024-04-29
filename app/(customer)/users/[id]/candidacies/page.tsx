@@ -57,14 +57,14 @@ export default async function RouteParams(props: PageParams<{ id: string }>) {
                                             </div>
                                         </Button>
                                     </Link>
-                                    <CardDescription className="mr-4 flex flex-row md:flex-col items-center"> <span className="font-bold mr-2">Candidacy sent on</span>  {candidacy.createdAt.toLocaleDateString()}</CardDescription>
+                                    <CardDescription className="mr-4 flex flex-row md:flex-col items-center"> <span className="font-bold mr-2">Candidature envoyé le </span>  {candidacy.createdAt.toLocaleDateString()}</CardDescription>
                                     <div className="flex">
                                         {candidacy.status === "PENDING" && (
-                                            <CardDescription className="mr-4 mt-2 md:mt-0 flex flex items-center"><span className="font-bold mr-4">Candidacy statut</span>  Pending</CardDescription>
+                                            <CardDescription className="mr-4 mt-2 md:mt-0 flex flex items-center"><span className="font-bold mr-4">Statut de la candidature</span>  En attente</CardDescription>
                                         )}
                                         {candidacy.status === "APPROVED" && (
                                             <>
-                                                <CardDescription className="w-content mr-4 flex flex items-center"><span className="w-[8rem] font-bold mr-4">Candidacy statut</span> Approved</CardDescription>
+                                                <CardDescription className="w-content mr-4 flex flex items-center"><span className="w-[8rem] font-bold mr-4">Statut de la candidature</span> Approuvé</CardDescription>
                                                 <Card className="w-full flex items-center justify-center bg-green-500" >
                                                     <Check color="white" size={36} />
                                                 </Card>
@@ -72,7 +72,7 @@ export default async function RouteParams(props: PageParams<{ id: string }>) {
                                         )}
                                         {candidacy.status === "REJECTED" && (
                                             <>
-                                                <CardDescription className="w-content mr-4 flex flex items-center"><span className="font-bold mr-4">Candidacy statut</span>Rrejected</CardDescription>
+                                                <CardDescription className="w-content mr-4 flex flex items-center"><span className="font-bold mr-4">Statut de la candidature</span>Rejeté</CardDescription>
                                                 <Card className="w-full  flex items-center justify-center bg-red-500 ">
                                                     <Cross className={'rotate-45'} color="white" size={36} />
                                                 </Card>
@@ -84,10 +84,10 @@ export default async function RouteParams(props: PageParams<{ id: string }>) {
                         ))
                     ) : (
                         <CardContent>
-                            <CardDescription>No candidacies</CardDescription>
+                            <CardDescription>Pas de candidatures</CardDescription>
                             <Button className="m-2 shadow-lg" variant={"secondary"}>
                                 <Link className="flex items-center p-4" href={`/`}>
-                                    Find new activities
+                                    Trouver une nouvelle activité
                                 </Link>
                             </Button>
                         </CardContent>

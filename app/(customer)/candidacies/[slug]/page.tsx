@@ -44,7 +44,7 @@ export default async function RouteParams(props: PageParams<{ slug: string }>) {
                 <Card className="shadow-lg">
                     <CardHeader>
                         <CardTitle>
-                            Manage candidacies for {activity?.Title}.
+                            Gerer les candidatured pour {activity?.Title}.
                         </CardTitle>
                     </CardHeader>
                     {activity?.candidacies && activity.candidacies.length > 0 ? (
@@ -63,7 +63,7 @@ export default async function RouteParams(props: PageParams<{ slug: string }>) {
                                     <div className="flex">
                                         {candidacy.status === "PENDING" && (
                                             <>
-                                                <CardDescription className="mr-4  mt-2">Approve or reject this candidacy</CardDescription>
+                                                <CardDescription className="mr-4  mt-2">Approuver ou rejeter cette candidature</CardDescription>
                                                 <Popover>
                                                     <PopoverTrigger asChild>
                                                         <Button className="bg-green-300 mr-4" variant="outline"><Check size={24} /></Button>
@@ -72,7 +72,7 @@ export default async function RouteParams(props: PageParams<{ slug: string }>) {
                                                         <div className="grid gap-4">
                                                             <div className="space-y-2">
                                                                 <p className="text-sm text-muted-foreground">
-                                                                    Are your sure to approve this candidacy
+                                                                    Etes vous sure d approuver cette candidature ?
                                                                 </p>
                                                             </div>
                                                             <div className="items-center">
@@ -89,7 +89,7 @@ export default async function RouteParams(props: PageParams<{ slug: string }>) {
                                                         <div className="grid gap-4">
                                                             <div className="space-y-2">
                                                                 <p className="text-sm text-muted-foreground">
-                                                                    Are your sure to rejecte this candidacy
+                                                                    Etes vous sure de rejeter cette candidature ?
                                                                 </p>
                                                             </div>
                                                             <div className="items-center">
@@ -102,7 +102,7 @@ export default async function RouteParams(props: PageParams<{ slug: string }>) {
                                         )}
                                         {candidacy.status === "APPROVED" && (
                                             <>
-                                                <CardDescription className="mr-4 mt-2">Candidacy approved</CardDescription>
+                                                <CardDescription className="mr-4 mt-2">Candidatures approuvé</CardDescription>
                                                 <Card className="bg-green-500 mr-4" >
                                                     <CandidacyForm activityId={activity.id} userId={candidacy.userId} icon="Check" candidacyId={candidacy.id} />
                                                 </Card>
@@ -110,7 +110,7 @@ export default async function RouteParams(props: PageParams<{ slug: string }>) {
                                         )}
                                         {candidacy.status === "REJECTED" && (
                                             <>
-                                                <CardDescription className="mr-4  mt-2">Candidacy rejected</CardDescription>
+                                                <CardDescription className="mr-4  mt-2">Candidatures rejeté</CardDescription>
                                                 <Card className="bg-red-500">
                                                     <CandidacyForm activityId={activity.id} userId={candidacy.userId} icon="Cross" candidacyId={candidacy.id} />
                                                 </Card>
@@ -122,7 +122,7 @@ export default async function RouteParams(props: PageParams<{ slug: string }>) {
                         ))
                     ) : (
                         <CardContent>
-                            <CardDescription>No candidacies</CardDescription>
+                            <CardDescription>Pas de candidatures</CardDescription>
                         </CardContent>
                     )}
                 </Card>

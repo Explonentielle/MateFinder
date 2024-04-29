@@ -70,11 +70,11 @@ export default async function RouteParams(props: PageParams<{ id: string }>) {
                     <LayoutTitle className="text-xl md:text-4xl">{user.username}</LayoutTitle>
                     {(current?.id === user?.id) ?
                         <Button className="p-0">
-                            <Link className="p-2" href={`/users/${user?.username}/edit`}>Update my profile</Link>
+                            <Link className="p-2" href={`/users/${user?.username}/edit`}>Update mon profil</Link>
                         </Button>
                         :
                         <Button className="p-0">
-                            <Link className="p-2" href={``}>Send friend request</Link>
+                            <Link className="p-2" href={``}>Envoyer une demande d ami</Link>
                         </Button>}
                 </div>
 
@@ -82,7 +82,7 @@ export default async function RouteParams(props: PageParams<{ id: string }>) {
                     <div className="flex flex-col m-4 w-content md:w-2/4">
                         <Card className="shadow-lg h-full ">
                             <CardHeader className="p-2 md:p-6 flex flex-row items-center justify-between">
-                                <CardTitle> {(current.id === user.id) ? "My Informations" : `Informations of ${user?.username}`}</CardTitle>
+                                <CardTitle> {(current.id === user.id) ? "Mes informations" : `Information d ${user?.username}`}</CardTitle>
                                 <div className="flex items-center">
                                     <UserAvatar size="size-12" email={user.email || ""} image={user.image || undefined} />
                                 </div>
@@ -93,17 +93,17 @@ export default async function RouteParams(props: PageParams<{ id: string }>) {
 
                                     <CardDescription className="my-2">Age: </CardDescription>
 
-                                    <CardDescription className="my-2">Membre since: </CardDescription>
+                                    <CardDescription className="my-2">Inscris le: </CardDescription>
 
-                                    <CardDescription className="my-2">Username: </CardDescription>
+                                    <CardDescription className="my-2">Pseudo: </CardDescription>
 
-                                    <CardDescription className="my-2">Location: </CardDescription>
+                                    <CardDescription className="my-2">Localisation: </CardDescription>
 
-                                    <CardDescription className="my-2">Activities: </CardDescription>
+                                    <CardDescription className="my-2">Activitiées: </CardDescription>
                                 </div>
                                 <div className="flex flex-col items-end">
                                     {current.id === user.id ? (
-                                        <CardDescription className="my-2">{user.email}</CardDescription>
+                                        <CardDescription className="my-2 text-xs lg:text-md">{user.email}</CardDescription>
                                     ) : (
                                         <ChatButton
                                             current={{
@@ -120,7 +120,7 @@ export default async function RouteParams(props: PageParams<{ id: string }>) {
                                             }}
                                         />
                                     )}
-                                    <CardDescription className="my-2"> {user?.age ? calculateAge(user?.age) : "Unknown"} year s old</CardDescription>
+                                    <CardDescription className="my-2"> {user?.age ? calculateAge(user?.age) : "Unknown"} ans</CardDescription>
 
                                     <CardDescription className="my-2"> {user?.createdAt.toLocaleDateString()}</CardDescription>
 
@@ -140,16 +140,16 @@ export default async function RouteParams(props: PageParams<{ id: string }>) {
                                     <CardDescription>{user?.plan}</CardDescription>
                                 </div>
                                 <div className="my-2 ">
-                                    <span className="text-sm">Max 2 activities for month</span>
+                                    <span className="text-sm">Max 2 activités par mois</span>
                                     <Progress value={user.activities.length * 10} />
                                 </div>
                                 <div className="my-2">
-                                    <span className="text-sm" >Max 5 activities for month</span>
+                                    <span className="text-sm" >Max 10 candidatures par mois</span>
                                     <Progress value={user?.candidacies.length + 1 * 40} />
                                 </div>
 
                                 <Card className="mt-6 p-4 flex flex-row items-center justify-between">
-                                    <span className="font-light text-xs">You will soon reach the limite of your free plan, please upgrade </span>
+                                    <span className="font-light text-xs">Vous avez bientot atteind la limite de votre plan gratuit, Pensez à devenir Premium</span>
                                     <Button className="ml-8">
                                         Upgrade
                                     </Button>
@@ -168,14 +168,14 @@ export default async function RouteParams(props: PageParams<{ id: string }>) {
                                     {(current?.id === user?.id) ?
                                         <Link className="mr-2 md:mr-4" href={"/activities/new"} >
                                             <Button variant={"secondary"}>
-                                                Create a New Activity
+                                                Créer une nouvelle activité
 
                                             </Button>
                                         </Link> : null}
 
                                     <Link href={`/users/${user?.username}/activities`}>
                                         <Button>
-                                            View all
+                                            Tout voir
                                             <MousePointerClick className="ml-2" size={16} />
                                         </Button>
                                     </Link>
@@ -183,7 +183,7 @@ export default async function RouteParams(props: PageParams<{ id: string }>) {
                             </CardHeader>
                             <CardContent>
                                 {user?.activities.length === 0 ? (
-                                    <CardDescription className="mt-20 flex justify-center items-center text-2xl">No activities found</CardDescription>
+                                    <CardDescription className="mt-20 flex justify-center items-center text-2xl">Pas d'activités trouvé</CardDescription>
                                 ) : (
                                     user?.activities.slice(0, 4).map((activity) => (
                                         <Card className="relative shadow-lg p-2 my-2" key={activity.id}>
