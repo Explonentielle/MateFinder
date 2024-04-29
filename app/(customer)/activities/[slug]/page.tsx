@@ -150,7 +150,7 @@ export default async function RouteParams(props: PageParams<{ slug: string }>) {
                         <CardDescription className="flex justify-center items-center" >
                             {activity.candidacies.map((candidacy) => (
                                 (candidacy.status === "APPROVED" &&
-                                    <Link href={`/users/${candidacy.user.id}`} key={candidacy.id}>
+                                    <Link href={`/users/${candidacy.user.username}`} key={candidacy.id}>
                                         <UserAvatar email={candidacy.user.email || ""} image={candidacy.user.image || undefined}/>
                                     </Link>)
                             ))}
