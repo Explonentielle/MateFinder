@@ -50,7 +50,7 @@ export const SidebarClient: FC<SidebarClientProps> = ({ usersInfo, users }) => {
         <div className={`${isScrolling ? "lg:-translate-y-16": ""} relative overflow-hidden flex flex-col lg:flex-col-reverse justify-between lg:justify-end items-start ${isOpen ? "w-full lg:w-[14vw]" : "w-full lg:w-[4vw]"} ${isOpen ? "h-[10vh] lg:h-full" : "h-[4vh] lg:h-full"} lg:fixed border-b lg:border-r border-border px-4 transition-all duration-300 z-10`}>
             {isOpen &&
                 (<>
-                    <div className="flex lg:flex-col items-center lg:items-start">
+                    <div className="flex w-full lg:flex-col items-center lg:items-start">
                         <span>En ligne:</span>
                         <ScrollArea className="w-2/3 md:w-full whitespace-nowrap">
                             <div className="mt-2 flex lg:flex-col pl-2">              
