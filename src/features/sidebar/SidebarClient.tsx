@@ -47,7 +47,7 @@ export const SidebarClient: FC<SidebarClientProps> = ({ usersInfo, users }) => {
     };
 
     return (
-        <div className={`${isScrolling ? "-translate-y-16": ""} relative overflow-hidden flex flex-col lg:flex-col-reverse justify-between lg:justify-end items-start ${isOpen ? "w-full lg:w-[14vw]" : "w-full lg:w-[4vw]"} ${isOpen ? "h-[10vh] lg:h-full" : "h-[4vh] lg:h-full"} lg:fixed border-b lg:border-r border-border px-4 transition-all duration-300 z-10`}>
+        <div className={`${isScrolling ? "lg:-translate-y-16": ""} relative overflow-hidden flex flex-col lg:flex-col-reverse justify-between lg:justify-end items-start ${isOpen ? "w-full lg:w-[14vw]" : "w-full lg:w-[4vw]"} ${isOpen ? "h-[10vh] lg:h-full" : "h-[4vh] lg:h-full"} lg:fixed border-b lg:border-r border-border px-4 transition-all duration-300 z-10`}>
             {isOpen &&
                 (<>
                     <div className="flex lg:flex-col items-center lg:items-start">
@@ -74,7 +74,7 @@ export const SidebarClient: FC<SidebarClientProps> = ({ usersInfo, users }) => {
                             <ScrollBar orientation="horizontal" />
                         </ScrollArea>
                     </div>
-                    <div className="overflow-visible flex items-center lg:items-start flex-row lg:flex-col my-2 lg:my-4">
+                    <div className="overflow-visible flex items-center lg:items-start flex-row lg:flex-col mb-4 lg:my-4">
                         <span className='text-md'>Rechercher</span>
                         <div>
                             <Input
